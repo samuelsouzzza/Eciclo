@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 
 export const InputText = styled.input`
-  background-color: transparent;
+  background-color: ghostwhite;
   border: 1px solid rgba(0, 0, 0, 0.1);
   height: 40px;
-  width: 95%;
+  width: 100%;
   font-size: 1.125rem;
   border-radius: 5px;
   padding: 0 2%;
@@ -15,5 +15,8 @@ export const InputText = styled.input`
   &:hover {
     cursor: text;
     box-shadow: 1px 1px 1px 1px #20732d44;
+  }
+  &::placeholder {
+    color: rgba(0, 0, 0, 0.3);
   }
 `;

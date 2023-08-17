@@ -11,6 +11,7 @@ export const Container = styled.section`
   background-color: white;
   box-shadow: 1px 1px 5px 3px rgba(0, 0, 0, 0.1);
   display: grid;
+  align-items: center;
   grid-template-columns: 1fr 1fr;
   border-radius: 5px;
   width: 50%;

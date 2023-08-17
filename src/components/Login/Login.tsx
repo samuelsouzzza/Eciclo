@@ -1,6 +1,8 @@
 import React from 'react';
 import { Wrapper, Container } from './Login.styles.ts';
 import { Input } from './../Form/Input/Input.tsx';
+import { Button } from '../Form/Button/Button.tsx';
+import ImgLogin from '../../../public/login-illustration.svg';
 
 export const Login = () => {
   const [valueUser, setValueUser] = React.useState('');
@@ -9,7 +11,7 @@ export const Login = () => {
   return (
     <Wrapper>
       <Container>
-        <img src='' alt='Imagem de Login' />
+        <img src={ImgLogin} alt='Imagem de Login' />
         <form action=''>
           <Input
             mask='@usuário'
@@ -30,6 +32,7 @@ export const Login = () => {
               setValuePassWord(e.currentTarget.value)
             }
           />
+          <Button />
         </form>
       </Container>
     </Wrapper>
