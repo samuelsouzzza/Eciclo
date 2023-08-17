@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Wrapper, Container } from './Login.styles.ts';
 import { Input } from './../Form/Input/Input.tsx';
 import { Button } from '../Form/Button/Button.tsx';
@@ -7,12 +8,18 @@ import ImgLogin from '../../../public/login-illustration.svg';
 export const Login = () => {
   const [valueUser, setValueUser] = React.useState('');
   const [valuePassword, setValuePassWord] = React.useState('');
+  const navigate = useNavigate();
+
+  function logon(e: React.FormEvent<HTMLElement>) {
+    e.preventDefault();
+    if (valueUser === 'sam' && valuePassword === 'sam') navigate('./home');
+  }
 
   return (
     <Wrapper>
       <Container>
         <img src={ImgLogin} alt='Imagem de Login' />
-        <form action=''>
+        <form onSubmit={logon}>
           <Input
             mask='@usuário'
             type='text'
@@ -32,7 +39,7 @@ export const Login = () => {
               setValuePassWord(e.currentTarget.value)
             }
           />
-          <Button />
+          <Button content='Entrar' />
         </form>
       </Container>
     </Wrapper>
