@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Wrapper, Container, BoxForm, BoxLinks } from './Login.styles.ts';
 import { Input } from './../Form/Input/Input.tsx';
 import { Button } from '../Form/Button/Button.tsx';
-import { Anchor } from '../Anchors/Anchor.tsx';
+import { Anchor } from '../Anchor/Anchor.tsx';
 import ImgLogin from '../../../public/login-illustration.svg';
 
 export const Login = () => {
@@ -14,6 +14,11 @@ export const Login = () => {
   function logon(e: React.FormEvent<HTMLElement>) {
     e.preventDefault();
     if (valueUser === 'sam' && valuePassword === 'sam') navigate('./home');
+  }
+  function toNewAccount(e: React.MouseEvent<HTMLAnchorElement>) {
+    e.preventDefault();
+    navigate('./new_account');
+    console.log('click');
   }
 
   return (
@@ -44,7 +49,7 @@ export const Login = () => {
             <Button content='Entrar' />
           </form>
           <BoxLinks>
-            <Anchor content='Não tenho conta' />
+            <Anchor content='Não tenho conta' onClick={toNewAccount} />
             <Anchor content='Perdeu a senha?' />
           </BoxLinks>
         </BoxForm>

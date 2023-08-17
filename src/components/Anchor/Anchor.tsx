@@ -5,6 +5,6 @@ type AnchorProps = React.ComponentProps<'a'> & {
   content: string;
 };
 
-export const Anchor = ({ content }: AnchorProps) => {
-  return <Anch>{content}</Anch>;
+export const Anchor = ({ content, ...props }: AnchorProps) => {
+  return <Anch {...props}>{content}</Anch>;
 };
