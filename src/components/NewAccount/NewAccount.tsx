@@ -8,10 +8,15 @@ export const NewAccount = () => {
     <Wrapper>
       <Container>
         <BoxForm>
-          <Input label='Nome' />
+          <Input label='Nome' className='txtName' />
           <Input label='Último nome' />
-          <Input label='E-mail' />
-          <Input label='E-mail' />
+          <Input label='E-mail' type='email' />
+          <Input label='Celular' />
+          <Input label='Rua' />
+          <Input label='Número' />
+          <Input label='Bairro' />
+          <Input label='Cidade' />
+          <Input label='Estado' />
         </BoxForm>
       </Container>
     </Wrapper>
