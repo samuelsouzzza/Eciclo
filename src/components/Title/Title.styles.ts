@@ -5,10 +5,4 @@ export const T = styled.h1`
   text-transform: uppercase;
   font-weight: bold;
   margin: 3% 0 5% 0;
-  ::before {
-    content: '';
-    width: 30px;
-    height: 30px;
-    background-color: green;
-  }
 `;

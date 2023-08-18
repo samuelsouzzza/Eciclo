@@ -3,6 +3,7 @@ import { Wrapper, Container, BoxForm } from './NewAccount.styles.ts';
 import { Input } from '../Form/Input/Input';
 import { Button } from '../Form/Button/Button.tsx';
 import { Title } from '../Title/Title.tsx';
+import { Separate } from '../Separate/Separate.tsx';
 
 export const NewAccount = () => {
   return (
@@ -20,7 +21,7 @@ export const NewAccount = () => {
             <Input label='Celular secundário' span={2} />
             <Input label='Nascimento *' />
           </BoxForm>
-          <div className='separate' />
+          <Separate />
           <h3>Endereço</h3>
           <BoxForm>
             <Input label='Rua *' span={2} />
