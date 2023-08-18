@@ -5,12 +5,24 @@ import { Button } from '../Form/Button/Button.tsx';
 import { Title } from '../Title/Title.tsx';
 import { Separate } from '../Separate/Separate.tsx';
 import ImgNewAccount from '../../../public/new_account-illustration.svg';
+import { BackBtn } from '../BackBtn/BackBtn.tsx';
 
 export const NewAccount = () => {
   return (
     <Wrapper>
       <Container>
-        <Title text='Criando conta como cliente' />
+        <div
+          style={{
+            width: '100%',
+            display: 'flex',
+            alignItems: 'baseline',
+            justifyContent: 'start',
+            fontSize: '1.75rem',
+          }}
+        >
+          <BackBtn />
+          <Title text='Criando conta como cliente' />
+        </div>
         <img src={ImgNewAccount} alt='' />
         <form action=''>
           <h3>Dados pessoais</h3>
