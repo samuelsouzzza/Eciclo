@@ -1,26 +1,25 @@
 import styled from 'styled-components';
 
-export const Container = styled.section`
+export const Wrapper = styled.section`
+  background-color: #92e3a922;
+  height: 100vh;
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 2%;
-  background-color: white;
-  box-shadow: 1px 1px 5px 3px rgba(0, 0, 0, 0.05);
-  border-radius: 5px;
-  width: auto;
-  height: auto;
 `;
-export const BoxForm = styled.div`
+export const Container = styled.section`
+  background-color: #fff;
+  box-shadow: 1px 1px 5px 3px rgba(0, 0, 0, 0.05);
+  height: 400px;
+  width: 60%;
+  border-radius: 5px;
   padding: 2%;
-  width: 100%;
-  height: auto;
-  display: grid;
-  grid-template-columns: repeat(3, max-content);
-  justify-content: center;
-  gap: 2%;
-  & .txtName {
-    /* column-span: span 2; */
+`;
+export const BoxForm = styled.section`
+  & form {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 75px;
+    gap: 2%;
   }
 `;
