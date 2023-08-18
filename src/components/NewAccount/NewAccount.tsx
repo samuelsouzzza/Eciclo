@@ -7,15 +7,26 @@ export const NewAccount = () => {
   return (
     <Wrapper>
       <Container>
-        <BoxForm>
-          <form action=''>
+        <form action=''>
+          <h3>Dados pessoais</h3>
+          <BoxForm>
             <Input label='Nome' span={3} />
-            <Input label='Sobrenome' />
-            <Input label='Sobrenome' />
-            <Input label='Sobrenome' />
-            <Button content='Criar nova conta' span={3} />
-          </form>
-        </BoxForm>
+            <Input label='Sobrenome' span={2} />
+            <Input label='Email' span={5} />
+            <Input label='Celular' span={2} />
+            <Input label='Celular secundário' span={2} />
+            <Input label='Nascimento' />
+          </BoxForm>
+          <h3>Endereço</h3>
+          <BoxForm>
+            <Input label='Rua' span={4} />
+            <Input label='Número' />
+            <Input label='Bairro' span={2} />
+            <Input label='Cidade' span={2} />
+            <Input label='Estado' span={1} />
+          </BoxForm>
+          <Button content='Criar nova conta' span={5} />
+        </form>
       </Container>
     </Wrapper>
   );
