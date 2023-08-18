@@ -15,9 +15,23 @@ export const Input = ({
   ...props
 }: InputTextProps) => {
   return (
-    <label htmlFor={name} style={{ gridColumn: `span ${span}` }}>
+    <label
+      htmlFor={name}
+      style={{
+        gridColumn: `span ${span}`,
+      }}
+    >
       {label}
-      <InputText id={name} placeholder={mask} {...props} />
+      <InputText
+        id={name}
+        placeholder={mask}
+        style={{
+          display: 'flex',
+          alignContent: 'center',
+          padding: '1%',
+        }}
+        {...props}
+      />
     </label>
   );
 };

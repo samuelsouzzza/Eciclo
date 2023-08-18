@@ -13,6 +13,7 @@ export const NewAccount = () => {
           <Title text='Criando conta como cliente' />
           <h3>Dados pessoais</h3>
           <BoxForm>
+            <Input label='Foto' type='file' span={5} />
             <Input label='Nome *' span={3} />
             <Input label='Sobrenome *' span={2} />
             <Input label='CPF *' span={2} />
