@@ -15,6 +15,15 @@ export const Container = styled.section`
   width: 60%;
   border-radius: 5px;
   padding: 2%;
+  & h3 {
+    color: #666;
+  }
+  & .separate {
+    height: 2px;
+    border-radius: 5px;
+    margin: 7% 0 5% 0;
+    background-color: rgba(0, 0, 0, 0.09);
+  }
 `;
 export const BoxForm = styled.section`
   margin: 2% 0;
