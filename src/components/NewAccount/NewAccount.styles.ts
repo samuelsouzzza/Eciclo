@@ -12,11 +12,18 @@ export const Container = styled.section`
   background-color: #fff;
   box-shadow: 1px 1px 5px 3px rgba(0, 0, 0, 0.05);
   height: auto;
-  width: 60%;
+  width: 75%;
   border-radius: 5px;
   padding: 2%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   & h3 {
     color: #666;
+  }
+  & img {
+    max-width: 50%;
+    margin: 0 auto;
   }
 `;
 export const BoxForm = styled.section`

@@ -5,4 +5,5 @@ export const T = styled.h1`
   text-transform: uppercase;
   font-weight: bold;
   margin: 3% 0 5% 0;
+  width: 95%;
 `;

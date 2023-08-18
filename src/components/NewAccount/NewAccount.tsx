@@ -4,13 +4,15 @@ import { Input } from '../Form/Input/Input';
 import { Button } from '../Form/Button/Button.tsx';
 import { Title } from '../Title/Title.tsx';
 import { Separate } from '../Separate/Separate.tsx';
+import ImgNewAccount from '../../../public/new_account-illustration.svg';
 
 export const NewAccount = () => {
   return (
     <Wrapper>
       <Container>
+        <Title text='Criando conta como cliente' />
+        <img src={ImgNewAccount} alt='' />
         <form action=''>
-          <Title text='Criando conta como cliente' />
           <h3>Dados pessoais</h3>
           <BoxForm>
             <Input label='Foto' type='file' span={5} />
