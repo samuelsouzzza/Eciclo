@@ -44,20 +44,34 @@ export const NewAccount = () => {
             <Input label='Celular *' span={2} />
             <Input label='Celular secundário' span={2} />
             <Input label='Nascimento *' /> */}
-            <Input label='Nome' id='name' type='text' {...txtName} />
+            <Input label='Nome' id='name' type='text' span={3} {...txtName} />
             <Input
               label='Sobrenome'
               id='sob_name'
               type='text'
+              span={2}
               {...txtSobrenome}
             />
-            <Input label='CPF' id='cpf' type='text' {...txtCpf} />
-            <Input label='E-Mail' id='email' type='email' {...txtEmail} />
-            <Input label='Celular' id='cell' type='text' {...txtCell} />
+            <Input label='CPF' id='cpf' type='text' span={2} {...txtCpf} />
+            <Input
+              label='E-Mail'
+              id='email'
+              type='email'
+              span={3}
+              {...txtEmail}
+            />
+            <Input
+              label='Celular'
+              id='cell'
+              type='text'
+              span={2}
+              {...txtCell}
+            />
             <Input
               label='Celular secundário'
               id='cell_sec'
               type='text'
+              span={2}
               {...txtCellSec}
             />
             <Input label='Nascimento' id='birth' type='date' {...txtBirth} />

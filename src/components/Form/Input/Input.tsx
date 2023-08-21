@@ -6,6 +6,7 @@ interface InputProps {
   label: string;
   value: string;
   type: string;
+  span?: number;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   error: string | null;
   onBlur: () => void;
@@ -17,6 +18,7 @@ export const Input: React.FC<InputProps> = ({
   label,
   value,
   type,
+  span = 1,
   onChange,
   error,
   onBlur,
@@ -24,7 +26,7 @@ export const Input: React.FC<InputProps> = ({
 }) => {
   return (
     <>
-      <label htmlFor={id}>
+      <label htmlFor={id} style={{ gridColumn: `span ${span}` }}>
         {label}
         <InputText
           type={type}
