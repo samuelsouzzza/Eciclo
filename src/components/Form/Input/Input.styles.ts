@@ -11,6 +11,9 @@ export const InputText = styled.input`
   outline: 0;
   transition: 0.2s;
   margin: 1.5% 0;
+  &[type='file'] {
+    padding: 1%;
+  }
   &:focus,
   &:hover {
     cursor: text;
@@ -19,4 +22,9 @@ export const InputText = styled.input`
   &::placeholder {
     color: rgba(0, 0, 0, 0.3);
   }
+`;
+export const Invalid = styled.p`
+  color: red;
+  font-size: 0.75rem;
+  display: inline;
 `;

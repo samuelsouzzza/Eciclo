@@ -1,5 +1,5 @@
 import React from 'react';
-import { InputText } from './Input.styles';
+import { InputText, Invalid } from './Input.styles';
 
 interface InputProps {
   id: string;
@@ -28,6 +28,7 @@ export const Input: React.FC<InputProps> = ({
     <>
       <label htmlFor={id} style={{ gridColumn: `span ${span}` }}>
         {label}
+        {error && <Invalid> - {error}</Invalid>}
         <InputText
           type={type}
           id={id}
@@ -38,7 +39,6 @@ export const Input: React.FC<InputProps> = ({
           placeholder={placeholder}
         />
       </label>
-      {error && <p>{error}</p>}
     </>
   );
 };

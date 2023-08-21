@@ -9,6 +9,7 @@ import ImgNewAccount from '../../../public/new_account-illustration.svg';
 import { BackBtn } from '../BackBtn/BackBtn.tsx';
 
 export const NewAccount = () => {
+  const filPhoto = useForm(false);
   const txtName = useForm(false);
   const txtSobrenome = useForm(false);
   const txtCpf = useForm(false);
@@ -16,6 +17,12 @@ export const NewAccount = () => {
   const txtCell = useForm(false);
   const txtCellSec = useForm(false);
   const txtBirth = useForm(false);
+  const txtStreet = useForm(false);
+  const txtNum = useForm(false);
+  const txtCep = useForm('cep');
+  const txtNeighborhood = useForm(false);
+  const txtCity = useForm(false);
+  const txtState = useForm(false);
 
   return (
     <Wrapper>
@@ -36,14 +43,7 @@ export const NewAccount = () => {
         <form action=''>
           <h3>Dados pessoais</h3>
           <BoxForm>
-            {/* <Input label='Foto' type='file' span={5} />
-            <Input label='Nome *' span={3} />
-            <Input label='Sobrenome *' span={2} />
-            <Input label='CPF *' span={2} />
-            <Input label='Email *' span={3} />
-            <Input label='Celular *' span={2} />
-            <Input label='Celular secundário' span={2} />
-            <Input label='Nascimento *' /> */}
+            <Input label='Foto' id='photo' type='file' span={5} {...filPhoto} />
             <Input label='Nome' id='name' type='text' span={3} {...txtName} />
             <Input
               label='Sobrenome'
@@ -79,12 +79,24 @@ export const NewAccount = () => {
           <Separate />
           <h3>Endereço</h3>
           <BoxForm>
-            {/* <Input label='Rua *' span={2} />
-            <Input label='Número' />
-            <Input label='CEP *' span={2} />
-            <Input label='Bairro *' span={2} />
-            <Input label='Cidade *' span={2} />
-            <Input label='Estado *' span={1} /> */}
+            <Input
+              label='Rua'
+              id='street'
+              type='text'
+              span={2}
+              {...txtStreet}
+            />
+            <Input label='Número' id='number' type='number' {...txtNum} />
+            <Input label='CEP' id='cep' type='text' span={2} {...txtCep} />
+            <Input
+              label='Bairro'
+              id='neighborhood'
+              type='text'
+              span={2}
+              {...txtNeighborhood}
+            />
+            <Input label='Cidade' id='city' type='text' span={2} {...txtCity} />
+            <Input label='Estado' id='state' type='text' {...txtState} />
           </BoxForm>
           <Button content='Criar nova conta' span={5} />
         </form>
