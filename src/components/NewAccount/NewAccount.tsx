@@ -36,7 +36,7 @@ export const NewAccount = () => {
             fontSize: '1.75rem',
           }}
         >
-          <BackBtn />
+          <BackBtn text='Voltar' />
           <Title text='Criando conta como cliente' />
         </div>
         <img src={ImgNewAccount} alt='' />
