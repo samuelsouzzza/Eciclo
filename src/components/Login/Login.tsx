@@ -1,4 +1,5 @@
 import React from 'react';
+import useForm from '../../../public/hooks/useForm.ts';
 import { useNavigate } from 'react-router-dom';
 import { Wrapper, Container, BoxForm, BoxLinks } from './Login.styles.ts';
 import { Input } from './../Form/Input/Input.tsx';
@@ -7,18 +8,19 @@ import { Anchor } from '../Anchor/Anchor.tsx';
 import ImgLogin from '../../../public/login-illustration.svg';
 
 export const Login = () => {
-  const [valueUser, setValueUser] = React.useState('');
-  const [valuePassword, setValuePassWord] = React.useState('');
+  const txtUser = useForm(false);
+  const txtPassword = useForm(false);
   const navigate = useNavigate();
 
   function logon(e: React.FormEvent<HTMLElement>) {
     e.preventDefault();
-    if (valueUser === 'sam' && valuePassword === 'sam') navigate('./home');
+    if (txtUser.value === 'sam' && txtPassword.value === 'sam')
+      navigate('./home');
   }
+
   function toNewAccount(e: React.MouseEvent<HTMLAnchorElement>) {
     e.preventDefault();
     navigate('./new_account');
-    console.log('click');
   }
 
   return (
@@ -27,25 +29,8 @@ export const Login = () => {
         <img src={ImgLogin} alt='Imagem de Login' />
         <BoxForm>
           <form onSubmit={logon}>
-            <Input
-              mask='@usuário'
-              type='text'
-              label='Nome:'
-              value={valueUser}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                setValueUser(e.currentTarget.value)
-              }
-            />
-
-            <Input
-              mask='*********'
-              type='password'
-              label='Senha:'
-              value={valuePassword}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                setValuePassWord(e.currentTarget.value)
-              }
-            />
+            <Input label='Usuário' id='user' type='text' {...txtUser} />
+            <Input label='Senha' id='pass' type='text' {...txtPassword} />
             <Button content='Entrar' />
           </form>
           <BoxLinks>

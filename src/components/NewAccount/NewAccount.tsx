@@ -7,6 +7,7 @@ import { Title } from '../Title/Title.tsx';
 import { Separate } from '../Separate/Separate.tsx';
 import ImgNewAccount from '../../../public/new_account-illustration.svg';
 import { BackBtn } from '../BackBtn/BackBtn.tsx';
+import { useNavigate } from 'react-router-dom';
 
 export const NewAccount = () => {
   const filPhoto = useForm(false);
@@ -24,6 +25,13 @@ export const NewAccount = () => {
   const txtCity = useForm(null);
   const txtState = useForm(null);
 
+  const navigate = useNavigate();
+
+  function backPage(e: React.MouseEvent<HTMLButtonElement>) {
+    e.preventDefault();
+    navigate('/');
+  }
+
   return (
     <Wrapper>
       <Container>
@@ -36,7 +44,7 @@ export const NewAccount = () => {
             fontSize: '1.75rem',
           }}
         >
-          <BackBtn text='Voltar' />
+          <BackBtn text='Voltar' onClick={backPage} />
           <Title text='Criando conta como cliente' />
         </div>
         <img src={ImgNewAccount} alt='' />

@@ -1,25 +1,17 @@
 import React from 'react';
+import { B } from './BackBtn.styles.ts';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 
-const styles: React.CSSProperties = {
-  border: '0',
-  backgroundColor: 'transparent',
-  marginRight: '2%',
-  fontSize: '1rem',
-  width: '10%',
-  cursor: 'pointer',
+type BackBtnProps = React.ComponentProps<'button'> & {
+  text: string;
 };
 
-interface BackBtnProps {
-  text: string;
-}
-
-export const BackBtn = ({ text }: BackBtnProps) => {
+export const BackBtn = ({ text, ...props }: BackBtnProps) => {
   return (
-    <button style={styles}>
+    <B {...props}>
       <FontAwesomeIcon icon={faChevronLeft} />
       {text}
-    </button>
+    </B>
   );
 };

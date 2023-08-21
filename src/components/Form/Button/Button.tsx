@@ -3,7 +3,7 @@ import { Btn } from './Button.styles.ts';
 
 type BtnProps = React.ComponentProps<'button'> & {
   content: string;
-  span: number;
+  span?: number;
 };
 
 export const Button = ({ content, span = 1, ...props }: BtnProps) => {
