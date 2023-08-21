@@ -10,15 +10,15 @@ import { BackBtn } from '../BackBtn/BackBtn.tsx';
 
 export const NewAccount = () => {
   const filPhoto = useForm(false);
-  const txtName = useForm(false);
+  const txtName = useForm(null);
   const txtSobrenome = useForm(false);
   const txtCpf = useForm(false);
   const txtEmail = useForm('email');
   const txtCell = useForm(false);
   const txtCellSec = useForm(false);
-  const txtBirth = useForm(false);
+  const txtBirth = useForm(null);
   const txtStreet = useForm(false);
-  const txtNum = useForm(false);
+  const txtNum = useForm(null);
   const txtCep = useForm('cep');
   const txtNeighborhood = useForm(false);
   const txtCity = useForm(false);

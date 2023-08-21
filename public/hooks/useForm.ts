@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 type ValidationType = 'cep' | 'email';
 
@@ -32,16 +32,16 @@ interface FormValues {
   validate: () => boolean;
 }
 
-const useForm = (type: ValidationType | false): FormValues => {
-  const [value, setValue] = React.useState('');
-  const [error, setError] = React.useState<string | null>(null);
+const useForm = (type: ValidationType | null | false): FormValues => {
+  const [value, setValue] = useState('');
+  const [error, setError] = useState<string | null>(null);
 
   function validate(value: string): boolean {
     if (type === false) return true;
-    if (value.length === 0) {
+    if (type === null && value.length === 0) {
       setError('Preencha um valor');
       return false;
-    } else if (types[type] && !types[type].regex.test(value)) {
+    } else if (type && types[type] && !types[type].regex.test(value)) {
       setError(types[type].message);
       return false;
     } else {
