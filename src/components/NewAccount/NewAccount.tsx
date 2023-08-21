@@ -12,17 +12,17 @@ export const NewAccount = () => {
   const filPhoto = useForm(false);
   const txtName = useForm(null);
   const txtSobrenome = useForm(false);
-  const txtCpf = useForm(false);
+  const txtCpf = useForm(null);
   const txtEmail = useForm('email');
-  const txtCell = useForm(false);
+  const txtCell = useForm(null);
   const txtCellSec = useForm(false);
   const txtBirth = useForm(null);
-  const txtStreet = useForm(false);
+  const txtStreet = useForm(null);
   const txtNum = useForm(null);
   const txtCep = useForm('cep');
-  const txtNeighborhood = useForm(false);
-  const txtCity = useForm(false);
-  const txtState = useForm(false);
+  const txtNeighborhood = useForm(null);
+  const txtCity = useForm(null);
+  const txtState = useForm(null);
 
   return (
     <Wrapper>
