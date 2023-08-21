@@ -1,37 +1,42 @@
 import React from 'react';
-import { InputText } from './Input.styles.ts';
+import { InputText } from './Input.styles';
 
-type InputTextProps = React.ComponentProps<'input'> & {
+interface InputProps {
+  id: string;
   label: string;
-  mask?: string;
-  span?: number;
-};
+  value: string;
+  type: string;
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  error: string | null;
+  onBlur: () => void;
+  placeholder?: string;
+}
 
-export const Input = ({
-  name,
+export const Input: React.FC<InputProps> = ({
+  id,
   label,
-  mask,
-  span = 1,
-  ...props
-}: InputTextProps) => {
+  value,
+  type,
+  onChange,
+  error,
+  onBlur,
+  placeholder,
+}) => {
   return (
-    <label
-      htmlFor={name}
-      style={{
-        gridColumn: `span ${span}`,
-      }}
-    >
-      {label}
-      <InputText
-        id={name}
-        placeholder={mask}
-        style={{
-          display: 'flex',
-          alignContent: 'center',
-          padding: '1%',
-        }}
-        {...props}
-      />
-    </label>
+    <>
+      <label htmlFor={id}>
+        {label}
+        <InputText
+          type={type}
+          id={id}
+          name={id}
+          value={value}
+          onChange={onChange}
+          onBlur={onBlur}
+          placeholder={placeholder}
+        />
+      </label>
+      {error && <p>{error}</p>}
+    </>
   );
 };
