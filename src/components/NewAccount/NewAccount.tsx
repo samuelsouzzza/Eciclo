@@ -11,7 +11,15 @@ import { BackBtn } from '../BackBtn/BackBtn.tsx';
 import { useNavigate } from 'react-router-dom';
 
 export const NewAccount = () => {
-  const [profilePic, setProfilePic] = React.useState('');
+  interface IProfileImg {
+    preview: string;
+    raw: File | null;
+  }
+
+  const [profilePic, setProfilePic] = React.useState<IProfileImg | null>({
+    preview: '',
+    raw: null,
+  });
   const txtName = useForm(null);
   const txtSobrenome = useForm(false);
   const txtCpf = useForm(null);
@@ -28,6 +36,10 @@ export const NewAccount = () => {
 
   const navigate = useNavigate();
 
+  React.useEffect(() => {
+    setProfilePic(null);
+  }, []);
+
   function backPage(e: React.MouseEvent<HTMLButtonElement>) {
     e.preventDefault();
     navigate('/');
@@ -36,9 +48,10 @@ export const NewAccount = () => {
   function loadPicture(e: React.ChangeEvent<HTMLInputElement>) {
     e.preventDefault();
     if (e.target.files !== null) {
-      setProfilePic(e.target.files[0].name);
-    } else {
-      console.log('Não pegou');
+      setProfilePic({
+        preview: URL.createObjectURL(e.target.files[0]),
+        raw: e.target.files[0],
+      });
     }
   }
 
@@ -68,9 +81,12 @@ export const NewAccount = () => {
               id='profile_photo'
               span={5}
               label='Foto de perfil'
+              accept='image/*'
+              preview={profilePic?.preview}
+              showPic={!!profilePic}
               onChange={loadPicture}
             />
-            {profilePic}
+
             <Input label='Nome' id='name' type='text' span={3} {...txtName} />
             <Input
               label='Sobrenome'
