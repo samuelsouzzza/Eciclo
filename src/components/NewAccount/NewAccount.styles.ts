@@ -18,6 +18,7 @@ export const Container = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
+  animation: fadeIn forwards 0.2s;
   & h3 {
     color: #666;
   }
