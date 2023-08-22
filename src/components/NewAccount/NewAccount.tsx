@@ -5,6 +5,7 @@ import { Input } from '../Form/Input/Input';
 import { InputFile } from '../Form/InputFile/InputFile.tsx';
 import { Button } from '../Form/Button/Button.tsx';
 import { SelectBox } from '../Form/SelectBox/SelectBox.tsx';
+import { CheckBox } from '../Form/CheckBox/CheckBox.tsx';
 import { Title } from '../Title/Title.tsx';
 import { Separate } from '../Separate/Separate.tsx';
 import ImgNewAccount from '../../../public/new_account-illustration.svg';
@@ -153,6 +154,10 @@ export const NewAccount = () => {
               value={txtState}
               setValue={setTxtState}
               options={arrStates}
+            />
+            <CheckBox
+              label='Estou de acordo com os termos e condições de uso do aplicativo'
+              span={5}
             />
           </BoxForm>
           <Button content='Criar nova conta' span={5} />
