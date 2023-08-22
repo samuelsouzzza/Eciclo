@@ -4,6 +4,7 @@ import { Wrapper, Container, BoxForm } from './NewAccount.styles.ts';
 import { Input } from '../Form/Input/Input';
 import { InputFile } from '../Form/InputFile/InputFile.tsx';
 import { Button } from '../Form/Button/Button.tsx';
+import { SelectBox } from '../Form/SelectBox/SelectBox.tsx';
 import { Title } from '../Title/Title.tsx';
 import { Separate } from '../Separate/Separate.tsx';
 import ImgNewAccount from '../../../public/new_account-illustration.svg';
@@ -15,6 +16,8 @@ export const NewAccount = () => {
     preview: string;
     raw: File | null;
   }
+
+  const arrStates = ['sp', 'rj', 'mg'];
 
   const [profilePic, setProfilePic] = React.useState<IProfileImg | null>({
     preview: '',
@@ -32,7 +35,7 @@ export const NewAccount = () => {
   const txtCep = useForm('cep');
   const txtNeighborhood = useForm(null);
   const txtCity = useForm(null);
-  const txtState = useForm(null);
+  const [txtState, setTxtState] = React.useState(arrStates[0]);
 
   const navigate = useNavigate();
 
@@ -62,7 +65,7 @@ export const NewAccount = () => {
           style={{
             width: '100%',
             display: 'flex',
-            alignItems: 'baseline',
+            alignItems: 'last baseline',
             justifyContent: 'start',
             fontSize: '1.75rem',
           }}
@@ -145,7 +148,12 @@ export const NewAccount = () => {
               span={2}
               {...txtCity}
             />
-            <Input label='Estado *' id='state' type='text' {...txtState} />
+            {/* <Input label='Estado *' id='state' type='text' {...txtState} /> */}
+            <SelectBox
+              value={txtState}
+              setValue={setTxtState}
+              options={arrStates}
+            />
           </BoxForm>
           <Button content='Criar nova conta' span={5} />
         </form>

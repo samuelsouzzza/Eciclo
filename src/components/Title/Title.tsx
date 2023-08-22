@@ -9,7 +9,7 @@ const styles: React.CSSProperties = {
   textTransform: 'uppercase',
   fontWeight: 'bold',
   margin: '3% 0 5% 0',
-  width: '95%',
+  width: '100%',
 };
 
 export const Title = ({ text }: TitleProps) => {
