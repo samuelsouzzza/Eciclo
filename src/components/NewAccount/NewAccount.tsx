@@ -2,6 +2,7 @@ import React from 'react';
 import useForm from '../../../public/hooks/useForm.ts';
 import { Wrapper, Container, BoxForm } from './NewAccount.styles.ts';
 import { Input } from '../Form/Input/Input';
+import { InputFile } from '../Form/InputFile/InputFile.tsx';
 import { Button } from '../Form/Button/Button.tsx';
 import { Title } from '../Title/Title.tsx';
 import { Separate } from '../Separate/Separate.tsx';
@@ -10,7 +11,7 @@ import { BackBtn } from '../BackBtn/BackBtn.tsx';
 import { useNavigate } from 'react-router-dom';
 
 export const NewAccount = () => {
-  const filPhoto = useForm(false);
+  const [profilePic, setProfilePic] = React.useState('');
   const txtName = useForm(null);
   const txtSobrenome = useForm(false);
   const txtCpf = useForm(null);
@@ -32,6 +33,15 @@ export const NewAccount = () => {
     navigate('/');
   }
 
+  function loadPicture(e: React.ChangeEvent<HTMLInputElement>) {
+    e.preventDefault();
+    if (e.target.files !== null) {
+      setProfilePic(e.target.files[0].name);
+    } else {
+      console.log('Não pegou');
+    }
+  }
+
   return (
     <Wrapper>
       <Container>
@@ -47,11 +57,20 @@ export const NewAccount = () => {
           <BackBtn text='Voltar' onClick={backPage} />
           <Title text='Criando conta como cliente' />
         </div>
-        <img src={ImgNewAccount} alt='' />
+        <img
+          src={ImgNewAccount}
+          alt='Imagem de ilustração para criação de novas contas'
+        />
         <form action=''>
           <h3>Dados pessoais</h3>
           <BoxForm>
-            <Input label='Foto' id='photo' type='file' span={5} {...filPhoto} />
+            <InputFile
+              id='profile_photo'
+              span={5}
+              label='Foto de perfil'
+              onChange={loadPicture}
+            />
+            {profilePic}
             <Input label='Nome' id='name' type='text' span={3} {...txtName} />
             <Input
               label='Sobrenome'
