@@ -149,12 +149,15 @@ export const NewAccount = () => {
               span={2}
               {...txtCity}
             />
-            {/* <Input label='Estado *' id='state' type='text' {...txtState} /> */}
             <SelectBox
               value={txtState}
               setValue={setTxtState}
               options={arrStates}
             />
+          </BoxForm>
+          <Separate />
+          <h3>Termos e condições</h3>
+          <BoxForm>
             <CheckBox
               label='Estou de acordo com os termos e condições de uso do aplicativo'
               span={5}
