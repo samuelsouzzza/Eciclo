@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-type ValidationType = 'cep' | 'email';
+type ValidationType = 'cpf' | 'email' | 'cep' | 'cell';
 
 interface ValidationRule {
   regex: RegExp;
@@ -12,14 +12,22 @@ interface ValidationTypes {
 }
 
 const types: ValidationTypes = {
-  cep: {
-    regex: /^\d{5}-?\d{3}$/,
-    message: 'Cep inválido',
+  cpf: {
+    regex: /^(?!000\.?0?0?0\.?0?0?0-?0?0?$)(\d{3}\.?){2}\d{3}-?\d{2}$/,
+    message: 'CPF inválido',
   },
   email: {
     regex:
       /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
     message: 'Email inválido',
+  },
+  cep: {
+    regex: /^\d{5}-?\d{3}$/,
+    message: 'Cep inválido',
+  },
+  cell: {
+    regex: /^(\(?\d{2}\)?\s?)?(\d{4,5}-?\d{4})$/,
+    message: 'Celular inválido',
   },
 };
 
