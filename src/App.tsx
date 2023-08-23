@@ -1,9 +1,9 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Login } from './components/Login/Login';
-import { NewAccount } from './components/NewAccount/NewAccount';
-import { Home } from './components/Home/Home';
-import { Page404 } from './components/Page404/Page404';
+import { NewAccount } from './pages/NewAccount/NewAccount';
+import { Home } from './pages/Home/Home';
+import { Page404 } from './pages/Page404/Page404';
 
 function App() {
   return (

@@ -1,15 +1,15 @@
 import React from 'react';
 import useForm from '../../../public/hooks/useForm.ts';
 import { Wrapper, Container, BoxForm } from './NewAccount.styles.ts';
-import { Input } from '../Form/Input/Input';
-import { InputFile } from '../Form/InputFile/InputFile.tsx';
-import { Button } from '../Form/Button/Button.tsx';
-import { SelectBox } from '../Form/SelectBox/SelectBox.tsx';
-import { CheckBox } from '../Form/CheckBox/CheckBox.tsx';
-import { Title } from '../Title/Title.tsx';
-import { Separate } from '../Separate/Separate.tsx';
+import { Input } from '../../components/Form/Input/Input.tsx';
+import { InputFile } from '../../components/Form/InputFile/InputFile.tsx';
+import { Button } from '../../components/Form/Button/Button.tsx';
+import { SelectBox } from '../../components/Form/SelectBox/SelectBox.tsx';
+import { CheckBox } from '../../components/Form/CheckBox/CheckBox.tsx';
+import { Title } from '../../components/Title/Title.tsx';
+import { Separate } from '../../components/Separate/Separate.tsx';
 import ImgNewAccount from '../../../public/new_account-illustration.svg';
-import { BackBtn } from '../BackBtn/BackBtn.tsx';
+import { BackBtn } from '../../components/BackBtn/BackBtn.tsx';
 import { useNavigate } from 'react-router-dom';
 
 export const NewAccount = () => {
