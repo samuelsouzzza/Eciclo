@@ -37,6 +37,7 @@ export const NewAccount = () => {
   const txtNeighborhood = useForm(null);
   const txtCity = useForm(null);
   const [txtState, setTxtState] = React.useState(arrStates[0]);
+  const [terms, setTerms] = React.useState(false);
 
   const navigate = useNavigate();
 
@@ -161,6 +162,9 @@ export const NewAccount = () => {
             <CheckBox
               label='Estou de acordo com os termos e condições de uso do aplicativo'
               span={5}
+              checked={terms}
+              onChange={() => setTerms(!terms)}
+              required
             />
           </BoxForm>
           <Button content='Criar nova conta' span={5} />

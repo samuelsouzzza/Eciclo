@@ -6,11 +6,11 @@ type CheckBoxProps = React.ComponentProps<'input'> & {
   span?: number;
 };
 
-export const CheckBox = ({ label, span = 1 }: CheckBoxProps) => {
+export const CheckBox = ({ label, span = 1, ...props }: CheckBoxProps) => {
   return (
     <Container style={{ gridColumn: `span ${span}` }}>
       <label htmlFor='check'>
-        <Check id='check' type='checkbox' />
+        <Check id='check' type='checkbox' {...props} />
         {label}
       </label>
     </Container>
