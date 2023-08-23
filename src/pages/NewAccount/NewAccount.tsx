@@ -3,7 +3,8 @@ import useForm from '../../../public/hooks/useForm.ts';
 import { Wrapper, Container, BoxForm } from './NewAccount.styles.ts';
 import { Input } from '../../components/Form/Input/Input.tsx';
 import { InputFile } from '../../components/Form/InputFile/InputFile.tsx';
-import { Button } from '../../components/Form/Button/Button.tsx';
+import { PrimaryButton } from '../../components/Form/PrimaryButton/PrimaryButton.tsx';
+import { SecondaryButton } from '../../components/Form/SecondaryButton/SecondaryButton.tsx';
 import { SelectBox } from '../../components/Form/SelectBox/SelectBox.tsx';
 import { CheckBox } from '../../components/Form/CheckBox/CheckBox.tsx';
 import { Title } from '../../components/Title/Title.tsx';
@@ -225,8 +226,13 @@ export const NewAccount = () => {
               onChange={() => setTerms(!terms)}
               required
             />
+            <SecondaryButton
+              onClick={backPage}
+              content='Cancelar cadastro'
+              span={2}
+            />
+            <PrimaryButton content='Criar nova conta' span={3} />
           </BoxForm>
-          <Button content='Criar nova conta' span={5} />
         </form>
       </Container>
     </Wrapper>

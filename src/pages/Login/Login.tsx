@@ -2,9 +2,9 @@ import React from 'react';
 import useForm from '../../../public/hooks/useForm.ts';
 import { useNavigate } from 'react-router-dom';
 import { Wrapper, Container, BoxForm, BoxLinks } from './Login.styles.ts';
-import { Input } from './../Form/Input/Input.tsx';
-import { Button } from '../Form/Button/Button.tsx';
-import { Anchor } from '../Anchor/Anchor.tsx';
+import { Input } from '../../components/Form/Input/Input.tsx';
+import { PrimaryButton } from '../../components/Form/PrimaryButton/PrimaryButton.tsx';
+import { Anchor } from '../../components/Anchor/Anchor.tsx';
 import ImgLogin from '../../../public/login-illustration.svg';
 
 export const Login = () => {
@@ -31,7 +31,7 @@ export const Login = () => {
           <form onSubmit={logon}>
             <Input label='Usuário' id='user' type='text' {...txtUser} />
             <Input label='Senha' id='pass' type='text' {...txtPassword} />
-            <Button content='Entrar' />
+            <PrimaryButton content='Entrar' />
           </form>
           <BoxLinks>
             <Anchor content='Não tenho conta' onClick={toNewAccount} />
