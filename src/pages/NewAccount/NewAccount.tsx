@@ -25,7 +25,7 @@ export const NewAccount = () => {
     raw: null,
   });
   const txtName = useForm(null);
-  const txtSobrenome = useForm(false);
+  const txtSurname = useForm(false);
   const txtCpf = useForm('cpf');
   const txtEmail = useForm('email');
   const txtCell = useForm('cell');
@@ -66,6 +66,32 @@ export const NewAccount = () => {
     }
   }
 
+  function sendForm(event: React.FormEvent) {
+    event.preventDefault();
+    if (
+      txtName.validate() &&
+      txtSurname.validate() &&
+      txtCpf.validate() &&
+      txtEmail.validate() &&
+      txtCell.validate() &&
+      txtCellSec.validate() &&
+      txtBirth.validate() &&
+      txtStreet.validate() &&
+      txtNum.validate() &&
+      txtCep.validate() &&
+      txtNeighborhood.validate() &&
+      txtCity.validate() &&
+      txtState &&
+      txtPass.validate() &&
+      txtConfirmPass.validate() &&
+      terms
+    ) {
+      console.log('Todos os dados estão corretos');
+    } else {
+      console.log('Algum campo não foi validado corretamente');
+    }
+  }
+
   return (
     <Wrapper>
       <Container>
@@ -85,7 +111,7 @@ export const NewAccount = () => {
           src={ImgNewAccount}
           alt='Imagem de ilustração para criação de novas contas'
         />
-        <form action=''>
+        <form onSubmit={sendForm}>
           <h3>Dados pessoais</h3>
           <BoxForm>
             <InputFile
@@ -104,7 +130,7 @@ export const NewAccount = () => {
               id='sob_name'
               type='text'
               span={2}
-              {...txtSobrenome}
+              {...txtSurname}
             />
             <Input label='CPF *' id='cpf' type='text' span={2} {...txtCpf} />
             <Input
