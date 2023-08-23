@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 
-type ValidationType = 'cpf' | 'email' | 'cep' | 'cell';
+type ValidationType = 'cpf' | 'email' | 'cep' | 'cell' | 'pass';
 
 interface ValidationRule {
-  regex: RegExp;
+  regex?: RegExp;
+  compare?: (field: string, compareField: string) => boolean;
   message: string;
 }
 
@@ -29,6 +30,11 @@ const types: ValidationTypes = {
     regex: /^(\(?\d{2}\)?\s?)?(\d{4,5}-?\d{4})$/,
     message: 'Celular inválido',
   },
+  pass: {
+    regex:
+      /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*()_+])[A-Za-z\d!@#$%^&*()_+]{7,}$/,
+    message: 'Senha inválida',
+  },
 };
 
 interface FormValues {
@@ -38,18 +44,27 @@ interface FormValues {
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   onBlur: () => boolean;
   validate: () => boolean;
+  compare: (compareValue: string) => boolean;
 }
 
 const useForm = (type: ValidationType | null | false): FormValues => {
   const [value, setValue] = useState('');
   const [error, setError] = useState<string | null>(null);
 
+  function compare(compareValue: string): boolean {
+    if (value !== compareValue) {
+      setError('As senhas devem ser idênticas');
+      return false;
+    }
+    return true;
+  }
+
   function validate(value: string): boolean {
     if (type === false) return true;
     if (type === null && value.length === 0) {
       setError('Preencha um valor');
       return false;
-    } else if (type && types[type] && !types[type].regex.test(value)) {
+    } else if (type && types[type] && !types[type].regex?.test(value)) {
       setError(types[type].message);
       return false;
     } else {
@@ -70,6 +85,7 @@ const useForm = (type: ValidationType | null | false): FormValues => {
     onChange,
     onBlur: () => validate(value),
     validate: () => validate(value),
+    compare: (compareValue) => compare(compareValue),
   };
 };
 

@@ -37,6 +37,8 @@ export const NewAccount = () => {
   const txtNeighborhood = useForm(null);
   const txtCity = useForm(null);
   const [txtState, setTxtState] = React.useState(arrStates[0]);
+  const txtPass = useForm('pass');
+  const txtConfirmPass = useForm(null);
   const [terms, setTerms] = React.useState(false);
 
   const navigate = useNavigate();
@@ -44,6 +46,10 @@ export const NewAccount = () => {
   React.useEffect(() => {
     setProfilePic(null);
   }, []);
+
+  React.useEffect(() => {
+    txtConfirmPass.compare(txtPass.value);
+  }, [txtPass.value, txtConfirmPass.value]);
 
   function backPage(e: React.MouseEvent<HTMLButtonElement>) {
     e.preventDefault();
@@ -154,6 +160,33 @@ export const NewAccount = () => {
               value={txtState}
               setValue={setTxtState}
               options={arrStates}
+            />
+          </BoxForm>
+          <Separate />
+          <h3>Acesso</h3>
+          <p>A senha deve conter, no mínimo: </p>
+          <ul>
+            <li>Seis dígitos</li>
+            <li>Uma letra maiúscula</li>
+            <li>Uma letra minúscula</li>
+            <li>Um número</li>
+            <li>Um caractere especial</li>
+          </ul>
+
+          <BoxForm>
+            <Input
+              label='Senha *'
+              id='pass'
+              type='password'
+              span={2}
+              {...txtPass}
+            />
+            <Input
+              label='Confirme a senha *'
+              id='confirmPass'
+              type='password'
+              span={2}
+              {...txtConfirmPass}
             />
           </BoxForm>
           <Separate />

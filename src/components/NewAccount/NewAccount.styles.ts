@@ -19,10 +19,21 @@ export const Container = styled.section`
   flex-direction: column;
   align-items: center;
   animation: fadeIn forwards 0.2s;
-  & h3 {
+  h3,
+  p,
+  li {
     color: #666;
   }
-  & img {
+  p {
+    color: #e04026;
+  }
+  ul {
+    li {
+      list-style: none;
+    }
+    font-size: 0.75rem;
+  }
+  img {
     max-width: 50%;
     margin: 0 auto;
   }
