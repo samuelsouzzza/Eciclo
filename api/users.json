@@ -1,0 +1,20 @@
+[
+  {
+    "name": "Samuel",
+    "surname": "Souza",
+    "cpf": "52928508880",
+    "email": "rssamuel17@gmail.com",
+    "cell": "13996976851",
+    "cell_secondary": null,
+    "birth": "2003-06-28",
+    "address": {
+      "street": "Barra do Ribeira",
+      "number": 101,
+      "cep": "11900000",
+      "neighborhood": "Jardim Valeri",
+      "city": "Registro",
+      "state": "sp"
+    },
+    "password": "sF44sribes#"
+  }
+]

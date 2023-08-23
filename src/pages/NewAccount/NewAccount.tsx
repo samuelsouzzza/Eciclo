@@ -50,7 +50,7 @@ export const NewAccount = () => {
 
   React.useEffect(() => {
     txtConfirmPass.compare(txtPass.value);
-  }, [txtPass.value, txtConfirmPass.value]);
+  }, [txtPass, txtConfirmPass.value]);
 
   function backPage(e: React.MouseEvent<HTMLButtonElement>) {
     e.preventDefault();
