@@ -1,5 +1,5 @@
 import React from 'react';
-import useForm from '../../../public/hooks/useForm.ts';
+import useForm from '../../hooks/useForm.ts';
 import { Wrapper, Container, BoxForm } from './NewAccount.styles.ts';
 import { Input } from '../../components/Form/Input/Input.tsx';
 import { InputFile } from '../../components/Form/InputFile/InputFile.tsx';
