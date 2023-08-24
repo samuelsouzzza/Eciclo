@@ -32,9 +32,14 @@ export const Login = () => {
   const txtUser = useForm(false);
   const txtPassword = useForm(false);
   const navigate = useNavigate();
-  const [loginError, setLoginError] = React.useState<string | null>();
+  const [loginError, setLoginError] = React.useState<string | null>(null);
 
-  const users = useFetch<User[]>('http://localhost:3000/users');
+  React.useEffect(() => {
+    setLoginError(null);
+  }, [txtUser.value, txtPassword.value]);
+
+  const users = useFetch<User[]>('../../../api/users.json');
+  // const users = useFetch<User[]>('http://localhost:3000/users');
 
   function logon(e: React.FormEvent<HTMLElement>) {
     e.preventDefault();
