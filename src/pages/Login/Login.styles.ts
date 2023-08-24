@@ -5,7 +5,8 @@ export const Wrapper = styled.div`
   height: 100vh;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: start;
+  padding: 3% 0;
   background-color: #92e3a922;
 `;
 export const Container = styled.section`
