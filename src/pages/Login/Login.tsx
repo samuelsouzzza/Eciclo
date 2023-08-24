@@ -1,6 +1,5 @@
 import React from 'react';
-import { useQuery } from 'react-query';
-import { fetchDataUsers } from '../../utils/fetchData.ts';
+import useFetch from '../../utils/useFetch.ts';
 import useForm from '../../hooks/useForm.ts';
 import { useNavigate } from 'react-router-dom';
 import { Wrapper, Container, BoxForm, BoxLinks } from './Login.styles.ts';
@@ -14,20 +13,8 @@ export const Login = () => {
   const txtPassword = useForm(false);
   const navigate = useNavigate();
 
-  const { data, isLoading, error } = useQuery('data-key', () =>
-    fetchDataUsers('../../../api/users.json')
-  );
-
   function logon(e: React.FormEvent<HTMLElement>) {
     e.preventDefault();
-
-    const userLogged = data?.filter((user) => {
-      return (
-        user.email === txtUser.value && user.password === txtPassword.value
-      );
-    });
-
-    if (userLogged) console.log('Usuário logado');
   }
 
   function toNewAccount(e: React.MouseEvent<HTMLAnchorElement>) {
