@@ -1,17 +1,11 @@
 import React from 'react';
+import { T } from './Title.styles.ts';
 
 type TitleProps = React.ComponentProps<'h1'> & {
   text: string;
+  size?: number;
 };
 
-const styles: React.CSSProperties = {
-  fontSize: '1.75rem',
-  textTransform: 'uppercase',
-  fontWeight: 'bold',
-  margin: '3% 0 5% 0',
-  width: '100%',
-};
-
-export const Title = ({ text }: TitleProps) => {
-  return <h1 style={styles}>{text}</h1>;
+export const Title = ({ text, size = 1.5 }: TitleProps) => {
+  return <T style={{ fontSize: `${size}rem` }}>{text}</T>;
 };

@@ -106,7 +106,7 @@ export const NewAccount = () => {
           }}
         >
           <BackBtn text='Voltar' onClick={backPage} />
-          <Title text='Criando conta como cliente' />
+          <Title text='Criando conta como cliente' size={1.5} />
         </div>
         <img
           src={ImgNewAccount}
