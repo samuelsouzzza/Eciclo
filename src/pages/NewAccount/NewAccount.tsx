@@ -5,7 +5,6 @@ import { Input } from '../../components/Form/Input/Input.tsx';
 import { InputFile } from '../../components/Form/InputFile/InputFile.tsx';
 import { PrimaryButton } from '../../components/Form/PrimaryButton/PrimaryButton.tsx';
 import { SecondaryButton } from '../../components/Form/SecondaryButton/SecondaryButton.tsx';
-import { SelectBox } from '../../components/Form/SelectBox/SelectBox.tsx';
 import { CheckBox } from '../../components/Form/CheckBox/CheckBox.tsx';
 import { Title } from '../../components/Title/Title.tsx';
 import { Separate } from '../../components/Separate/Separate.tsx';
@@ -26,7 +25,7 @@ export const NewAccount = () => {
     raw: null,
   });
   const txtName = useForm(null);
-  const txtSurname = useForm(false);
+  const txtSurname = useForm(null);
   const txtCpf = useForm('cpf');
   const txtEmail = useForm('email');
   const txtCell = useForm('cell');
@@ -117,7 +116,7 @@ export const NewAccount = () => {
           <BoxForm>
             <InputFile
               id='profile_photo'
-              span={5}
+              span={6}
               label='Foto de perfil'
               accept='image/*'
               preview={profilePic?.preview}
@@ -130,17 +129,10 @@ export const NewAccount = () => {
               label='Sobrenome *'
               id='sob_name'
               type='text'
-              span={2}
+              span={3}
               {...txtSurname}
             />
-            <Input label='CPF *' id='cpf' type='text' span={2} {...txtCpf} />
-            <Input
-              label='E-Mail *'
-              id='email'
-              type='email'
-              span={3}
-              {...txtEmail}
-            />
+            <Input label='CPF *' id='cpf' type='text' span={4} {...txtCpf} />
             <Input
               label='Celular *'
               id='cell'
@@ -149,44 +141,11 @@ export const NewAccount = () => {
               {...txtCell}
             />
             <Input
-              label='Celular secundário'
-              id='cell_sec'
-              type='text'
-              span={2}
-              {...txtCellSec}
-            />
-            <Input label='Nascimento *' id='birth' type='date' {...txtBirth} />
-          </BoxForm>
-          <Separate />
-          <h3>Endereço</h3>
-          <BoxForm>
-            <Input
-              label='Rua *'
-              id='street'
-              type='text'
-              span={2}
-              {...txtStreet}
-            />
-            <Input label='Número' id='number' type='number' {...txtNum} />
-            <Input label='CEP *' id='cep' type='text' span={2} {...txtCep} />
-            <Input
-              label='Bairro *'
-              id='neighborhood'
-              type='text'
-              span={2}
-              {...txtNeighborhood}
-            />
-            <Input
-              label='Cidade *'
-              id='city'
-              type='text'
-              span={2}
-              {...txtCity}
-            />
-            <SelectBox
-              value={txtState}
-              setValue={setTxtState}
-              options={arrStates}
+              label='E-Mail *'
+              id='email'
+              type='email'
+              span={6}
+              {...txtEmail}
             />
           </BoxForm>
           <Separate />
@@ -205,14 +164,14 @@ export const NewAccount = () => {
               label='Senha *'
               id='pass'
               type='password'
-              span={2}
+              span={3}
               {...txtPass}
             />
             <Input
               label='Confirme a senha *'
               id='confirmPass'
               type='password'
-              span={2}
+              span={3}
               {...txtConfirmPass}
             />
           </BoxForm>
@@ -221,7 +180,7 @@ export const NewAccount = () => {
           <BoxForm>
             <CheckBox
               label='Estou de acordo com os termos e condições de uso do aplicativo'
-              span={5}
+              span={6}
               checked={terms}
               onChange={() => setTerms(!terms)}
               required
@@ -231,7 +190,7 @@ export const NewAccount = () => {
               content='Cancelar cadastro'
               span={2}
             />
-            <PrimaryButton content='Criar nova conta' span={3} />
+            <PrimaryButton content='Criar nova conta' span={4} />
           </BoxForm>
         </form>
       </Container>
