@@ -14,6 +14,7 @@ import { BackBtn } from '../../components/BackBtn/BackBtn.tsx';
 import { useNavigate } from 'react-router-dom';
 
 interface User {
+  profile_photo: File | null | undefined;
   name: string;
   surname: string;
   cpf: string;
@@ -21,18 +22,15 @@ interface User {
   cell: string;
   password: string;
 }
-
 interface Feedback {
   message: string;
   status: number;
 }
-
+interface IProfileImg {
+  preview: string;
+  raw: File | null;
+}
 export const NewAccount = () => {
-  interface IProfileImg {
-    preview: string;
-    raw: File | null;
-  }
-
   const [profilePic, setProfilePic] = React.useState<IProfileImg | null>({
     preview: '',
     raw: null,
@@ -86,6 +84,7 @@ export const NewAccount = () => {
       terms
     ) {
       const newUser: User = {
+        profile_photo: profilePic?.raw,
         name: txtName.value,
         surname: txtSurname.value,
         cpf: txtCpf.value,
@@ -94,9 +93,7 @@ export const NewAccount = () => {
         password: txtPass.value,
       };
 
-      try {
-        setLoadingNewUser(true);
-        setStatusNewUser(null);
+      async function postUser() {
         const response = await fetch('http://localhost:3000/users', {
           method: 'post',
           headers: {
@@ -108,7 +105,16 @@ export const NewAccount = () => {
         if (feedback.status != 201)
           throw new Error('Não foi possível salvar o usuário.');
 
-        setStatusNewUser(feedback.message);
+        return feedback;
+      }
+
+      try {
+        setLoadingNewUser(true);
+        setStatusNewUser(null);
+
+        await postUser();
+        setStatusNewUser((await postUser()).message);
+
         setLoadingNewUser(false);
       } catch (err) {
         if (err instanceof Error) setStatusNewUser(err.message);
@@ -142,7 +148,7 @@ export const NewAccount = () => {
           src={ImgNewAccount}
           alt='Imagem de ilustração para criação de novas contas'
         />
-        <form onSubmit={sendForm}>
+        <form onSubmit={sendForm} method='post' encType='multipart/form-data'>
           <h3>Dados pessoais</h3>
           <BoxForm>
             <InputFile
