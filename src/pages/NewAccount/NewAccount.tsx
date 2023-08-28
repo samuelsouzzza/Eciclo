@@ -14,7 +14,6 @@ import { BackBtn } from '../../components/BackBtn/BackBtn.tsx';
 import { useNavigate } from 'react-router-dom';
 
 interface User {
-  profile_photo: File | null | undefined;
   name: string;
   surname: string;
   cpf: string;
@@ -84,7 +83,6 @@ export const NewAccount = () => {
       terms
     ) {
       const newUser: User = {
-        profile_photo: profilePic?.raw,
         name: txtName.value,
         surname: txtSurname.value,
         cpf: txtCpf.value,
@@ -112,9 +110,7 @@ export const NewAccount = () => {
         setLoadingNewUser(true);
         setStatusNewUser(null);
 
-        await postUser();
         setStatusNewUser((await postUser()).message);
-
         setLoadingNewUser(false);
       } catch (err) {
         if (err instanceof Error) setStatusNewUser(err.message);
