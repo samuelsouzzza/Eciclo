@@ -8,17 +8,30 @@ import { SecondaryButton } from '../../components/Form/SecondaryButton/Secondary
 import { CheckBox } from '../../components/Form/CheckBox/CheckBox.tsx';
 import { Title } from '../../components/Title/Title.tsx';
 import { Separate } from '../../components/Separate/Separate.tsx';
+import { Feedback } from '../../components/Feedback/Feedback.tsx';
 import ImgNewAccount from '../../../public/new_account-illustration.svg';
 import { BackBtn } from '../../components/BackBtn/BackBtn.tsx';
 import { useNavigate } from 'react-router-dom';
+
+interface User {
+  name: string;
+  surname: string;
+  cpf: string;
+  email: string;
+  cell: string;
+  password: string;
+}
+
+interface Feedback {
+  message: string;
+  status: number;
+}
 
 export const NewAccount = () => {
   interface IProfileImg {
     preview: string;
     raw: File | null;
   }
-
-  const arrStates = ['sp', 'rj', 'mg'];
 
   const [profilePic, setProfilePic] = React.useState<IProfileImg | null>({
     preview: '',
@@ -29,17 +42,11 @@ export const NewAccount = () => {
   const txtCpf = useForm('cpf');
   const txtEmail = useForm('email');
   const txtCell = useForm('cell');
-  const txtCellSec = useForm('cell');
-  const txtBirth = useForm(null);
-  const txtStreet = useForm(null);
-  const txtNum = useForm(null);
-  const txtCep = useForm('cep');
-  const txtNeighborhood = useForm(null);
-  const txtCity = useForm(null);
-  const [txtState, setTxtState] = React.useState(arrStates[0]);
   const txtPass = useForm('pass');
   const txtConfirmPass = useForm(null);
   const [terms, setTerms] = React.useState(false);
+  const [loadingNewUser, setLoadingNewUser] = React.useState(false);
+  const [statusNewUser, setStatusNewUser] = React.useState<string | null>(null);
 
   const navigate = useNavigate();
 
@@ -66,7 +73,7 @@ export const NewAccount = () => {
     }
   }
 
-  function sendForm(event: React.FormEvent) {
+  async function sendForm(event: React.FormEvent) {
     event.preventDefault();
     if (
       txtName.validate() &&
@@ -74,21 +81,45 @@ export const NewAccount = () => {
       txtCpf.validate() &&
       txtEmail.validate() &&
       txtCell.validate() &&
-      txtCellSec.validate() &&
-      txtBirth.validate() &&
-      txtStreet.validate() &&
-      txtNum.validate() &&
-      txtCep.validate() &&
-      txtNeighborhood.validate() &&
-      txtCity.validate() &&
-      txtState &&
       txtPass.validate() &&
       txtConfirmPass.validate() &&
       terms
     ) {
-      console.log('Todos os dados estão corretos');
+      const newUser: User = {
+        name: txtName.value,
+        surname: txtSurname.value,
+        cpf: txtCpf.value,
+        email: txtEmail.value,
+        cell: txtCell.value,
+        password: txtPass.value,
+      };
+
+      try {
+        setLoadingNewUser(true);
+        setStatusNewUser(null);
+        const response = await fetch('http://localhost:3000/users', {
+          method: 'post',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(newUser),
+        });
+        const feedback: Feedback = await response.json();
+        if (feedback.status != 201)
+          throw new Error('Não foi possível salvar o usuário.');
+
+        setStatusNewUser(feedback.message);
+        setLoadingNewUser(false);
+      } catch (err) {
+        if (err instanceof Error) setStatusNewUser(err.message);
+      } finally {
+        setLoadingNewUser(false);
+        navigate('/');
+      }
     } else {
-      console.log('Algum campo não foi validado corretamente');
+      setStatusNewUser(
+        'Verifique se todos os campos estão preenchidos corretamente'
+      );
     }
   }
 
@@ -190,8 +221,13 @@ export const NewAccount = () => {
               content='Cancelar cadastro'
               span={2}
             />
-            <PrimaryButton content='Criar nova conta' span={4} />
+            {loadingNewUser ? (
+              <PrimaryButton content='Carregando' span={4} />
+            ) : (
+              <PrimaryButton content='Criar nova conta' span={4} />
+            )}
           </BoxForm>
+          {statusNewUser && <Feedback>{statusNewUser}</Feedback>}
         </form>
       </Container>
     </Wrapper>
