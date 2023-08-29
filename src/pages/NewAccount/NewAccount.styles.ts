@@ -41,7 +41,7 @@ export const Container = styled.section`
 export const BoxForm = styled.section`
   margin: 2% 0;
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(6, 1fr);
   justify-content: center;
   align-items: last baseline;
   gap: 2%;
