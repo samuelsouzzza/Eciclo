@@ -231,7 +231,7 @@ export const NewAccount = () => {
               <PrimaryButton content='Criar nova conta' span={4} />
             )}
           </BoxForm>
-          {statusNewUser && <Feedback>{statusNewUser}</Feedback>}
+          {statusNewUser && <Feedback text={statusNewUser} />}
         </form>
       </Container>
     </Wrapper>
