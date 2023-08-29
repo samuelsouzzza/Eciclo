@@ -6,11 +6,11 @@ export const Container = styled.section`
   height: 100%;
   width: 100%;
   border-radius: 5px;
-  grid-column: 1;
   align-self: flex-end;
   padding: 5%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: start;
+  grid-area: feed;
 `;

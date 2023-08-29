@@ -6,5 +6,6 @@ export const Container = styled.section`
   width: 100vw;
   padding: 1%;
   display: grid;
-  grid-template-columns: 1fr 3fr 1fr;
+  grid-template-areas: 'feed . menu sidenav';
+  grid-template-columns: 1fr 3fr 1fr 40px;
 `;
