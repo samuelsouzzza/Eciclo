@@ -91,13 +91,17 @@ export const NewAccount = () => {
         password: txtPass.value,
       };
 
+      const formData = new FormData();
+      formData.append('user', JSON.stringify(newUser));
+
+      if (profilePic?.raw) {
+        formData.append('profilePic', profilePic.raw);
+      }
+
       async function postUser() {
         const response = await fetch('http://localhost:3000/users', {
           method: 'post',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(newUser),
+          body: formData,
         });
         const feedback: Feedback = await response.json();
         if (feedback.status != 201)
@@ -109,14 +113,13 @@ export const NewAccount = () => {
       try {
         setLoadingNewUser(true);
         setStatusNewUser(null);
-
         setStatusNewUser((await postUser()).message);
         setLoadingNewUser(false);
+        navigate('/');
       } catch (err) {
         if (err instanceof Error) setStatusNewUser(err.message);
       } finally {
         setLoadingNewUser(false);
-        navigate('/');
       }
     } else {
       setStatusNewUser(
@@ -191,7 +194,6 @@ export const NewAccount = () => {
             <li>Um número</li>
             <li>Um caractere especial</li>
           </ul>
-
           <BoxForm>
             <Input
               label='Senha *'
