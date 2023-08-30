@@ -1,8 +1,13 @@
 import React from 'react';
 import { Container } from './Feed.styles.ts';
 import { Title } from '../Title/Title.tsx';
+import { SearchBar } from '../SearchBar/SearchBar.tsx';
 import { Publication } from '../Publication/Publication.tsx';
-import { faMobileScreen, faLaptop } from '@fortawesome/free-solid-svg-icons';
+import {
+  faMobileScreen,
+  faLaptop,
+  faSearch,
+} from '@fortawesome/free-solid-svg-icons';
 
 export const Feed = () => {
   return (
@@ -10,6 +15,7 @@ export const Feed = () => {
       <Title text='Perto de você' size={1.25}>
         Perto de você
       </Title>
+      <SearchBar placeholder='Pesquise aqui' />
       <Publication
         icon={faMobileScreen}
         title='Moto G7 Power'

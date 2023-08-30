@@ -3,13 +3,13 @@ import { InputText, Invalid } from './Input.styles';
 
 interface InputProps {
   id: string;
-  label: string;
-  value: string;
+  label?: string;
+  value?: string;
   type: string;
   span?: number;
-  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  error: string | null;
-  onBlur: () => void;
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  error?: string | null;
+  onBlur?: () => void;
   placeholder?: string;
 }
 
