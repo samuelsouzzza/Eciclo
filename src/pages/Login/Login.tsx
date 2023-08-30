@@ -7,7 +7,7 @@ import { Wrapper, Container, BoxForm, BoxLinks } from './Login.styles.ts';
 import { Input } from '../../components/Form/Input/Input.tsx';
 import { PrimaryButton } from '../../components/Form/PrimaryButton/PrimaryButton.tsx';
 import { Anchor } from '../../components/Anchor/Anchor.tsx';
-import ImgLogin from '../../../public/login-illustration.svg';
+import ImgLogin from '../../assets/login-illustration.svg';
 
 interface User {
   name: string;
