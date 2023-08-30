@@ -13,4 +13,5 @@ export const Container = styled.section`
   align-items: center;
   justify-content: start;
   grid-area: feed;
+  overflow-y: scroll;
 `;

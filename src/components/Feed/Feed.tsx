@@ -2,6 +2,7 @@ import React from 'react';
 import { Container } from './Feed.styles.ts';
 import { Title } from '../Title/Title.tsx';
 import { Publication } from '../Publication/Publication.tsx';
+import { faMobileScreen, faLaptop } from '@fortawesome/free-solid-svg-icons';
 
 export const Feed = () => {
   return (
@@ -10,14 +11,40 @@ export const Feed = () => {
         Perto de você
       </Title>
       <Publication
-        img=''
-        title='Primeira publicação'
-        description='Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae, maxime.'
+        icon={faMobileScreen}
+        title='Moto G7 Power'
+        type='Celular'
+        description='Celular com e tudo funcionando, mas está com a bateria um pouco viciada.'
       />
       <Publication
-        img=''
-        title='Primeira publicação'
-        description='Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae, maxime.'
+        icon={faLaptop}
+        title='Notebook Asus i5'
+        type='Notebook'
+        description='Tudo funcioando, mas sem carregador.'
+      />
+      <Publication
+        icon={faMobileScreen}
+        title='Moto G7 Power'
+        type='Celular'
+        description='Celular com e tudo funcionando, mas está com a bateria um pouco viciada.'
+      />
+      <Publication
+        icon={faLaptop}
+        title='Notebook Asus i5'
+        type='Notebook'
+        description='Tudo funcioando, mas sem carregador.'
+      />
+      <Publication
+        icon={faMobileScreen}
+        title='Moto G7 Power'
+        type='Celular'
+        description='Celular com e tudo funcionando, mas está com a bateria um pouco viciada.'
+      />
+      <Publication
+        icon={faLaptop}
+        title='Notebook Asus i5'
+        type='Notebook'
+        description='Tudo funcioando, mas sem carregador.'
       />
     </Container>
   );

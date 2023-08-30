@@ -5,17 +5,20 @@ export const Container = styled.div`
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
   display: flex;
   flex-direction: column;
-
-  padding: 1% 0;
   margin: 5% 0;
-  height: 125px;
+  padding: 1% 0;
+  height: auto;
   width: 100%;
-  p {
-    font-size: 0.75rem;
-  }
 `;
-export const Img = styled.img`
-  max-width: 100%;
-  height: 100%;
-  margin: 1% 0;
+export const Description = styled.p`
+  font-size: 0.75rem;
+  width: 100%;
+  margin: 3% 0 0.1% 0;
+`;
+export const Type = styled.span`
+  background-color: #92e3a944;
+  border: 1px solid #92e3a9;
+  padding: 0.25% 3%;
+  border-radius: 5px;
+  margin-right: 1%;
 `;

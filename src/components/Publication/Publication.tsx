@@ -1,20 +1,40 @@
 import React from 'react';
-import { Container, Img } from './Publication.styles.ts';
+import { Container, Description, Type } from './Publication.styles.ts';
 import { PrimaryButton } from '../Form/PrimaryButton/PrimaryButton.tsx';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { IconProp } from '@fortawesome/fontawesome-svg-core';
 
 interface PublicationProps {
-  img: string;
+  icon: IconProp;
   title: string;
+  type: string;
   description: string;
 }
 
-export const Publication = ({ img, title, description }: PublicationProps) => {
+export const Publication = ({
+  icon,
+  title,
+  type,
+  description,
+}: PublicationProps) => {
   return (
     <Container>
-      <Img src={img} alt='Foto da publicação' />
-      <h4>{title}</h4>
-      <p>{description}</p>
-      <PrimaryButton content='Saber mais' style={{ fontSize: '1rem' }} />
+      <h4>
+        <FontAwesomeIcon icon={icon} /> {title}
+      </h4>
+      <Description>
+        <Type>{type}</Type>
+        {description}
+      </Description>
+      <PrimaryButton
+        content='Saber mais'
+        style={{
+          fontSize: '.85rem',
+          height: '80%',
+          padding: '1% 0',
+          fontWeight: 'bold',
+        }}
+      />
     </Container>
   );
 };
