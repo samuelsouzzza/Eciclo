@@ -6,7 +6,7 @@ export const Container = styled.section`
   height: 100%;
   width: 100%;
   border-radius: 5px;
-  padding: 2.5%;
+  padding: 2%;
   grid-column-start: 2;
   grid-column-end: 4;
   overflow-y: scroll;

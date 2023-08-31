@@ -6,6 +6,7 @@ import { SelectBox } from '../Form/SelectBox/SelectBox.tsx';
 import { InputFile } from '../Form/InputFile/InputFile.tsx';
 import { PrimaryButton } from '../Form/PrimaryButton/PrimaryButton.tsx';
 import { SecondaryButton } from '../Form/SecondaryButton/SecondaryButton.tsx';
+import { UseContextScreens } from '../../global/ScreenStates.tsx';
 
 export const ModalNewPublication = () => {
   const arrCategories = [
@@ -15,8 +16,13 @@ export const ModalNewPublication = () => {
     'Televisão',
     'Monitor',
   ];
-
+  const { setShowFeed, setShowModalNewPublication } = UseContextScreens();
   const [categorie, setCategorie] = React.useState(arrCategories[0]);
+
+  function closeModal() {
+    setShowModalNewPublication(false);
+    setShowFeed(true);
+  }
 
   return (
     <Container>
@@ -38,7 +44,7 @@ export const ModalNewPublication = () => {
           span={5}
         />
         <InputFile id='photosPublication' label='Fotos' span={5} />
-        <SecondaryButton content='Cancelar' span={2} />
+        <SecondaryButton content='Cancelar' span={2} onClick={closeModal} />
         <PrimaryButton content='Criar' span={3} />
       </BoxForm>
     </Container>
