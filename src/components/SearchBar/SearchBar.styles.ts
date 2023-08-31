@@ -4,6 +4,7 @@ export const Container = styled.div`
   width: 100%;
   display: flex;
   align-items: center;
+  gap: 1%;
 `;
 export const Bar = styled.input`
   background-color: ghostwhite;

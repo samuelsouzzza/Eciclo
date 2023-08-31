@@ -10,8 +10,9 @@ export const Container = styled.aside`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-around;
-  padding: 5%;
+  justify-content: start;
+  gap: 5%;
+  padding: 50% 5%;
   .i {
     font-size: 1.25rem;
     cursor: pointer;
