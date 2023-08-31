@@ -26,7 +26,13 @@ export const Input: React.FC<InputProps> = ({
 }) => {
   return (
     <>
-      <label htmlFor={id} style={{ gridColumn: `span ${span}` }}>
+      <label
+        htmlFor={id}
+        style={{
+          gridColumn: `span ${span}`,
+          width: '100%',
+        }}
+      >
         {label}
         {error && <Invalid> - {error}</Invalid>}
         <InputText

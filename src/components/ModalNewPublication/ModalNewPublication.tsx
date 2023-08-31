@@ -4,6 +4,7 @@ import { Title } from '../Title/Title.tsx';
 import { Input } from '../Form/Input/Input.tsx';
 import { SelectBox } from '../Form/SelectBox/SelectBox.tsx';
 import { InputFile } from '../Form/InputFile/InputFile.tsx';
+import { TextArea } from '../Form/TextArea/TextArea.tsx';
 import { PrimaryButton } from '../Form/PrimaryButton/PrimaryButton.tsx';
 import { SecondaryButton } from '../Form/SecondaryButton/SecondaryButton.tsx';
 import { UseContextScreens } from '../../global/ScreenStates.tsx';
@@ -18,6 +19,7 @@ export const ModalNewPublication = () => {
   ];
   const { setShowFeed, setShowModalNewPublication } = UseContextScreens();
   const [categorie, setCategorie] = React.useState(arrCategories[0]);
+  const [describe, setDescribe] = React.useState('');
 
   function closeModal() {
     setShowModalNewPublication(false);
@@ -37,11 +39,13 @@ export const ModalNewPublication = () => {
           value={''}
           setValue={setCategorie}
         />
-        <Input
-          id='descriptionPublication'
-          type='text'
-          label='Descrição'
+        <TextArea
+          id='describePublication'
           span={5}
+          label='Descrição'
+          limit={200}
+          value={describe}
+          setValue={setDescribe}
         />
         <InputFile id='photosPublication' label='Fotos' span={5} />
         <SecondaryButton content='Cancelar' span={2} onClick={closeModal} />
