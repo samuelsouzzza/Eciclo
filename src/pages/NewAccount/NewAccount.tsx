@@ -12,6 +12,7 @@ import { Feedback } from '../../components/Feedback/Feedback.tsx';
 import ImgNewAccount from '../../assets/new_account-illustration.svg';
 import { BackBtn } from '../../components/BackBtn/BackBtn.tsx';
 import { useNavigate } from 'react-router-dom';
+// import { IPublicationImgs } from '../../components/ModalNewPublication/ModalNewPublication.tsx';
 
 interface User {
   name: string;
@@ -155,6 +156,7 @@ export const NewAccount = () => {
               span={6}
               label='Foto de perfil'
               accept='image/*'
+              radius={50}
               preview={profilePic?.preview}
               showPic={!!profilePic}
               onChange={loadPicture}

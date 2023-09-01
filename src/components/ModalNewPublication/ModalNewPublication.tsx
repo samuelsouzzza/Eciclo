@@ -9,6 +9,11 @@ import { PrimaryButton } from '../Form/PrimaryButton/PrimaryButton.tsx';
 import { SecondaryButton } from '../Form/SecondaryButton/SecondaryButton.tsx';
 import { UseContextScreens } from '../../global/ScreenStates.tsx';
 
+export interface IPublicationImgs {
+  preview: string;
+  raw: File | null;
+}
+
 export const ModalNewPublication = () => {
   const arrCategories = [
     'Celular',
@@ -20,11 +25,31 @@ export const ModalNewPublication = () => {
   const { setShowFeed, setShowModalNewPublication } = UseContextScreens();
   const [categorie, setCategorie] = React.useState(arrCategories[0]);
   const [describe, setDescribe] = React.useState('');
+  const [publicationPics, setpublicationPics] = React.useState<
+    IPublicationImgs[] | null
+  >([]);
 
   function closeModal() {
     setShowModalNewPublication(false);
     setShowFeed(true);
   }
+
+  function loadPictures(e: React.ChangeEvent<HTMLInputElement>) {
+    e.preventDefault();
+    const { files } = e.target;
+    if (files !== null && files.length > 0) {
+      setpublicationPics((...prevPublicationPics) =>
+        Array.from(files).map((file) => ({
+          preview: URL.createObjectURL(file),
+          raw: file,
+        }))
+      );
+    }
+  }
+
+  React.useEffect(() => {
+    console.log(publicationPics);
+  }, [publicationPics]);
 
   return (
     <Container>
@@ -47,7 +72,17 @@ export const ModalNewPublication = () => {
           value={describe}
           setValue={setDescribe}
         />
-        <InputFile id='photosPublication' label='Fotos' span={5} />
+        <InputFile
+          id='photosPublication'
+          label='Fotos'
+          accept='image/*'
+          multiple
+          span={5}
+          preview={publicationPics}
+          showPic={!!publicationPics}
+          onChange={loadPictures}
+        />
+
         <SecondaryButton content='Cancelar' span={2} onClick={closeModal} />
         <PrimaryButton content='Criar' span={3} />
       </BoxForm>

@@ -1,12 +1,19 @@
 import React from 'react';
-import { Container, File, PreviewContainer } from './InputFile.styles.ts';
+import {
+  Container,
+  File,
+  PreviewContainer,
+  PreviewImg,
+} from './InputFile.styles.ts';
+import { IPublicationImgs } from '../../ModalNewPublication/ModalNewPublication.tsx';
 
 type InputFileProps = React.ComponentProps<'input'> & {
   id: string;
   label: string;
-  preview?: string;
+  preview?: IPublicationImgs[] | string | null;
   showPic?: boolean;
   span?: number;
+  radius?: number;
 };
 
 export const InputFile = ({
@@ -15,6 +22,7 @@ export const InputFile = ({
   label,
   preview,
   showPic,
+  radius = 5,
   ...props
 }: InputFileProps) => {
   return (
@@ -23,9 +31,26 @@ export const InputFile = ({
         {label}
         <File id={id} type='file' {...props} />
       </label>
-      {showPic && preview && (
-        <PreviewContainer src={preview} alt='Foto de perfil selecionada' />
-      )}
+      <PreviewContainer>
+        {preview !== null && typeof preview !== 'undefined' ? (
+          Array.isArray(preview) ? (
+            preview.map((pre, i) => (
+              <PreviewImg
+                key={i}
+                src={pre.preview}
+                alt='Imagens selecionadas manualmente'
+                style={{ borderRadius: `${radius}%` }}
+              />
+            ))
+          ) : (
+            <PreviewImg
+              src={preview}
+              alt='Foto de perfil selecionada'
+              style={{ borderRadius: `${radius}%` }}
+            />
+          )
+        ) : null}
+      </PreviewContainer>
     </Container>
   );
 };

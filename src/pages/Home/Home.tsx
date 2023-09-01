@@ -11,7 +11,7 @@ export const Home = () => {
     <Container>
       {showFeed ? <Feed /> : <></>}
       {showModalNewPublication ? <ModalNewPublication /> : <></>}
-      <SideMenu></SideMenu>
+      <SideMenu />
     </Container>
   );
 };
