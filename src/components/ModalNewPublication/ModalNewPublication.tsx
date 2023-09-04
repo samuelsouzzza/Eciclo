@@ -22,6 +22,7 @@ export const ModalNewPublication = () => {
     'Placa',
     'Televisão',
     'Monitor',
+    'Kit',
   ];
   const arrOptionsSend = [
     'Fatec Registro',
@@ -64,7 +65,7 @@ export const ModalNewPublication = () => {
       <BackBtn text='Cancelar' onClick={closeModal} />
       <Title text='Criar nova publicação' />
       <BoxForm>
-        <Input id='titlePublication' type='text' label='Título' />
+        <Input id='titlePublication' type='text' label='Título' length={35} />
         <SelectBox
           id='categoriePublication'
           label='Categoria'

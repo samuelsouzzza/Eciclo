@@ -21,7 +21,7 @@ export const Container = styled.section`
   min-width: 300px;
   height: auto;
   padding: 2%;
-  animation: fadeIn forwards 0.2s;
+  animation: fadeInLeft forwards 0.2s;
   &form {
     grid-column: 2;
   }

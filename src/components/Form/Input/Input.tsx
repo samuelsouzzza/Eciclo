@@ -7,6 +7,7 @@ interface InputProps {
   value?: string;
   type: string;
   span?: number;
+  length?: number;
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   error?: string | null;
   onBlur?: () => void;
@@ -19,6 +20,7 @@ export const Input: React.FC<InputProps> = ({
   value,
   type,
   span = 1,
+  length,
   onChange,
   error,
   onBlur,
@@ -40,6 +42,7 @@ export const Input: React.FC<InputProps> = ({
           id={id}
           name={id}
           value={value}
+          maxLength={length}
           onChange={onChange}
           onBlur={onBlur}
           placeholder={placeholder}

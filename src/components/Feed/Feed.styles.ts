@@ -14,4 +14,5 @@ export const Container = styled.section`
   justify-content: start;
   grid-area: feed;
   overflow-y: scroll;
+  animation: fadeInRight 0.3s forwards;
 `;

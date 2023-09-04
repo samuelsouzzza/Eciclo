@@ -10,6 +10,7 @@ export const Container = styled.section`
   grid-column-start: 3;
   grid-column-end: 4;
   overflow-y: scroll;
+  animation: fadeInLeft 0.3s forwards;
 `;
 export const BoxForm = styled.div`
   width: 100%;
