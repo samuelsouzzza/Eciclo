@@ -22,12 +22,18 @@ export const Container = styled.aside`
     border-radius: 5px;
     transition: 0.3s;
     &:hover {
+      path {
+        color: #92e3a9;
+      }
       background-color: #92e3a944;
     }
     &.new {
       background-color: #92e3a944;
       border: 1px solid #92e3a9;
       &:hover {
+        path {
+          color: #fff;
+        }
         background-color: #92e3a9;
       }
     }
