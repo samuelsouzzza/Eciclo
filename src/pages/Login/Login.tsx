@@ -1,7 +1,7 @@
 import React from 'react';
 import useFetch from '../../hooks/useFetch.ts';
 import useForm from '../../hooks/useForm.ts';
-import { Invalid } from '../../components/Form/Input/Input.styles.ts';
+import { Invalid } from '../../components/Form/Invalid/Invalid.tsx';
 import { useNavigate } from 'react-router-dom';
 import { Wrapper, Container, BoxForm, BoxLinks } from './Login.styles.ts';
 import { Input } from '../../components/Form/Input/Input.tsx';
@@ -74,7 +74,7 @@ export const Login = () => {
           <form onSubmit={logon}>
             <Input label='Usuário' id='user' type='text' {...txtUser} />
             <Input label='Senha' id='pass' type='text' {...txtPassword} />
-            {loginError && <Invalid>{loginError}</Invalid>}
+            {loginError && <Invalid text={loginError} />}
             <PrimaryButton content='Entrar' />
           </form>
           <BoxLinks>

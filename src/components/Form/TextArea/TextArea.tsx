@@ -1,5 +1,6 @@
 import React from 'react';
 import { Area } from './TextArea.styles.ts';
+import { Invalid } from '../Invalid/Invalid.tsx';
 
 type TextAreaProps = React.ComponentProps<'textarea'> & {
   label?: string;
@@ -29,6 +30,9 @@ export const TextArea = ({
       }}
     >
       {label}
+      {value.length === 0 && (
+        <Invalid text=' - Preencha uma descrição' color='#e0d026' />
+      )}
       <Area
         rows={lines}
         value={value}

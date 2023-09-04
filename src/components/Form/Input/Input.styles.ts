@@ -23,8 +23,3 @@ export const InputText = styled.input`
     color: rgba(0, 0, 0, 0.3);
   }
 `;
-export const Invalid = styled.p`
-  color: #e04026;
-  font-size: 0.75rem;
-  display: inline;
-`;

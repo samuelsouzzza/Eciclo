@@ -1,5 +1,6 @@
 import React from 'react';
-import { InputText, Invalid } from './Input.styles';
+import { InputText } from './Input.styles';
+import { Invalid } from '../Invalid/Invalid';
 
 interface InputProps {
   id: string;
@@ -36,7 +37,7 @@ export const Input: React.FC<InputProps> = ({
         }}
       >
         {label}
-        {error && <Invalid> - {error}</Invalid>}
+        {error && <Invalid text={' - ' + error} />}
         <InputText
           type={type}
           id={id}

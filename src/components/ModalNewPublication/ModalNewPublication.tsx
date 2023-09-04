@@ -9,6 +9,7 @@ import { PrimaryButton } from '../Form/PrimaryButton/PrimaryButton.tsx';
 import { SecondaryButton } from '../Form/SecondaryButton/SecondaryButton.tsx';
 import { UseContextScreens } from '../../global/ScreenStates.tsx';
 import { BackBtn } from '../BackBtn/BackBtn.tsx';
+import useForm from '../../hooks/useForm.ts';
 
 export interface IPublicationImgs {
   preview: string;
@@ -32,6 +33,7 @@ export const ModalNewPublication = () => {
   ];
   const { setShowFeed, setShowModalNewPublication } = UseContextScreens();
   const [categorie, setCategorie] = React.useState(arrCategories[0]);
+  const txtTitle = useForm(null);
   const [optSend, setOptSend] = React.useState(arrOptionsSend[0]);
   const [describe, setDescribe] = React.useState('');
   const [publicationPics, setpublicationPics] = React.useState<
@@ -65,7 +67,13 @@ export const ModalNewPublication = () => {
       <BackBtn text='Cancelar' onClick={closeModal} />
       <Title text='Criar nova publicação' />
       <BoxForm>
-        <Input id='titlePublication' type='text' label='Título' length={35} />
+        <Input
+          id='titlePublication'
+          type='text'
+          label='Título'
+          length={35}
+          {...txtTitle}
+        />
         <SelectBox
           id='categoriePublication'
           label='Categoria'

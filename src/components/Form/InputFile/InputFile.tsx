@@ -6,6 +6,7 @@ import {
   PreviewImg,
 } from './InputFile.styles.ts';
 import { IPublicationImgs } from '../../ModalNewPublication/ModalNewPublication.tsx';
+import { Invalid } from '../Invalid/Invalid.tsx';
 
 type InputFileProps = React.ComponentProps<'input'> & {
   id: string;
@@ -29,6 +30,9 @@ export const InputFile = ({
     <Container style={{ gridColumn: `span ${span}` }}>
       <label htmlFor={id}>
         {label}
+        {preview?.length === 0 && (
+          <Invalid text=' - Escolha no mínimo uma foto' color='#e0d026' />
+        )}
         <File id={id} type='file' {...props} />
       </label>
       <PreviewContainer>
