@@ -10,6 +10,7 @@ import { SecondaryButton } from '../Form/SecondaryButton/SecondaryButton.tsx';
 import { UseContextScreens } from '../../global/ScreenStates.tsx';
 import { BackBtn } from '../BackBtn/BackBtn.tsx';
 import useForm from '../../hooks/useForm.ts';
+import { Feedback } from '../Feedback/Feedback.tsx';
 
 export interface IPublicationImgs {
   preview: string;
@@ -39,6 +40,9 @@ export const ModalNewPublication = () => {
   const [publicationPics, setpublicationPics] = React.useState<
     IPublicationImgs[] | null
   >([]);
+  const [statusNewPublication, setStatusNewPublication] = React.useState<
+    string | null
+  >(null);
 
   function closeModal() {
     setShowModalNewPublication(false);
@@ -58,9 +62,27 @@ export const ModalNewPublication = () => {
     }
   }
 
-  React.useEffect(() => {
-    console.log(publicationPics);
-  }, [publicationPics]);
+  function createNewPublication() {
+    if (
+      txtTitle.validate() &&
+      describe.length >= 1 &&
+      publicationPics &&
+      publicationPics?.length >= 1
+    ) {
+      const newPublication = {
+        title: txtTitle.value,
+        categorie,
+        optSend,
+        describe,
+      };
+
+      const formData = new FormData();
+      formData.append('publication', JSON.stringify(newPublication));
+      formData.append('publication_photos', JSON.stringify(publicationPics));
+    } else {
+      setStatusNewPublication('Não foi possível criar a publicação');
+    }
+  }
 
   return (
     <Container>
@@ -106,8 +128,9 @@ export const ModalNewPublication = () => {
         />
         <div>
           <SecondaryButton content='Cancelar' onClick={closeModal} />
-          <PrimaryButton content='Criar' />
+          <PrimaryButton content='Criar' onClick={createNewPublication} />
         </div>
+        {statusNewPublication && <Feedback text={statusNewPublication} />}
       </BoxForm>
     </Container>
   );
