@@ -16,8 +16,9 @@ export const Container = styled.aside`
   .i {
     font-size: 1.25rem;
     cursor: pointer;
-    padding: 10% 2%;
+    padding: 5%;
     width: 90%;
+    height: 28px;
     border-radius: 5px;
     transition: 0.3s;
     &:hover {
