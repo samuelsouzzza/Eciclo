@@ -7,14 +7,14 @@ export const Container = styled.section`
   width: 100%;
   border-radius: 5px;
   padding: 2%;
-  grid-column-start: 2;
+  grid-column-start: 3;
   grid-column-end: 4;
   overflow-y: scroll;
 `;
 export const BoxForm = styled.div`
   width: 100%;
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: 1fr;
   gap: 1%;
   align-items: center;
   justify-content: flex-end;

@@ -4,7 +4,7 @@ export const SecBtn = styled.button`
   width: 100%;
   height: 40px;
   font-size: 1.125rem;
-  margin: 5% 0;
+  margin: 1% 0;
   cursor: pointer;
   background-color: #f8f8ff;
   border: 1px solid transparent;

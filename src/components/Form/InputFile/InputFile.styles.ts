@@ -37,6 +37,7 @@ export const PreviewContainer = styled.section`
   width: 100%;
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
   gap: 1%;
 `;
 export const PreviewImg = styled.img`

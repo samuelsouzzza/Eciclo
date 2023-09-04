@@ -8,6 +8,7 @@ import { TextArea } from '../Form/TextArea/TextArea.tsx';
 import { PrimaryButton } from '../Form/PrimaryButton/PrimaryButton.tsx';
 import { SecondaryButton } from '../Form/SecondaryButton/SecondaryButton.tsx';
 import { UseContextScreens } from '../../global/ScreenStates.tsx';
+import { BackBtn } from '../BackBtn/BackBtn.tsx';
 
 export interface IPublicationImgs {
   preview: string;
@@ -22,8 +23,15 @@ export const ModalNewPublication = () => {
     'Televisão',
     'Monitor',
   ];
+  const arrOptionsSend = [
+    'Fatec Registro',
+    'Prefeitura de Registro',
+    'CRAS Registro',
+    'Combinar entrega',
+  ];
   const { setShowFeed, setShowModalNewPublication } = UseContextScreens();
   const [categorie, setCategorie] = React.useState(arrCategories[0]);
+  const [optSend, setOptSend] = React.useState(arrOptionsSend[0]);
   const [describe, setDescribe] = React.useState('');
   const [publicationPics, setpublicationPics] = React.useState<
     IPublicationImgs[] | null
@@ -53,20 +61,26 @@ export const ModalNewPublication = () => {
 
   return (
     <Container>
+      <BackBtn text='Cancelar' onClick={closeModal} />
       <Title text='Criar nova publicação' />
       <BoxForm>
-        <Input id='titlePublication' type='text' label='Título' span={3} />
+        <Input id='titlePublication' type='text' label='Título' />
         <SelectBox
           id='categoriePublication'
           label='Categoria'
-          span={2}
           options={arrCategories}
-          value={''}
+          value={categorie}
           setValue={setCategorie}
+        />
+        <SelectBox
+          id='sendPublication'
+          label='Envio/Retirada'
+          options={arrOptionsSend}
+          value={optSend}
+          setValue={setOptSend}
         />
         <TextArea
           id='describePublication'
-          span={5}
           label='Descrição'
           limit={200}
           value={describe}
@@ -77,14 +91,14 @@ export const ModalNewPublication = () => {
           label='Fotos'
           accept='image/*'
           multiple
-          span={5}
           preview={publicationPics}
           showPic={!!publicationPics}
           onChange={loadPictures}
         />
-
-        <SecondaryButton content='Cancelar' span={2} onClick={closeModal} />
-        <PrimaryButton content='Criar' span={3} />
+        <div>
+          <SecondaryButton content='Cancelar' onClick={closeModal} />
+          <PrimaryButton content='Criar' />
+        </div>
       </BoxForm>
     </Container>
   );
