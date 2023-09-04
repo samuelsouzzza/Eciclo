@@ -6,7 +6,6 @@ type TitleProps = React.ComponentProps<'h1'> & {
 
 const styles: React.CSSProperties = {
   fontSize: '1.75rem',
-  textTransform: 'uppercase',
   fontWeight: 'bold',
   margin: '3% 0 5% 0',
   width: '100%',

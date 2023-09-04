@@ -6,25 +6,34 @@ export const Wrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: start;
-  padding: 3% 0;
+  padding: 2% 0;
   background-color: #92e3a922;
 `;
-export const Container = styled.section`
+export const ContentLogin = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+`;
+export const BoxContent = styled.section`
   background-color: white;
   box-shadow: 1px 1px 5px 3px rgba(0, 0, 0, 0.05);
-  display: grid;
+  display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  grid-template-columns: 1fr 1fr;
   border-radius: 5px;
   width: 60%;
   min-width: 300px;
   height: auto;
-  padding: 2%;
+  padding: 1% 2%;
   animation: fadeIn forwards 0.2s;
   &form {
     grid-column: 2;
   }
+`;
+export const BoxLogo = styled.div`
+  margin: 0 auto;
+`;
+export const Illustration = styled.img`
+  width: 100%;
 `;
 export const BoxForm = styled.div`
   display: flex;

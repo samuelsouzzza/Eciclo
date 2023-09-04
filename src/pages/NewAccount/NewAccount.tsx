@@ -9,7 +9,7 @@ import { CheckBox } from '../../components/Form/CheckBox/CheckBox.tsx';
 import { Title } from '../../components/Title/Title.tsx';
 import { Separate } from '../../components/Separate/Separate.tsx';
 import { Feedback } from '../../components/Feedback/Feedback.tsx';
-import ImgNewAccount from '../../../public/new_account-illustration.svg';
+import ImgNewAccount from '../../assets/new_account-illustration.svg';
 import { BackBtn } from '../../components/BackBtn/BackBtn.tsx';
 import { useNavigate } from 'react-router-dom';
 
