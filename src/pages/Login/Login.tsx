@@ -3,11 +3,21 @@ import useFetch from '../../hooks/useFetch.ts';
 import useForm from '../../hooks/useForm.ts';
 import { Invalid } from '../../components/Form/Input/Input.styles.ts';
 import { useNavigate } from 'react-router-dom';
-import { Wrapper, Container, BoxForm, BoxLinks } from './Login.styles.ts';
+import {
+  Wrapper,
+  ContentLogin,
+  BoxContent,
+  BoxLogo,
+  BoxForm,
+  BoxLinks,
+  Illustration,
+} from './Login.styles.ts';
 import { Input } from '../../components/Form/Input/Input.tsx';
 import { PrimaryButton } from '../../components/Form/PrimaryButton/PrimaryButton.tsx';
 import { Anchor } from '../../components/Anchor/Anchor.tsx';
-import ImgLogin from '../../../public/login-illustration.svg';
+import ImgLogin from '../../assets/login-illustration.svg';
+import { LogoMain } from '../../components/Logos/LogoMain.tsx';
+import { Title } from '../../components/Title/Title.tsx';
 
 interface User {
   name: string;
@@ -68,21 +78,27 @@ export const Login = () => {
 
   return (
     <Wrapper>
-      <Container>
-        <img src={ImgLogin} alt='Imagem de Login' />
-        <BoxForm>
-          <form onSubmit={logon}>
-            <Input label='Usuário' id='user' type='text' {...txtUser} />
-            <Input label='Senha' id='pass' type='text' {...txtPassword} />
-            {loginError && <Invalid>{loginError}</Invalid>}
-            <PrimaryButton content='Entrar' />
-          </form>
-          <BoxLinks>
-            <Anchor content='Não tenho conta' onClick={toNewAccount} />
-            <Anchor content='Perdeu a senha?' />
-          </BoxLinks>
-        </BoxForm>
-      </Container>
+      <BoxContent>
+        <BoxLogo>
+          <LogoMain />
+        </BoxLogo>
+        <ContentLogin>
+          <Illustration src={ImgLogin} alt='Imagem de Login' />
+          <BoxForm>
+            <Title text='Login' />
+            <form onSubmit={logon}>
+              <Input label='Usuário' id='user' type='text' {...txtUser} />
+              <Input label='Senha' id='pass' type='text' {...txtPassword} />
+              {loginError && <Invalid>{loginError}</Invalid>}
+              <PrimaryButton content='Entrar' />
+            </form>
+            <BoxLinks>
+              <Anchor content='Não tenho conta' onClick={toNewAccount} />
+              <Anchor content='Perdeu a senha?' />
+            </BoxLinks>
+          </BoxForm>
+        </ContentLogin>
+      </BoxContent>
     </Wrapper>
   );
 };
