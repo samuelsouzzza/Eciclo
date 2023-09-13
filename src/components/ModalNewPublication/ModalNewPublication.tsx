@@ -77,17 +77,15 @@ export const ModalNewPublication = () => {
         describe,
       };
 
-      const formDataPublication = new FormData();
-      formDataPublication.append('publication', JSON.stringify(newPublication));
-      formDataPublication.append(
-        'publication_photos',
-        JSON.stringify(publicationPics)
-      );
+      const formData = new FormData();
+      formData.append('publication', JSON.stringify(newPublication));
+
+      formData.append('publication_photos', JSON.stringify(publicationPics));
 
       async function postPublication() {
         const response = await fetch('http://localhost:3000/publications', {
           method: 'post',
-          body: formDataPublication,
+          body: formData,
         });
         const feedback: IFeedback = await response.json();
         if (feedback.status != 201)
