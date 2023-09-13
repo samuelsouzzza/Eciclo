@@ -12,23 +12,8 @@ import { Feedback } from '../../components/Feedback/Feedback.tsx';
 import ImgNewAccount from '../../assets/new_account-illustration.svg';
 import { BackBtn } from '../../components/BackBtn/BackBtn.tsx';
 import { useNavigate } from 'react-router-dom';
+import { IFeedback, IUser, IProfileImg } from '../../@types/types.ts';
 
-interface User {
-  name: string;
-  surname: string;
-  cpf: string;
-  email: string;
-  cell: string;
-  password: string;
-}
-interface Feedback {
-  message: string;
-  status: number;
-}
-interface IProfileImg {
-  preview: string;
-  raw: File | null;
-}
 export const NewAccount = () => {
   const [profilePic, setProfilePic] = React.useState<IProfileImg | null>({
     preview: '',
@@ -82,7 +67,7 @@ export const NewAccount = () => {
       txtConfirmPass.validate() &&
       terms
     ) {
-      const newUser: User = {
+      const newUser: IUser = {
         name: txtName.value,
         surname: txtSurname.value,
         cpf: txtCpf.value,
@@ -103,7 +88,7 @@ export const NewAccount = () => {
           method: 'post',
           body: formData,
         });
-        const feedback: Feedback = await response.json();
+        const feedback: IFeedback = await response.json();
         if (feedback.status != 201)
           throw new Error('Não foi possível salvar o usuário.');
 

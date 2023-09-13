@@ -11,13 +11,12 @@ import { UseContextScreens } from '../../global/ScreenStates.tsx';
 import { BackBtn } from '../BackBtn/BackBtn.tsx';
 import useForm from '../../hooks/useForm.ts';
 import { Feedback } from '../Feedback/Feedback.tsx';
-
-export interface IPublicationImgs {
-  preview: string;
-  raw: File | null;
-}
+import { IFeedback, IPublicationImgs } from '../../@types/types';
+import { useNavigate } from 'react-router-dom';
 
 export const ModalNewPublication = () => {
+  const navigate = useNavigate();
+
   const arrCategories = [
     'Celular',
     'Notebook',
@@ -43,6 +42,8 @@ export const ModalNewPublication = () => {
   const [statusNewPublication, setStatusNewPublication] = React.useState<
     string | null
   >(null);
+  const [loadingNewPublication, setLoadingNewPublication] =
+    React.useState(false);
 
   function closeModal() {
     setShowModalNewPublication(false);
@@ -62,7 +63,7 @@ export const ModalNewPublication = () => {
     }
   }
 
-  function createNewPublication() {
+  async function createNewPublication() {
     if (
       txtTitle.validate() &&
       describe.length >= 1 &&
@@ -76,9 +77,36 @@ export const ModalNewPublication = () => {
         describe,
       };
 
-      const formData = new FormData();
-      formData.append('publication', JSON.stringify(newPublication));
-      formData.append('publication_photos', JSON.stringify(publicationPics));
+      const formDataPublication = new FormData();
+      formDataPublication.append('publication', JSON.stringify(newPublication));
+      formDataPublication.append(
+        'publication_photos',
+        JSON.stringify(publicationPics)
+      );
+
+      async function postPublication() {
+        const response = await fetch('http://localhost:3000/publications', {
+          method: 'post',
+          body: formDataPublication,
+        });
+        const feedback: IFeedback = await response.json();
+        if (feedback.status != 201)
+          throw new Error('Não foi possível criar a publicação.');
+
+        return feedback;
+      }
+
+      try {
+        setLoadingNewPublication(true);
+        setStatusNewPublication(null);
+        setStatusNewPublication((await postPublication()).message);
+        setLoadingNewPublication(false);
+        navigate('/home');
+      } catch (err) {
+        if (err instanceof Error) setStatusNewPublication(err.message);
+      } finally {
+        setLoadingNewPublication(false);
+      }
     } else {
       setStatusNewPublication('Não foi possível criar a publicação');
     }
