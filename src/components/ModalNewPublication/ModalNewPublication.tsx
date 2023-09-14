@@ -63,7 +63,9 @@ export const ModalNewPublication = () => {
     }
   }
 
-  async function createNewPublication() {
+  async function createNewPublication(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+
     if (
       txtTitle.validate() &&
       describe.length >= 1 &&
@@ -77,15 +79,17 @@ export const ModalNewPublication = () => {
         describe,
       };
 
-      const formData = new FormData();
-      formData.append('publication', JSON.stringify(newPublication));
-
-      formData.append('publication_photos', JSON.stringify(publicationPics));
+      const formDataPublication = new FormData();
+      formDataPublication.append('publication', JSON.stringify(newPublication));
+      // formData.append('publication_photos', JSON.stringify(publicationPics));
 
       async function postPublication() {
         const response = await fetch('http://localhost:3000/publications', {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
           method: 'post',
-          body: formData,
+          body: formDataPublication,
         });
         const feedback: IFeedback = await response.json();
         if (feedback.status != 201)
@@ -115,48 +119,54 @@ export const ModalNewPublication = () => {
       <BackBtn text='Cancelar' onClick={closeModal} />
       <Title text='Criar nova publicação' />
       <BoxForm>
-        <Input
-          id='titlePublication'
-          type='text'
-          label='Título'
-          length={35}
-          {...txtTitle}
-        />
-        <SelectBox
-          id='categoriePublication'
-          label='Categoria'
-          options={arrCategories}
-          value={categorie}
-          setValue={setCategorie}
-        />
-        <SelectBox
-          id='sendPublication'
-          label='Envio/Retirada'
-          options={arrOptionsSend}
-          value={optSend}
-          setValue={setOptSend}
-        />
-        <TextArea
-          id='describePublication'
-          label='Descrição'
-          limit={200}
-          value={describe}
-          setValue={setDescribe}
-        />
-        <InputFile
-          id='photosPublication'
-          label='Fotos'
-          accept='image/*'
-          multiple
-          preview={publicationPics}
-          showPic={!!publicationPics}
-          onChange={loadPictures}
-        />
-        <div>
-          <SecondaryButton content='Cancelar' onClick={closeModal} />
-          <PrimaryButton content='Criar' onClick={createNewPublication} />
-        </div>
-        {statusNewPublication && <Feedback text={statusNewPublication} />}
+        <form
+          onSubmit={createNewPublication}
+          method='post'
+          encType='multipart/form-data'
+        >
+          <Input
+            id='titlePublication'
+            type='text'
+            label='Título'
+            length={35}
+            {...txtTitle}
+          />
+          <SelectBox
+            id='categoriePublication'
+            label='Categoria'
+            options={arrCategories}
+            value={categorie}
+            setValue={setCategorie}
+          />
+          <SelectBox
+            id='sendPublication'
+            label='Envio/Retirada'
+            options={arrOptionsSend}
+            value={optSend}
+            setValue={setOptSend}
+          />
+          <TextArea
+            id='describePublication'
+            label='Descrição'
+            limit={200}
+            value={describe}
+            setValue={setDescribe}
+          />
+          <InputFile
+            id='photosPublication'
+            label='Fotos'
+            accept='image/*'
+            multiple
+            preview={publicationPics}
+            showPic={!!publicationPics}
+            onChange={loadPictures}
+          />
+          <div>
+            <SecondaryButton content='Cancelar' onClick={closeModal} />
+            <PrimaryButton content='Criar' />
+          </div>
+          {statusNewPublication && <Feedback text={statusNewPublication} />}
+        </form>
       </BoxForm>
     </Container>
   );
