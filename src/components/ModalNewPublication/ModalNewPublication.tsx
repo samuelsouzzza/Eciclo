@@ -66,52 +66,51 @@ export const ModalNewPublication = () => {
   async function createNewPublication(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
-    if (
-      txtTitle.validate() &&
-      describe.length >= 1 &&
-      publicationPics &&
-      publicationPics?.length >= 1
-    ) {
-      const newPublication = {
-        title: txtTitle.value,
-        categorie,
-        optSend,
-        describe,
-      };
+    // if (
+    //   txtTitle.validate() &&
+    //   describe.length >= 1 &&
+    //   publicationPics &&
+    //   publicationPics?.length >= 1
+    // ) {
+    const newPublication = {
+      title: txtTitle.value,
+      categorie,
+      optSend,
+      describe,
+    };
+    const formDataPublication = new FormData();
+    formDataPublication.append('publication', JSON.stringify(newPublication));
+    formDataPublication.append(
+      'publication_photos',
+      JSON.stringify(publicationPics)
+    );
 
-      const formDataPublication = new FormData();
-      formDataPublication.append('publication', JSON.stringify(newPublication));
-      // formData.append('publication_photos', JSON.stringify(publicationPics));
+    async function postPublication() {
+      const response = await fetch('http://localhost:3000/publications', {
+        method: 'post',
+        body: formDataPublication,
+      });
+      const feedback: IFeedback = await response.json();
+      if (feedback.status != 201)
+        throw new Error('Não foi possível criar a publicação.');
 
-      async function postPublication() {
-        const response = await fetch('http://localhost:3000/publications', {
-          headers: {
-            'Content-Type': 'multipart/form-data',
-          },
-          method: 'post',
-          body: formDataPublication,
-        });
-        const feedback: IFeedback = await response.json();
-        if (feedback.status != 201)
-          throw new Error('Não foi possível criar a publicação.');
-
-        return feedback;
-      }
-
-      try {
-        setLoadingNewPublication(true);
-        setStatusNewPublication(null);
-        setStatusNewPublication((await postPublication()).message);
-        setLoadingNewPublication(false);
-        navigate('/home');
-      } catch (err) {
-        if (err instanceof Error) setStatusNewPublication(err.message);
-      } finally {
-        setLoadingNewPublication(false);
-      }
-    } else {
-      setStatusNewPublication('Não foi possível criar a publicação');
+      return feedback;
     }
+
+    try {
+      setLoadingNewPublication(true);
+      setStatusNewPublication(null);
+      setStatusNewPublication((await postPublication()).message);
+      setLoadingNewPublication(false);
+      navigate('/home');
+    } catch (err) {
+      if (err instanceof Error) setStatusNewPublication(err.message);
+    } finally {
+      setLoadingNewPublication(false);
+    }
+    // } else {
+    //   setStatusNewPublication('Não foi possível criar a publicação');
+    // }
   }
 
   return (
