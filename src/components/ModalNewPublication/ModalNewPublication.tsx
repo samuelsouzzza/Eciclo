@@ -107,6 +107,8 @@ export const ModalNewPublication = () => {
       if (err instanceof Error) setStatusNewPublication(err.message);
     } finally {
       setLoadingNewPublication(false);
+      setShowFeed(true);
+      setShowModalNewPublication(false);
     }
     // } else {
     //   setStatusNewPublication('Não foi possível criar a publicação');
@@ -162,7 +164,11 @@ export const ModalNewPublication = () => {
           />
           <div>
             <SecondaryButton content='Cancelar' onClick={closeModal} />
-            <PrimaryButton content='Criar' />
+            {loadingNewPublication ? (
+              <PrimaryButton content='Carregando...' disabled />
+            ) : (
+              <PrimaryButton content='Criar' />
+            )}
           </div>
           {statusNewPublication && <Feedback text={statusNewPublication} />}
         </form>
