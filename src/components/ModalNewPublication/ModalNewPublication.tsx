@@ -32,10 +32,10 @@ export const ModalNewPublication = () => {
     'Combinar entrega',
   ];
   const { setShowFeed, setShowModalNewPublication } = UseContextScreens();
-  const [categorie, setCategorie] = React.useState(arrCategories[0]);
+  const [category, setCategory] = React.useState(arrCategories[0]);
   const txtTitle = useForm(null);
-  const [optSend, setOptSend] = React.useState(arrOptionsSend[0]);
-  const [describe, setDescribe] = React.useState('');
+  const [collectReceipt, setCollectReceipt] = React.useState(arrOptionsSend[0]);
+  const [description, setDescription] = React.useState('');
   const [publicationPics, setpublicationPics] = React.useState<
     IPublicationImgs[] | null
   >([]);
@@ -66,53 +66,54 @@ export const ModalNewPublication = () => {
   async function createNewPublication(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
-    // if (
-    //   txtTitle.validate() &&
-    //   describe.length >= 1 &&
-    //   publicationPics &&
-    //   publicationPics?.length >= 1
-    // ) {
-    const newPublication = {
-      title: txtTitle.value,
-      categorie,
-      optSend,
-      describe,
-    };
-    const formDataPublication = new FormData();
-    formDataPublication.append('publication', JSON.stringify(newPublication));
-    formDataPublication.append(
-      'publication_photos',
-      JSON.stringify(publicationPics)
-    );
+    if (
+      // txtTitle.validate() &&
+      // description.length >= 1 &&
+      // publicationPics &&
+      publicationPics
+    ) {
+      const newPublication = {
+        title: txtTitle.value,
+        category,
+        collect_receipt: collectReceipt,
+        description,
+      };
+      const formDataPublication = new FormData();
+      formDataPublication.append('publication', JSON.stringify(newPublication));
 
-    async function postPublication() {
-      const response = await fetch('http://localhost:3000/publications', {
-        method: 'post',
-        body: formDataPublication,
-      });
-      const feedback: IFeedback = await response.json();
-      if (feedback.status != 201)
-        throw new Error('Não foi possível criar a publicação.');
+      for (const image of publicationPics) {
+        if (image.raw)
+          formDataPublication.append('publication_photos', image.raw);
+      }
 
-      return feedback;
+      async function postPublication() {
+        const response = await fetch('http://localhost:3000/publications', {
+          method: 'post',
+          body: formDataPublication,
+        });
+        const feedback: IFeedback = await response.json();
+        if (feedback.status != 201)
+          throw new Error('Não foi possível criar a publicação.');
+
+        return feedback;
+      }
+
+      try {
+        setLoadingNewPublication(true);
+        setStatusNewPublication(null);
+        setStatusNewPublication((await postPublication()).message);
+        setLoadingNewPublication(false);
+        navigate('/home');
+      } catch (err) {
+        if (err instanceof Error) setStatusNewPublication(err.message);
+      } finally {
+        setLoadingNewPublication(false);
+        setShowFeed(true);
+        setShowModalNewPublication(false);
+      }
+    } else {
+      setStatusNewPublication('Não foi possível criar a publicação');
     }
-
-    try {
-      setLoadingNewPublication(true);
-      setStatusNewPublication(null);
-      setStatusNewPublication((await postPublication()).message);
-      setLoadingNewPublication(false);
-      navigate('/home');
-    } catch (err) {
-      if (err instanceof Error) setStatusNewPublication(err.message);
-    } finally {
-      setLoadingNewPublication(false);
-      setShowFeed(true);
-      setShowModalNewPublication(false);
-    }
-    // } else {
-    //   setStatusNewPublication('Não foi possível criar a publicação');
-    // }
   }
 
   return (
@@ -133,30 +134,31 @@ export const ModalNewPublication = () => {
             {...txtTitle}
           />
           <SelectBox
-            id='categoriePublication'
+            id='categoryPublication'
             label='Categoria'
             options={arrCategories}
-            value={categorie}
-            setValue={setCategorie}
+            value={category}
+            setValue={setCategory}
           />
           <SelectBox
             id='sendPublication'
             label='Envio/Retirada'
             options={arrOptionsSend}
-            value={optSend}
-            setValue={setOptSend}
+            value={collectReceipt}
+            setValue={setCollectReceipt}
           />
           <TextArea
-            id='describePublication'
+            id='descriptionPublication'
             label='Descrição'
             limit={200}
-            value={describe}
-            setValue={setDescribe}
+            value={description}
+            setValue={setDescription}
           />
           <InputFile
             id='photosPublication'
             label='Fotos'
             accept='image/*'
+            name='publication_photos'
             multiple
             preview={publicationPics}
             showPic={!!publicationPics}
