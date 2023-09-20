@@ -8,25 +8,7 @@ import { Input } from '../../components/Form/Input/Input.tsx';
 import { PrimaryButton } from '../../components/Form/PrimaryButton/PrimaryButton.tsx';
 import { Anchor } from '../../components/Anchor/Anchor.tsx';
 import ImgLogin from '../../assets/login-illustration.svg';
-
-interface User {
-  name: string;
-  surname: string;
-  cpf: string;
-  email: string;
-  cell: string;
-  cell_secondary: string;
-  birth: string;
-  address: {
-    street: string;
-    number: number | null;
-    cep: string;
-    neighborhood: string;
-    city: string;
-    state: string;
-  };
-  password: string;
-}
+import { IUser } from '../../@types/types';
 
 export const Login = () => {
   const txtUser = useForm(false);
@@ -38,8 +20,7 @@ export const Login = () => {
     setLoginError(null);
   }, [txtUser.value, txtPassword.value]);
 
-  // const users = useFetch<User[]>('../../../api/users.json');
-  const users = useFetch<User[]>('http://localhost:3000/users');
+  const users = useFetch<IUser[]>('http://localhost:3000/users');
 
   function logon(e: React.FormEvent<HTMLElement>) {
     e.preventDefault();
@@ -51,6 +32,9 @@ export const Login = () => {
         );
 
         if (userLogged?.length === 1) {
+          localStorage.setItem('userLogged', JSON.stringify(userLogged[0]));
+          // console.log(userLogged[0]);
+
           navigate('./home');
         } else {
           throw new Error('Usuário e/ou senha incorretos');

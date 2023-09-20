@@ -11,7 +11,7 @@ import { UseContextScreens } from '../../global/ScreenStates.tsx';
 import { BackBtn } from '../BackBtn/BackBtn.tsx';
 import useForm from '../../hooks/useForm.ts';
 import { Feedback } from '../Feedback/Feedback.tsx';
-import { IFeedback, IPublicationImgs } from '../../@types/types';
+import { IFeedback, IPublicationImgs, IUser } from '../../@types/types';
 import { useNavigate } from 'react-router-dom';
 
 export const ModalNewPublication = () => {
@@ -20,10 +20,10 @@ export const ModalNewPublication = () => {
   const arrCategories = [
     'Celular',
     'Notebook',
-    'Placa',
+    'Placa eletrônica',
+    'Monitores',
     'Televisão',
     'Monitor',
-    'Kit',
   ];
   const arrOptionsSend = [
     'Fatec Registro',
@@ -66,6 +66,10 @@ export const ModalNewPublication = () => {
   async function createNewPublication(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
+    const userLogged: IUser = JSON.parse(
+      localStorage.getItem('userLogged') as string
+    );
+
     if (
       // txtTitle.validate() &&
       // description.length >= 1 &&
@@ -77,6 +81,10 @@ export const ModalNewPublication = () => {
         category,
         collect_receipt: collectReceipt,
         description,
+        owner: {
+          complete_name: `${userLogged.name} ${userLogged.surname}`,
+          cell: userLogged.cell,
+        },
       };
       const formDataPublication = new FormData();
       formDataPublication.append('publication', JSON.stringify(newPublication));
