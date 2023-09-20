@@ -14,6 +14,7 @@ import { BackBtn } from '../../components/BackBtn/BackBtn.tsx';
 import { useNavigate } from 'react-router-dom';
 import { IFeedback, IUser, IProfileImg } from '../../@types/types.ts';
 import { SpinLoader } from '../../components/SpinLoader/SpinLoader.tsx';
+import { ModalFeedback } from '../../components/ModalFeedback/ModalFeedback.tsx';
 
 export const NewAccount = () => {
   const [profilePic, setProfilePic] = React.useState<IProfileImg | null>({
@@ -30,6 +31,7 @@ export const NewAccount = () => {
   const [terms, setTerms] = React.useState(false);
   const [loadingNewUser, setLoadingNewUser] = React.useState(false);
   const [statusNewUser, setStatusNewUser] = React.useState<string | null>(null);
+  const [showModalFeedback, setShowModalFeedback] = React.useState(true);
 
   const navigate = useNavigate();
 
@@ -98,13 +100,15 @@ export const NewAccount = () => {
 
       try {
         setLoadingNewUser(true);
-        setStatusNewUser(null);
-        setStatusNewUser((await postUser()).message);
+        // setStatusNewUser(null);
+
         setLoadingNewUser(false);
-        navigate('/');
+        // navigate('/');
       } catch (err) {
         if (err instanceof Error) setStatusNewUser(err.message);
       } finally {
+        setStatusNewUser((await postUser()).message);
+        setShowModalFeedback(true);
         setLoadingNewUser(false);
       }
     } else {
@@ -218,9 +222,20 @@ export const NewAccount = () => {
               <PrimaryButton content='Criar nova conta' span={4} />
             )}
           </BoxForm>
-          {statusNewUser && <Feedback text={statusNewUser} />}
         </form>
       </Container>
+      {statusNewUser &&
+        (statusNewUser !== 'Usuário criado com sucesso!' ? (
+          <ModalFeedback
+            message={statusNewUser}
+            onClose={() => setStatusNewUser(null)}
+          />
+        ) : (
+          <ModalFeedback
+            message={statusNewUser}
+            onClose={() => navigate('/')}
+          />
+        ))}
     </Wrapper>
   );
 };

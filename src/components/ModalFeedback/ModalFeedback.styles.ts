@@ -1,14 +1,16 @@
 import styled from 'styled-components';
 
 export const Wrapper = styled.div`
-  width: 99%;
-  height: 97%;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   background-color: #00000033;
   display: flex;
   justify-content: center;
   align-items: center;
   position: fixed;
-  z-index: 5;
+  z-index: 50;
 `;
 export const Container = styled.div`
   width: 300px;
