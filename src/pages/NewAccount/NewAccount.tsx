@@ -13,6 +13,7 @@ import ImgNewAccount from '../../assets/new_account-illustration.svg';
 import { BackBtn } from '../../components/BackBtn/BackBtn.tsx';
 import { useNavigate } from 'react-router-dom';
 import { IFeedback, IUser, IProfileImg } from '../../@types/types.ts';
+import { SpinLoader } from '../../components/SpinLoader/SpinLoader.tsx';
 
 export const NewAccount = () => {
   const [profilePic, setProfilePic] = React.useState<IProfileImg | null>({
@@ -212,7 +213,7 @@ export const NewAccount = () => {
               span={2}
             />
             {loadingNewUser ? (
-              <PrimaryButton content='Carregando' span={4} />
+              <SpinLoader size={25} color='#92e3a9' />
             ) : (
               <PrimaryButton content='Criar nova conta' span={4} />
             )}

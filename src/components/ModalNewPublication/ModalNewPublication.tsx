@@ -13,6 +13,7 @@ import useForm from '../../hooks/useForm.ts';
 import { Feedback } from '../Feedback/Feedback.tsx';
 import { IFeedback, IPublicationImgs, IUser } from '../../@types/types';
 import { useNavigate } from 'react-router-dom';
+import { SpinLoader } from '../SpinLoader/SpinLoader.tsx';
 
 export const ModalNewPublication = () => {
   const navigate = useNavigate();
@@ -175,7 +176,7 @@ export const ModalNewPublication = () => {
           <div>
             <SecondaryButton content='Cancelar' onClick={closeModal} />
             {loadingNewPublication ? (
-              <PrimaryButton content='Carregando...' disabled />
+              <SpinLoader size={25} color='#92e3a9' />
             ) : (
               <PrimaryButton content='Criar' />
             )}

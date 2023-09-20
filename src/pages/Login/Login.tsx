@@ -33,7 +33,6 @@ export const Login = () => {
 
         if (userLogged?.length === 1) {
           localStorage.setItem('userLogged', JSON.stringify(userLogged[0]));
-          // console.log(userLogged[0]);
 
           navigate('./home');
         } else {

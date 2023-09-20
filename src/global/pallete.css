@@ -1,0 +1,14 @@
+.pallete {
+  --primary: #92e3a9;
+  --primary-opac: #92e3a9aa;
+  --primary-opac2: #92e3a944;
+  --white: #f8f8ff;
+
+  --border: #0000001a;
+
+  --shadow: #0000000d;
+  --shadowColor: #20732d44;
+
+  --invadid: #e04026;
+  --warning: #e0d026;
+}
