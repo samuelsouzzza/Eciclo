@@ -3,6 +3,7 @@ import { Wrapper, Container } from './ModalFeedback.styles.ts';
 import { PrimaryButton } from '../Form/PrimaryButton/PrimaryButton.tsx';
 
 type ModalFeedbackProps = React.ComponentProps<'div'> & {
+  icon: React.ReactNode;
   message: string;
   onClose: React.Dispatch<React.SetStateAction<string | null>>;
 };
@@ -10,6 +11,7 @@ type ModalFeedbackProps = React.ComponentProps<'div'> & {
 export const ModalFeedback = ({
   message,
   onClose,
+  icon,
   ...props
 }: ModalFeedbackProps) => {
   React.useEffect(() => {
@@ -23,6 +25,7 @@ export const ModalFeedback = ({
   return (
     <Wrapper>
       <Container {...props}>
+        {icon}
         <p style={{ textAlign: 'center', padding: '0 0 1% 0' }}>{message}</p>
         <PrimaryButton content='Ok' onClick={() => onClose(null)} />
       </Container>

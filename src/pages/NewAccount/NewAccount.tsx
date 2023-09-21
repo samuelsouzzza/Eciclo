@@ -15,6 +15,7 @@ import { useNavigate } from 'react-router-dom';
 import { IFeedback, IUser, IProfileImg } from '../../@types/types.ts';
 import { SpinLoader } from '../../components/SpinLoader/SpinLoader.tsx';
 import { ModalFeedback } from '../../components/ModalFeedback/ModalFeedback.tsx';
+import { BiCheck, BiMessageError } from 'react-icons/bi';
 
 export const NewAccount = () => {
   const [profilePic, setProfilePic] = React.useState<IProfileImg | null>({
@@ -227,11 +228,13 @@ export const NewAccount = () => {
       {statusNewUser &&
         (statusNewUser !== 'Usuário criado com sucesso!' ? (
           <ModalFeedback
+            icon={<BiMessageError className='i' />}
             message={statusNewUser}
             onClose={() => setStatusNewUser(null)}
           />
         ) : (
           <ModalFeedback
+            icon={<BiCheck className='i' />}
             message={statusNewUser}
             onClose={() => navigate('/')}
           />
