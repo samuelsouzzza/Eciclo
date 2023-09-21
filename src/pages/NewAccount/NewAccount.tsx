@@ -72,6 +72,7 @@ export const NewAccount = () => {
       terms
     ) {
       const newUser: IUser = {
+        id: 0,
         name: txtName.value,
         surname: txtSurname.value,
         cpf: txtCpf.value,
@@ -101,10 +102,7 @@ export const NewAccount = () => {
 
       try {
         setLoadingNewUser(true);
-        // setStatusNewUser(null);
-
         setLoadingNewUser(false);
-        // navigate('/');
       } catch (err) {
         if (err instanceof Error) setStatusNewUser(err.message);
       } finally {

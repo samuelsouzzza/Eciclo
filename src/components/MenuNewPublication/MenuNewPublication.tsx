@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, BoxForm } from './ModalNewPublication.styles.ts';
+import { Container, BoxForm } from './MenuNewPublication.styles.ts';
 import { Title } from '../Title/Title.tsx';
 import { Input } from '../Form/Input/Input.tsx';
 import { SelectBox } from '../Form/SelectBox/SelectBox.tsx';
@@ -14,8 +14,10 @@ import { Feedback } from '../Feedback/Feedback.tsx';
 import { IFeedback, IPublicationImgs, IUser } from '../../@types/types';
 import { useNavigate } from 'react-router-dom';
 import { SpinLoader } from '../SpinLoader/SpinLoader.tsx';
+import { ModalFeedback } from '../ModalFeedback/ModalFeedback.tsx';
+import { BiCheck, BiMessageError } from 'react-icons/bi';
 
-export const ModalNewPublication = () => {
+export const MenuNewPublication = () => {
   const navigate = useNavigate();
 
   const arrCategories = [
@@ -46,7 +48,7 @@ export const ModalNewPublication = () => {
   const [loadingNewPublication, setLoadingNewPublication] =
     React.useState(false);
 
-  function closeModal() {
+  function closeMenuPublication() {
     setShowModalNewPublication(false);
     setShowFeed(true);
   }
@@ -64,6 +66,11 @@ export const ModalNewPublication = () => {
     }
   }
 
+  function handleClickModalFeedback() {
+    setShowFeed(true);
+    setShowModalNewPublication(false);
+  }
+
   async function createNewPublication(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
@@ -72,10 +79,10 @@ export const ModalNewPublication = () => {
     );
 
     if (
-      // txtTitle.validate() &&
-      // description.length >= 1 &&
-      // publicationPics &&
-      publicationPics
+      txtTitle.validate() &&
+      description.length >= 1 &&
+      publicationPics &&
+      publicationPics?.length >= 1
     ) {
       const newPublication = {
         title: txtTitle.value,
@@ -83,6 +90,7 @@ export const ModalNewPublication = () => {
         collect_receipt: collectReceipt,
         description,
         owner: {
+          id: userLogged.id,
           complete_name: `${userLogged.name} ${userLogged.surname}`,
           cell: userLogged.cell,
         },
@@ -112,22 +120,21 @@ export const ModalNewPublication = () => {
         setStatusNewPublication(null);
         setStatusNewPublication((await postPublication()).message);
         setLoadingNewPublication(false);
-        navigate('/home');
       } catch (err) {
         if (err instanceof Error) setStatusNewPublication(err.message);
       } finally {
         setLoadingNewPublication(false);
-        setShowFeed(true);
-        setShowModalNewPublication(false);
       }
     } else {
-      setStatusNewPublication('Não foi possível criar a publicação');
+      setStatusNewPublication(
+        'Verifique se todos os campos foram preenchidos corretamente.'
+      );
     }
   }
 
   return (
     <Container>
-      <BackBtn text='Cancelar' onClick={closeModal} />
+      <BackBtn text='Cancelar' onClick={closeMenuPublication} />
       <Title text='Criar nova publicação' />
       <BoxForm>
         <form
@@ -174,16 +181,32 @@ export const ModalNewPublication = () => {
             onChange={loadPictures}
           />
           <div>
-            <SecondaryButton content='Cancelar' onClick={closeModal} />
+            <SecondaryButton
+              content='Cancelar'
+              onClick={closeMenuPublication}
+            />
             {loadingNewPublication ? (
               <SpinLoader size={25} color='#92e3a9' />
             ) : (
               <PrimaryButton content='Criar' />
             )}
           </div>
-          {statusNewPublication && <Feedback text={statusNewPublication} />}
         </form>
       </BoxForm>
+      {statusNewPublication &&
+        (statusNewPublication !== 'Publicação criada com sucesso!' ? (
+          <ModalFeedback
+            icon={<BiMessageError className='i' />}
+            message={statusNewPublication}
+            onClose={() => setStatusNewPublication(null)}
+          />
+        ) : (
+          <ModalFeedback
+            icon={<BiCheck className='i' />}
+            message={statusNewPublication}
+            onClose={handleClickModalFeedback}
+          />
+        ))}
     </Container>
   );
 };
