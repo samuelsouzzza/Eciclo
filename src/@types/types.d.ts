@@ -10,6 +10,7 @@ export interface IUser {
   email: string;
   cell: string;
   password: string;
+  profile_path: string | null;
 }
 export interface IProfileImg {
   preview: string;

@@ -93,6 +93,7 @@ export const MenuNewPublication = () => {
           id: userLogged.id,
           complete_name: `${userLogged.name} ${userLogged.surname}`,
           cell: userLogged.cell,
+          profile: userLogged.profile_path,
         },
       };
       const formDataPublication = new FormData();
