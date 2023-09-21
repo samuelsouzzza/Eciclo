@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container } from './Feed.styles.ts';
+import { Container, BoxEmpty } from './Feed.styles.ts';
 import { Title } from '../Title/Title.tsx';
 import { SearchBar } from '../SearchBar/SearchBar.tsx';
 import { Publication } from '../Publication/Publication.tsx';
@@ -17,6 +17,9 @@ export const Feed = () => {
     <Container>
       <Title text='Perto de você' size={1.25} />
       <SearchBar placeholder='Pesquise aqui' />
+      {publications.data?.length === 0 && (
+        <BoxEmpty>Não há publicações</BoxEmpty>
+      )}
       {publications.data?.map((publication) => {
         return (
           <Publication
