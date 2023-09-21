@@ -8,50 +8,29 @@ import {
   faLaptop,
   faSearch,
 } from '@fortawesome/free-solid-svg-icons';
+import useFetch from '../../hooks/useFetch.ts';
+import { IPublication } from '../../@types/types';
 
 export const Feed = () => {
+  const publications = useFetch<IPublication[]>(
+    'http://localhost:3000/publications'
+  );
+
   return (
     <Container>
-      <Title text='Perto de você' size={1.25}>
-        Perto de você
-      </Title>
+      <Title text='Perto de você' size={1.25} />
       <SearchBar placeholder='Pesquise aqui' />
-      <Publication
-        icon={faMobileScreen}
-        title='Moto G7 Power'
-        type='Celular'
-        description='Celular com e tudo funcionando, mas está com a bateria um pouco viciada.'
-      />
-      <Publication
-        icon={faLaptop}
-        title='Notebook Asus i5'
-        type='Notebook'
-        description='Tudo funcioando, mas sem carregador.'
-      />
-      <Publication
-        icon={faMobileScreen}
-        title='Moto G7 Power'
-        type='Celular'
-        description='Celular com e tudo funcionando, mas está com a bateria um pouco viciada.'
-      />
-      <Publication
-        icon={faLaptop}
-        title='Notebook Asus i5'
-        type='Notebook'
-        description='Tudo funcioando, mas sem carregador.'
-      />
-      <Publication
-        icon={faMobileScreen}
-        title='Moto G7 Power'
-        type='Celular'
-        description='Celular com e tudo funcionando, mas está com a bateria um pouco viciada.'
-      />
-      <Publication
-        icon={faLaptop}
-        title='Notebook Asus i5'
-        type='Notebook'
-        description='Tudo funcioando, mas sem carregador.'
-      />
+      {publications.data?.map((publication) => {
+        return (
+          <Publication
+            key={publication.id}
+            icon={faMobileScreen}
+            title={publication.title}
+            category={publication.category}
+            description={publication.description}
+          />
+        );
+      })}
     </Container>
   );
 };

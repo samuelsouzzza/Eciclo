@@ -13,9 +13,10 @@ export const Container = styled.div`
 export const Description = styled.p`
   font-size: 0.75rem;
   width: 100%;
+  word-wrap: break-word;
   margin: 3% 0 0.1% 0;
 `;
-export const Type = styled.span`
+export const Category = styled.span`
   background-color: #92e3a944;
   border: 1px solid #92e3a9;
   padding: 0.25% 3%;
