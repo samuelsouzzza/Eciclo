@@ -1,11 +1,14 @@
 import React from 'react';
-import { Container, Description, Category } from './Publication.styles.ts';
+import {
+  Container,
+  Description,
+  Category,
+  Author,
+} from './Publication.styles.ts';
 import { PrimaryButton } from '../Form/PrimaryButton/PrimaryButton.tsx';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { IconProp } from '@fortawesome/fontawesome-svg-core';
 
 interface PublicationProps {
-  icon: IconProp;
+  icon: React.ReactNode;
   title: string;
   category: string;
   description: string;
@@ -19,11 +22,13 @@ export const Publication = ({
 }: PublicationProps) => {
   return (
     <Container>
-      <h4>
-        <FontAwesomeIcon icon={icon} /> {title}
-      </h4>
+      <div>
+        {icon}
+        <h4>{title}</h4>
+      </div>
       <Description>
         <Category>{category}</Category>
+        <Author>Samuel Souza - Fatec Registro</Author>
         {description}
       </Description>
       <PrimaryButton

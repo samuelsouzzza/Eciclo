@@ -2,13 +2,20 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   background-color: #fff;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  border-bottom: 1px solid #0000001a;
   display: flex;
   flex-direction: column;
   margin: 5% 0;
   padding: 1% 0;
   height: auto;
   width: 100%;
+  div {
+    display: flex;
+    align-items: center;
+  }
+  .i {
+    margin-right: 1%;
+  }
 `;
 export const Description = styled.p`
   font-size: 0.75rem;
@@ -22,4 +29,10 @@ export const Category = styled.span`
   padding: 0.25% 3%;
   border-radius: 5px;
   margin-right: 1%;
+  text-transform: capitalize;
+`;
+export const Author = styled.p`
+  color: #333;
+  margin: 1% 0;
+  font-weight: bold;
 `;

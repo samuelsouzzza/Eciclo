@@ -3,13 +3,10 @@ import { Container } from './Feed.styles.ts';
 import { Title } from '../Title/Title.tsx';
 import { SearchBar } from '../SearchBar/SearchBar.tsx';
 import { Publication } from '../Publication/Publication.tsx';
-import {
-  faMobileScreen,
-  faLaptop,
-  faSearch,
-} from '@fortawesome/free-solid-svg-icons';
 import useFetch from '../../hooks/useFetch.ts';
 import { IPublication } from '../../@types/types';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { chooseIcon } from '../../utils/chooseIcon.tsx';
 
 export const Feed = () => {
   const publications = useFetch<IPublication[]>(
@@ -24,7 +21,12 @@ export const Feed = () => {
         return (
           <Publication
             key={publication.id}
-            icon={faMobileScreen}
+            icon={
+              <FontAwesomeIcon
+                icon={chooseIcon(publication.category)}
+                className='i'
+              />
+            }
             title={publication.title}
             category={publication.category}
             description={publication.description}

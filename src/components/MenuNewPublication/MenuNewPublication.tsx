@@ -18,16 +18,7 @@ import { ModalFeedback } from '../ModalFeedback/ModalFeedback.tsx';
 import { BiCheck, BiMessageError } from 'react-icons/bi';
 
 export const MenuNewPublication = () => {
-  const navigate = useNavigate();
-
-  const arrCategories = [
-    'Celular',
-    'Notebook',
-    'Placa eletrônica',
-    'Monitores',
-    'Televisão',
-    'Monitor',
-  ];
+  const arrCategories = ['Celular', 'Notebook', 'Hardware'];
   const arrOptionsSend = [
     'Fatec Registro',
     'Prefeitura de Registro',
