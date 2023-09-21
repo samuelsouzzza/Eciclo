@@ -16,7 +16,7 @@ export const Container = styled.section`
   overflow-y: scroll;
   animation: fadeInRight 0.3s forwards;
 `;
-export const BoxEmpty = styled.p`
+export const P = styled.p`
   display: flex;
   align-items: center;
   justify-content: center;

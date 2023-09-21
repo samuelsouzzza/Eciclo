@@ -3,9 +3,12 @@ import {
   Container,
   Description,
   Category,
+  Local,
   Author,
+  B,
 } from './Publication.styles.ts';
 import { PrimaryButton } from '../Form/PrimaryButton/PrimaryButton.tsx';
+import { BiPin, BiUser } from 'react-icons/bi';
 
 interface PublicationProps {
   icon: React.ReactNode;
@@ -28,9 +31,19 @@ export const Publication = ({
       </div>
       <Description>
         <Category>{category}</Category>
-        <Author>Samuel Souza - Fatec Registro</Author>
+        <B>
+          <Author>
+            <BiUser className='i' />
+            Samuel Souza
+          </Author>
+          <Local>
+            <BiPin className='i' />
+            Fatec Registro
+          </Local>
+        </B>
         {description}
       </Description>
+
       <PrimaryButton
         content='Saber mais'
         style={{

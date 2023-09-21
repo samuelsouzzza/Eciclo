@@ -17,7 +17,7 @@ export const Container = styled.div`
     margin-right: 1%;
   }
 `;
-export const Description = styled.p`
+export const Description = styled.span`
   font-size: 0.75rem;
   width: 100%;
   word-wrap: break-word;
@@ -30,9 +30,28 @@ export const Category = styled.span`
   border-radius: 5px;
   margin-right: 1%;
   text-transform: capitalize;
+  display: inline-block;
+`;
+export const Local = styled.p`
+  color: #333;
+  margin: 1% 0;
+  font-weight: bold;
+  font-size: 0.75rem;
+  width: 50%;
+  display: flex;
+  align-items: center;
 `;
 export const Author = styled.p`
   color: #333;
   margin: 1% 0;
   font-weight: bold;
+  font-size: 0.75rem;
+  width: 50%;
+  display: flex;
+  align-items: center;
+`;
+export const B = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
 `;
