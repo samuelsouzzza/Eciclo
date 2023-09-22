@@ -40,6 +40,15 @@ export const Local = styled.p`
   width: 50%;
   display: flex;
   align-items: center;
+  justify-content: start;
+  text-transform: capitalize;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  > span {
+    display: flex;
+    align-items: center;
+  }
 `;
 export const Author = styled.p`
   color: #333;
@@ -53,5 +62,4 @@ export const Author = styled.p`
 export const B = styled.div`
   width: 100%;
   display: flex;
-  justify-content: flex-start;
 `;

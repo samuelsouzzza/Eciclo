@@ -15,6 +15,8 @@ interface PublicationProps {
   title: string;
   category: string;
   description: string;
+  owner: string;
+  adress: string;
 }
 
 export const Publication = ({
@@ -22,6 +24,8 @@ export const Publication = ({
   title,
   category,
   description,
+  owner,
+  adress,
 }: PublicationProps) => {
   return (
     <Container>
@@ -34,11 +38,13 @@ export const Publication = ({
         <B>
           <Author>
             <BiUser className='i' />
-            Samuel Souza
+            {owner}
           </Author>
           <Local>
-            <BiPin className='i' />
-            Fatec Registro
+            <span>
+              <BiPin className='i' />
+              {adress}
+            </span>
           </Local>
         </B>
         {description}

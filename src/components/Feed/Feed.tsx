@@ -34,6 +34,8 @@ export const Feed = () => {
             title={publication.title}
             category={publication.category}
             description={publication.description}
+            owner={publication.owner.complete_name}
+            adress={publication.collect_receipt}
           />
         );
       })}

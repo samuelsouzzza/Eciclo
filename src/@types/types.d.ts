@@ -27,6 +27,7 @@ export interface IPublication {
     cell: string;
     profile: string | null;
   };
+  collect_receipt: string;
 }
 export interface IProfileImg {
   preview: string;
