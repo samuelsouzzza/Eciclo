@@ -7,6 +7,7 @@ import useFetch from '../../hooks/useFetch.ts';
 import { IPublication } from '../../@types/types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { chooseIcon } from '../../utils/chooseIcon.tsx';
+import { SkeletonPublicationLoader } from '../SkeletonPublicationLoader/SkeletonPublicationLoader.tsx';
 
 export const Feed = () => {
   const publications = useFetch<IPublication[]>(
@@ -18,6 +19,8 @@ export const Feed = () => {
       <Title text='Perto de você' size={1.25} />
       <SearchBar placeholder='Pesquise aqui' />
       {publications.data?.length === 0 && <P>Não há publicações</P>}
+      {publications.loading && <SkeletonPublicationLoader />}
+      {publications.loading}
       {publications.data?.map((publication) => {
         return (
           <Publication

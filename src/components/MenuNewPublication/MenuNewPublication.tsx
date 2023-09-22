@@ -178,7 +178,7 @@ export const MenuNewPublication = () => {
               onClick={closeMenuPublication}
             />
             {loadingNewPublication ? (
-              <SpinLoader size={25} color='#92e3a9' />
+              <SpinLoader size={25} />
             ) : (
               <PrimaryButton content='Criar' />
             )}

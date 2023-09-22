@@ -2,10 +2,14 @@ import React from 'react';
 
 type SpinLoaderProps = React.ComponentProps<'svg'> & {
   size: number;
-  color: string;
+  color?: string;
 };
 
-export const SpinLoader = ({ size, color, ...props }: SpinLoaderProps) => {
+export const SpinLoader = ({
+  size,
+  color = '#92e3a9',
+  ...props
+}: SpinLoaderProps) => {
   return (
     <div
       style={{
