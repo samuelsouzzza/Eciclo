@@ -5,7 +5,13 @@ import {
   faMicrochip,
 } from '@fortawesome/free-solid-svg-icons';
 
-export const chooseIcons = (iconName: string): IconProp => {
+/**
+ * Retorna o devido ícone de acordo com a categoria da publicação.
+ *
+ * @param iconName - A categoria do ícone
+ * @returns Um ícone do componente <FontAwesomeIcon/>
+ */
+export const handlerIcons = (iconName: string): IconProp => {
   switch (iconName.toLowerCase()) {
     case 'celular':
       return faMobileScreen;

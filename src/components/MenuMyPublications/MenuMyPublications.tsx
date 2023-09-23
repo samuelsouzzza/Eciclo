@@ -9,9 +9,7 @@ export const MenuMyPublications = () => {
   const { setShowFeed, setShowMenuMyPublications } = UseContextScreens();
 
   function closeMenu() {
-    // setShowFeed(true);
-    // setShowMenuMyPublications(false);
-    handlerMenus(setShowFeed, [setShowMenuMyPublications]);
+    handlerMenus([setShowFeed], [setShowMenuMyPublications]);
   }
   return (
     <Container>

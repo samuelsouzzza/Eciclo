@@ -39,7 +39,7 @@ export const MenuNewPublication = () => {
     React.useState(false);
 
   function closeMenu() {
-    handlerMenus(setShowFeed, [setShowMenuNewPublication]);
+    handlerMenus([setShowFeed], [setShowMenuNewPublication]);
   }
 
   function loadPictures(e: React.ChangeEvent<HTMLInputElement>) {

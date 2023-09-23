@@ -18,16 +18,16 @@ export const SideMenu = () => {
     UseContextScreens();
 
   function createNewPublication() {
-    handlerMenus(setShowMenuNewPublication, [
-      setShowFeed,
-      setShowMenuMyPublications,
-    ]);
+    handlerMenus(
+      [setShowMenuNewPublication],
+      [setShowFeed, setShowMenuMyPublications]
+    );
   }
   function myPublications() {
-    handlerMenus(setShowMenuMyPublications, [
-      setShowFeed,
-      setShowMenuNewPublication,
-    ]);
+    handlerMenus(
+      [setShowMenuMyPublications],
+      [setShowFeed, setShowMenuNewPublication]
+    );
   }
 
   return (

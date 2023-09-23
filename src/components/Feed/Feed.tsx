@@ -6,7 +6,7 @@ import { Publication } from '../Publication/Publication.tsx';
 import useFetch from '../../hooks/useFetch.ts';
 import { IPublication } from '../../@types/types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { chooseIcons } from '../../utils/handlerIcons.ts';
+import { handlerIcons } from '../../utils/handlerIcons.ts';
 import { SkeletonPublicationLoader } from '../SkeletonPublicationLoader/SkeletonPublicationLoader.tsx';
 
 export const Feed = () => {
@@ -27,7 +27,7 @@ export const Feed = () => {
             key={publication.id}
             icon={
               <FontAwesomeIcon
-                icon={chooseIcons(publication.category)}
+                icon={handlerIcons(publication.category)}
                 className='i'
               />
             }
