@@ -10,12 +10,11 @@ import { SecondaryButton } from '../Form/SecondaryButton/SecondaryButton.tsx';
 import { UseContextScreens } from '../../global/ScreenStates.tsx';
 import { BackBtn } from '../BackBtn/BackBtn.tsx';
 import useForm from '../../hooks/useForm.ts';
-import { Feedback } from '../Feedback/Feedback.tsx';
 import { IFeedback, IPublicationImgs, IUser } from '../../@types/types';
-import { useNavigate } from 'react-router-dom';
 import { SpinLoader } from '../SpinLoader/SpinLoader.tsx';
 import { ModalFeedback } from '../ModalFeedback/ModalFeedback.tsx';
 import { BiCheck, BiMessageError } from 'react-icons/bi';
+import { handlerMenus } from '../../utils/handlerMenus.ts';
 
 export const MenuNewPublication = () => {
   const arrCategories = ['Celular', 'Notebook', 'Hardware'];
@@ -25,7 +24,7 @@ export const MenuNewPublication = () => {
     'CRAS Registro',
     'Combinar entrega',
   ];
-  const { setShowFeed, setShowModalNewPublication } = UseContextScreens();
+  const { setShowFeed, setShowMenuNewPublication } = UseContextScreens();
   const [category, setCategory] = React.useState(arrCategories[0]);
   const txtTitle = useForm(null);
   const [collectReceipt, setCollectReceipt] = React.useState(arrOptionsSend[0]);
@@ -39,9 +38,8 @@ export const MenuNewPublication = () => {
   const [loadingNewPublication, setLoadingNewPublication] =
     React.useState(false);
 
-  function closeMenuPublication() {
-    setShowModalNewPublication(false);
-    setShowFeed(true);
+  function closeMenu() {
+    handlerMenus(setShowFeed, [setShowMenuNewPublication]);
   }
 
   function loadPictures(e: React.ChangeEvent<HTMLInputElement>) {
@@ -59,7 +57,7 @@ export const MenuNewPublication = () => {
 
   function handleClickModalFeedback() {
     setShowFeed(true);
-    setShowModalNewPublication(false);
+    setShowMenuNewPublication(false);
   }
 
   async function createNewPublication(e: React.FormEvent<HTMLFormElement>) {
@@ -126,7 +124,7 @@ export const MenuNewPublication = () => {
 
   return (
     <Container>
-      <BackBtn text='Cancelar' onClick={closeMenuPublication} />
+      <BackBtn text='Cancelar' onClick={closeMenu} />
       <Title text='Criar nova publicação' />
       <BoxForm>
         <form
@@ -173,10 +171,7 @@ export const MenuNewPublication = () => {
             onChange={loadPictures}
           />
           <div>
-            <SecondaryButton
-              content='Cancelar'
-              onClick={closeMenuPublication}
-            />
+            <SecondaryButton content='Cancelar' onClick={closeMenu} />
             {loadingNewPublication ? (
               <SpinLoader size={25} />
             ) : (

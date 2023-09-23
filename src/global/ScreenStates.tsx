@@ -3,8 +3,10 @@ import React from 'react';
 type IScreens = {
   showFeed: boolean;
   setShowFeed: React.Dispatch<React.SetStateAction<boolean>>;
-  showModalNewPublication: boolean;
-  setShowModalNewPublication: React.Dispatch<React.SetStateAction<boolean>>;
+  showMenuNewPublication: boolean;
+  setShowMenuNewPublication: React.Dispatch<React.SetStateAction<boolean>>;
+  showMenuMyPublications: boolean;
+  setShowMenuMyPublications: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 const ScreensContext = React.createContext<IScreens | null>(null);
@@ -19,7 +21,9 @@ export const ScreensContextProvider = ({
   children,
 }: React.PropsWithChildren) => {
   const [showFeed, setShowFeed] = React.useState(true);
-  const [showModalNewPublication, setShowModalNewPublication] =
+  const [showMenuNewPublication, setShowMenuNewPublication] =
+    React.useState(false);
+  const [showMenuMyPublications, setShowMenuMyPublications] =
     React.useState(false);
 
   return (
@@ -27,8 +31,10 @@ export const ScreensContextProvider = ({
       value={{
         showFeed,
         setShowFeed,
-        showModalNewPublication,
-        setShowModalNewPublication,
+        showMenuNewPublication,
+        setShowMenuNewPublication,
+        showMenuMyPublications,
+        setShowMenuMyPublications,
       }}
     >
       {children}

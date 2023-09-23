@@ -5,7 +5,7 @@ import {
   faMicrochip,
 } from '@fortawesome/free-solid-svg-icons';
 
-export const chooseIcon = (iconName: string): IconProp => {
+export const chooseIcons = (iconName: string): IconProp => {
   switch (iconName.toLowerCase()) {
     case 'celular':
       return faMobileScreen;

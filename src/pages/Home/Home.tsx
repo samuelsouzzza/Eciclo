@@ -4,10 +4,12 @@ import { Feed } from '../../components/Feed/Feed';
 import { SideMenu } from '../../components/SideMenu/SideMenu.tsx';
 import { UseContextScreens } from '../../global/ScreenStates.tsx';
 import { MenuNewPublication } from '../../components/MenuNewPublication/MenuNewPublication.tsx';
+import { MenuMyPublications } from '../../components/MenuMyPublications/MenuMyPublications.tsx';
 import { useNavigate } from 'react-router-dom';
 
 export const Home = () => {
-  const { showFeed, showModalNewPublication } = UseContextScreens();
+  const { showFeed, showMenuNewPublication, showMenuMyPublications } =
+    UseContextScreens();
   const navigate = useNavigate();
 
   React.useEffect(() => {
@@ -17,8 +19,10 @@ export const Home = () => {
 
   return (
     <Container>
-      {showFeed ? <Feed /> : <></>}
-      {showModalNewPublication ? <MenuNewPublication /> : <></>}
+      {showFeed && <Feed />}
+      {showMenuNewPublication && <MenuNewPublication />}
+      {showMenuMyPublications && <MenuMyPublications />}
+
       <SideMenu />
     </Container>
   );

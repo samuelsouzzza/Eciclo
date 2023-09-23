@@ -11,22 +11,32 @@ import {
   BiDotsVertical,
 } from 'react-icons/bi';
 import { UseContextScreens } from '../../global/ScreenStates.tsx';
+import { handlerMenus } from '../../utils/handlerMenus.ts';
 
 export const SideMenu = () => {
-  const { setShowFeed, setShowModalNewPublication } = UseContextScreens();
+  const { setShowFeed, setShowMenuNewPublication, setShowMenuMyPublications } =
+    UseContextScreens();
 
   function createNewPublication() {
-    setShowFeed(false);
-    setShowModalNewPublication(true);
+    handlerMenus(setShowMenuNewPublication, [
+      setShowFeed,
+      setShowMenuMyPublications,
+    ]);
+  }
+  function myPublications() {
+    handlerMenus(setShowMenuMyPublications, [
+      setShowFeed,
+      setShowMenuNewPublication,
+    ]);
   }
 
   return (
     <Container>
       <BiPlus className='i new' onClick={createNewPublication} />
       <BiUser className='i' />
+      <BiListUl className='i' onClick={myPublications} />
       <BiBell className='i' />
       <BiBookmarkHeart className='i' />
-      <BiListUl className='i' />
       <BiCommentDetail className='i' />
       <BiQuestionMark className='i' />
       <BiDotsVertical className='i' />
