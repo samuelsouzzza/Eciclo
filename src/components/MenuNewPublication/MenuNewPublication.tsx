@@ -123,63 +123,66 @@ export const MenuNewPublication = () => {
   }
 
   return (
-    <Container>
-      <BackBtn text='Cancelar' onClick={closeMenu} />
-      <Title text='Criar nova publicação' />
-      <BoxForm>
-        <form
-          onSubmit={createNewPublication}
-          method='post'
-          encType='multipart/form-data'
-        >
-          <Input
-            id='titlePublication'
-            type='text'
-            label='Título'
-            length={35}
-            {...txtTitle}
-          />
-          <SelectBox
-            id='categoryPublication'
-            label='Categoria'
-            options={arrCategories}
-            value={category}
-            setValue={setCategory}
-          />
-          <SelectBox
-            id='sendPublication'
-            label='Envio/Retirada'
-            options={arrOptionsSend}
-            value={collectReceipt}
-            setValue={setCollectReceipt}
-          />
-          <TextArea
-            id='descriptionPublication'
-            label='Descrição'
-            limit={200}
-            value={description}
-            setValue={setDescription}
-          />
-          <InputFile
-            id='photosPublication'
-            label='Fotos'
-            accept='image/*'
-            name='publication_photos'
-            multiple
-            preview={publicationPics}
-            showPic={!!publicationPics}
-            onChange={loadPictures}
-          />
-          <div>
-            <SecondaryButton content='Cancelar' onClick={closeMenu} />
-            {loadingNewPublication ? (
-              <SpinLoader size={25} />
-            ) : (
-              <PrimaryButton content='Criar' />
-            )}
-          </div>
-        </form>
-      </BoxForm>
+    <>
+      {' '}
+      <Container>
+        <BackBtn text='Cancelar' onClick={closeMenu} />
+        <Title text='Criar nova publicação' />
+        <BoxForm>
+          <form
+            onSubmit={createNewPublication}
+            method='post'
+            encType='multipart/form-data'
+          >
+            <Input
+              id='titlePublication'
+              type='text'
+              label='Título'
+              length={35}
+              {...txtTitle}
+            />
+            <SelectBox
+              id='categoryPublication'
+              label='Categoria'
+              options={arrCategories}
+              value={category}
+              setValue={setCategory}
+            />
+            <SelectBox
+              id='sendPublication'
+              label='Envio/Retirada'
+              options={arrOptionsSend}
+              value={collectReceipt}
+              setValue={setCollectReceipt}
+            />
+            <TextArea
+              id='descriptionPublication'
+              label='Descrição'
+              limit={200}
+              value={description}
+              setValue={setDescription}
+            />
+            <InputFile
+              id='photosPublication'
+              label='Fotos'
+              accept='image/*'
+              name='publication_photos'
+              multiple
+              preview={publicationPics}
+              showPic={!!publicationPics}
+              onChange={loadPictures}
+            />
+            <div>
+              <SecondaryButton content='Cancelar' onClick={closeMenu} />
+              {loadingNewPublication ? (
+                <SpinLoader size={25} />
+              ) : (
+                <PrimaryButton content='Criar' />
+              )}
+            </div>
+          </form>
+        </BoxForm>
+      </Container>
       {statusNewPublication &&
         (statusNewPublication !== 'Publicação criada com sucesso!' ? (
           <ModalFeedback
@@ -194,6 +197,6 @@ export const MenuNewPublication = () => {
             onClose={handleClickModalFeedback}
           />
         ))}
-    </Container>
+    </>
   );
 };

@@ -33,30 +33,28 @@ export const Publication = ({
         {icon}
         <h4>{title}</h4>
       </div>
-      <Description>
-        <Category>{category}</Category>
-        <B>
-          <Author>
-            <BiUser className='i' />
-            {owner}
-          </Author>
-          <Local>
-            <span>
-              <BiPin className='i' />
-              {adress}
-            </span>
-          </Local>
-        </B>
-        {description}
-      </Description>
+      <Category>{category}</Category>
+      <B>
+        <Author>
+          <BiUser className='i' />
+          {owner}
+        </Author>
+        <Local>
+          <span>
+            <BiPin className='i' />
+            {adress}
+          </span>
+        </Local>
+      </B>
+      <Description>{description}</Description>
 
       <PrimaryButton
         content='Saber mais'
         style={{
           fontSize: '.85rem',
-          height: '80%',
+          height: 'min-content',
           padding: '1% 0',
-          margin: '2% 0',
+          margin: '1% 0',
           fontWeight: 'bold',
         }}
       />

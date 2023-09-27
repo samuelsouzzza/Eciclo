@@ -6,7 +6,7 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   margin: 5% 0;
-  padding: 1% 0;
+  padding: 1%;
   height: auto;
   width: 100%;
   div {
@@ -17,20 +17,21 @@ export const Container = styled.div`
     margin-right: 1%;
   }
 `;
-export const Description = styled.span`
-  font-size: 0.75rem;
-  width: 100%;
-  word-wrap: break-word;
-  margin: 3% 0 0.1% 0;
-`;
+
 export const Category = styled.span`
   background-color: #92e3a944;
   border: 1px solid #92e3a9;
   padding: 0.25% 3%;
+  width: min-content;
+  font-size: 0.75rem;
   border-radius: 5px;
-  margin-right: 1%;
+  margin: 2% 0;
   text-transform: capitalize;
   display: inline-block;
+`;
+export const B = styled.div`
+  width: 100%;
+  display: flex;
 `;
 export const Local = styled.p`
   color: #333;
@@ -59,7 +60,11 @@ export const Author = styled.p`
   display: flex;
   align-items: center;
 `;
-export const B = styled.div`
+export const Description = styled.span`
+  font-size: 0.75rem;
   width: 100%;
-  display: flex;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin: 1% 0;
 `;
