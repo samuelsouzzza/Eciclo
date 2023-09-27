@@ -12,3 +12,9 @@ export const Container = styled.div`
   overflow-y: scroll;
   animation: fadeInLeft 0.3s forwards;
 `;
+export const P = styled.p`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+`;
