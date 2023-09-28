@@ -10,6 +10,7 @@ export const Container = styled.div`
   grid-column-start: 3;
   grid-column-end: 4;
   overflow-y: scroll;
+  overflow-x: hidden;
   animation: fadeInLeft 0.3s forwards;
 `;
 export const P = styled.p`

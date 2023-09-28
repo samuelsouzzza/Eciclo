@@ -14,7 +14,6 @@ export const Container = styled.aside`
   gap: 5%;
   padding: 50% 5%;
   .i {
-    font-size: 1rem;
     cursor: pointer;
     padding: 5%;
     width: 90%;
@@ -30,8 +29,8 @@ export const Container = styled.aside`
     &.new {
       background-color: #92e3a944;
       border: 1px solid #92e3a9;
-      height: 25px;
-      width: 25px;
+      height: 20px;
+      width: 20px;
       padding: 10%;
       border-radius: 50%;
       &:hover {

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, T, BtnDel, BtnEdit, Temp } from './MyPublication.styles.ts';
+import { Container, T, Temp } from './MyPublication.styles.ts';
 import {
   faPenToSquare,
   faSquareMinus,
@@ -12,6 +12,7 @@ type MyPublicationProps = {
   title: string;
   dateCreation: string;
   onDelete: () => void;
+  onEdit: () => void;
 };
 
 export const MyPublication = ({
@@ -19,6 +20,7 @@ export const MyPublication = ({
   title,
   dateCreation,
   onDelete,
+  onEdit,
 }: MyPublicationProps) => {
   return (
     <Container>
@@ -27,7 +29,7 @@ export const MyPublication = ({
       </T>
       <div>
         <Temp>{dateCreation}</Temp>
-        <FontAwesomeIcon icon={faPenToSquare} className='i' />
+        <FontAwesomeIcon icon={faPenToSquare} className='i' onClick={onEdit} />
         <FontAwesomeIcon
           icon={faSquareMinus}
           className='i'
