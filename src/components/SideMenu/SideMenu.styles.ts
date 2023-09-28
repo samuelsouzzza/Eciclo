@@ -14,11 +14,11 @@ export const Container = styled.aside`
   gap: 5%;
   padding: 50% 5%;
   .i {
-    font-size: 1.25rem;
+    font-size: 1rem;
     cursor: pointer;
     padding: 5%;
     width: 90%;
-    height: 28px;
+    height: 20px;
     border-radius: 5px;
     transition: 0.3s;
     &:hover {
@@ -30,6 +30,10 @@ export const Container = styled.aside`
     &.new {
       background-color: #92e3a944;
       border: 1px solid #92e3a9;
+      height: 25px;
+      width: 25px;
+      padding: 10%;
+      border-radius: 50%;
       &:hover {
         path {
           color: #fff;

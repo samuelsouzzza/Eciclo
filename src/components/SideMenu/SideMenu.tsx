@@ -1,15 +1,18 @@
 import React from 'react';
 import { Container } from './SideMenu.styles.ts';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
-  BiPlus,
-  BiUser,
-  BiBell,
-  BiListUl,
-  BiCommentDetail,
-  BiQuestionMark,
-  BiBookmarkHeart,
-  BiDotsVertical,
-} from 'react-icons/bi';
+  faUser,
+  faBell,
+  faBookmark,
+  faComments,
+} from '@fortawesome/free-regular-svg-icons';
+import {
+  faPlus,
+  faQuestion,
+  faEllipsisH,
+  faList,
+} from '@fortawesome/free-solid-svg-icons';
 import { UseContextScreens } from '../../global/ScreenStates.tsx';
 import { handlerMenus } from '../../utils/handlerMenus.ts';
 
@@ -32,14 +35,18 @@ export const SideMenu = () => {
 
   return (
     <Container>
-      <BiPlus className='i new' onClick={createNewPublication} />
-      <BiUser className='i' />
-      <BiListUl className='i' onClick={myPublications} />
-      <BiBell className='i' />
-      <BiBookmarkHeart className='i' />
-      <BiCommentDetail className='i' />
-      <BiQuestionMark className='i' />
-      <BiDotsVertical className='i' />
+      <FontAwesomeIcon
+        icon={faPlus}
+        className='i new'
+        onClick={createNewPublication}
+      />
+      <FontAwesomeIcon icon={faUser} className='i' />
+      <FontAwesomeIcon icon={faList} className='i' onClick={myPublications} />
+      <FontAwesomeIcon icon={faBell} className='i' />
+      <FontAwesomeIcon icon={faBookmark} className='i' />
+      <FontAwesomeIcon icon={faComments} className='i' />
+      <FontAwesomeIcon icon={faQuestion} className='i' />
+      <FontAwesomeIcon icon={faEllipsisH} className='i' />
     </Container>
   );
 };
