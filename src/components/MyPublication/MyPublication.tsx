@@ -7,13 +7,15 @@ import { PrimaryButton } from '../Form/PrimaryButton/PrimaryButton.tsx';
 type MyPublicationProps = {
   id: number;
   title: string;
-  dateCreation: number | string;
+  dateCreation: string;
+  onDelete: () => void;
 };
 
 export const MyPublication = ({
   id,
   title,
   dateCreation,
+  onDelete,
 }: MyPublicationProps) => {
   return (
     <Container>
@@ -21,7 +23,7 @@ export const MyPublication = ({
         {id}. {title}
       </T>
       <div>
-        <BtnDel>
+        <BtnDel onClick={onDelete}>
           <FontAwesomeIcon icon={faTrash} />
         </BtnDel>
         <BtnEdit>

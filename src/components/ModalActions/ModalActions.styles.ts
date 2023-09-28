@@ -28,3 +28,10 @@ export const Container = styled.div`
     fill: #92e3a9;
   }
 `;
+export const B = styled.div`
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1%;
+`;

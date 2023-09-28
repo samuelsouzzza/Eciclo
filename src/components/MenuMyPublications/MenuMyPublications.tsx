@@ -8,9 +8,12 @@ import { MyPublication } from '../MyPublication/MyPublication.tsx';
 import useFetch from '../../hooks/useFetch.ts';
 import { IPublication, IUser } from '../../@types/types';
 import { timerFormatter } from '../../utils/timerFormatter.ts';
+import { ModalActions } from '../ModalActions/ModalActions.tsx';
+import { BiWater } from 'react-icons/bi';
 
 export const MenuMyPublications = () => {
   const { setShowFeed, setShowMenuMyPublications } = UseContextScreens();
+  const [showModalDelete, setShowModalDelete] = React.useState(false);
 
   const publications = useFetch<IPublication[]>(
     'http://localhost:3000/publications'
@@ -27,24 +30,41 @@ export const MenuMyPublications = () => {
   function closeMenu() {
     handlerMenus([setShowFeed], [setShowMenuMyPublications]);
   }
+
+  function deletePublication() {
+    console.log('Excluiu a publicação!');
+  }
+
   return (
-    <Container>
-      <BackBtn text='Voltar' onClick={closeMenu} />
-      <Title text='Minhas publicações' size={1.25} />
-      {publicationsFiltred?.length === 0 && <P>Não há publicações</P>}
-      {publications.loading && <p>Carregando...</p>}
-      {publicationsFiltred?.map((publication) => {
-        const datePublication = new Date(publication.opening_date);
-        const dateNow = new Date();
-        return (
-          <MyPublication
-            key={publication.id}
-            id={publication.id}
-            title={publication.title}
-            dateCreation={timerFormatter(datePublication, dateNow)}
-          />
-        );
-      })}
-    </Container>
+    <>
+      <Container>
+        <BackBtn text='Voltar' onClick={closeMenu} />
+        <Title text='Minhas publicações' size={1.25} />
+        {publicationsFiltred?.length === 0 && <P>Não há publicações</P>}
+        {publications.loading && <p>Carregando...</p>}
+        {publicationsFiltred?.map((publication) => {
+          const datePublication = new Date(publication.opening_date);
+          const dateNow = new Date();
+          return (
+            <MyPublication
+              key={publication.id}
+              id={publication.id}
+              title={publication.title}
+              dateCreation={timerFormatter(datePublication, dateNow)}
+              onDelete={() => setShowModalDelete(true)}
+            />
+          );
+        })}
+      </Container>
+      {showModalDelete && (
+        <ModalActions
+          action='confirm'
+          message='Tem certeza que deseja excluir esta publicação?'
+          onClose={() => setShowModalDelete(false)}
+          onConfirm={() => deletePublication()}
+          icon={<BiWater />}
+        />
+      )}
+    </>
   );
 };

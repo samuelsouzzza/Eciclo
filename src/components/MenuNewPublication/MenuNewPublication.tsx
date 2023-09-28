@@ -12,7 +12,7 @@ import { BackBtn } from '../BackBtn/BackBtn.tsx';
 import useForm from '../../hooks/useForm.ts';
 import { IFeedback, IPublicationImgs, IUser } from '../../@types/types';
 import { SpinLoader } from '../SpinLoader/SpinLoader.tsx';
-import { ModalFeedback } from '../ModalFeedback/ModalFeedback.tsx';
+import { ModalActions } from '../ModalActions/ModalActions.tsx';
 import { BiCheck, BiMessageError } from 'react-icons/bi';
 import { handlerMenus } from '../../utils/handlerMenus.ts';
 
@@ -56,8 +56,7 @@ export const MenuNewPublication = () => {
   }
 
   function handleClickModalFeedback() {
-    setShowFeed(true);
-    setShowMenuNewPublication(false);
+    handlerMenus([setShowFeed], [setShowMenuNewPublication]);
   }
 
   async function createNewPublication(e: React.FormEvent<HTMLFormElement>) {
@@ -124,7 +123,6 @@ export const MenuNewPublication = () => {
 
   return (
     <>
-      {' '}
       <Container>
         <BackBtn text='Cancelar' onClick={closeMenu} />
         <Title text='Criar nova publicação' />
@@ -185,13 +183,15 @@ export const MenuNewPublication = () => {
       </Container>
       {statusNewPublication &&
         (statusNewPublication !== 'Publicação criada com sucesso!' ? (
-          <ModalFeedback
+          <ModalActions
+            action='ok'
             icon={<BiMessageError className='i' />}
             message={statusNewPublication}
             onClose={() => setStatusNewPublication(null)}
           />
         ) : (
-          <ModalFeedback
+          <ModalActions
+            action='ok'
             icon={<BiCheck className='i' />}
             message={statusNewPublication}
             onClose={handleClickModalFeedback}

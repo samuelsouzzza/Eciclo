@@ -14,7 +14,7 @@ import { BackBtn } from '../../components/BackBtn/BackBtn.tsx';
 import { useNavigate } from 'react-router-dom';
 import { IFeedback, IUser, IProfileImg } from '../../@types/types.ts';
 import { SpinLoader } from '../../components/SpinLoader/SpinLoader.tsx';
-import { ModalFeedback } from '../../components/ModalFeedback/ModalFeedback.tsx';
+import { ModalActions } from '../../components/ModalActions/ModalActions.tsx';
 import { BiCheck, BiMessageError } from 'react-icons/bi';
 
 export const NewAccount = () => {
@@ -225,13 +225,15 @@ export const NewAccount = () => {
       </Container>
       {statusNewUser &&
         (statusNewUser !== 'Usuário criado com sucesso!' ? (
-          <ModalFeedback
+          <ModalActions
+            action='ok'
             icon={<BiMessageError className='i' />}
             message={statusNewUser}
             onClose={() => setStatusNewUser(null)}
           />
         ) : (
-          <ModalFeedback
+          <ModalActions
+            action='ok'
             icon={<BiCheck className='i' />}
             message={statusNewUser}
             onClose={() => navigate('/')}
