@@ -1,8 +1,11 @@
 import React from 'react';
 import { Container, T, BtnDel, BtnEdit, Temp } from './MyPublication.styles.ts';
-import { faTrash, faPen } from '@fortawesome/free-solid-svg-icons';
+import {
+  faPenToSquare,
+  faSquareMinus,
+} from '@fortawesome/free-regular-svg-icons';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { PrimaryButton } from '../Form/PrimaryButton/PrimaryButton.tsx';
 
 type MyPublicationProps = {
   id: number;
@@ -23,16 +26,12 @@ export const MyPublication = ({
         {id}. {title}
       </T>
       <div>
-        <BtnDel onClick={onDelete}>
-          <FontAwesomeIcon icon={faTrash} />
-        </BtnDel>
-        <BtnEdit>
-          <FontAwesomeIcon icon={faPen} />
-        </BtnEdit>
         <Temp>{dateCreation}</Temp>
-        <PrimaryButton
-          style={{ height: 'auto', fontSize: '0.75rem', padding: '0 5%' }}
-          content='Fechar'
+        <FontAwesomeIcon icon={faPenToSquare} className='i' />
+        <FontAwesomeIcon
+          icon={faSquareMinus}
+          className='i'
+          onClick={onDelete}
         />
       </div>
     </Container>

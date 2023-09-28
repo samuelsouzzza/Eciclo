@@ -13,6 +13,21 @@ export const Container = styled.div`
     justify-content: end;
     align-items: center;
     gap: 10%;
+    > svg {
+      cursor: pointer;
+      transition: 0.3s;
+      font-weight: 100;
+      > path {
+        fill: #333;
+        transition: 0.3s;
+      }
+      &:hover {
+        transform: scale(1.25);
+        > path {
+          fill: #92e3a9;
+        }
+      }
+    }
   }
 `;
 export const T = styled.p`
@@ -37,16 +52,6 @@ export const BtnDel = styled.button`
   padding: 0.5% 1%;
   cursor: pointer;
   transition: 0.3s;
-  > svg > path {
-    fill: #333;
-    transition: 0.3s;
-  }
-  &:hover {
-    transform: scale(1.25);
-    > svg > path {
-      fill: #92e3a9;
-    }
-  }
 `;
 export const BtnEdit = styled.button`
   width: 20%;

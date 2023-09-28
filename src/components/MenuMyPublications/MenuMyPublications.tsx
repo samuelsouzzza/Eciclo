@@ -9,7 +9,7 @@ import useFetch from '../../hooks/useFetch.ts';
 import { IPublication, IUser } from '../../@types/types';
 import { timerFormatter } from '../../utils/timerFormatter.ts';
 import { ModalActions } from '../ModalActions/ModalActions.tsx';
-import { BiWater } from 'react-icons/bi';
+import { BiError } from 'react-icons/bi';
 
 export const MenuMyPublications = () => {
   const { setShowFeed, setShowMenuMyPublications } = UseContextScreens();
@@ -62,7 +62,7 @@ export const MenuMyPublications = () => {
           message='Tem certeza que deseja excluir esta publicação?'
           onClose={() => setShowModalDelete(false)}
           onConfirm={() => deletePublication()}
-          icon={<BiWater />}
+          icon={<BiError className='i' />}
         />
       )}
     </>
