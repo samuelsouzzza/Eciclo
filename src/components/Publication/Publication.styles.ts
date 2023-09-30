@@ -39,7 +39,8 @@ export const Local = styled.p`
   font-weight: bold;
   font-size: 0.75rem;
   width: 50%;
-  display: flex;
+  display: block;
+
   align-items: center;
   justify-content: start;
   text-transform: capitalize;
@@ -57,7 +58,14 @@ export const Author = styled.p`
   font-weight: bold;
   font-size: 0.75rem;
   width: 50%;
-  display: flex;
+  display: inline-block;
+
+  /* align-items: center;
+  justify-content: start; */
+  text-transform: capitalize;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   align-items: center;
 `;
 export const Description = styled.span`

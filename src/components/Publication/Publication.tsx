@@ -8,16 +8,17 @@ import {
   B,
 } from './Publication.styles.ts';
 import { PrimaryButton } from '../Form/PrimaryButton/PrimaryButton.tsx';
-import { BiPin, BiUser } from 'react-icons/bi';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUser, faCompass } from '@fortawesome/free-regular-svg-icons';
 
-interface PublicationProps {
+type PublicationProps = {
   icon: React.ReactNode;
   title: string;
   category: string;
   description: string;
   owner: string;
   adress: string;
-}
+};
 
 export const Publication = ({
   icon,
@@ -36,14 +37,12 @@ export const Publication = ({
       <Category>{category}</Category>
       <B>
         <Author>
-          <BiUser className='i' />
+          <FontAwesomeIcon icon={faUser} className='i' />
           {owner}
         </Author>
         <Local>
-          <span>
-            <BiPin className='i' />
-            {adress}
-          </span>
+          <FontAwesomeIcon icon={faCompass} className='i' />
+          {adress}
         </Local>
       </B>
       <Description>{description}</Description>
