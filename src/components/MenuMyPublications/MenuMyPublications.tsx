@@ -52,36 +52,38 @@ export const MenuMyPublications = () => {
   return (
     <>
       <Container>
-        {showListPublications ? (
+        {showListPublications && (
           <>
             <BackBtn text='Voltar' onClick={closeMenu} />
             <Title text='Minhas publicações' size={1.25} />
+            {publicationsFiltred?.length === 0 && <P>Não há publicações</P>}
+            {publications.loading && <p>Carregando...</p>}
+            {showListPublications &&
+              publicationsFiltred?.map((publication) => {
+                const datePublication = new Date(publication.opening_date);
+                const dateNow = new Date();
+                return (
+                  <MyPublication
+                    key={publication.id}
+                    id={publication.id}
+                    title={publication.title}
+                    dateCreation={timerFormatter(datePublication, dateNow)}
+                    onDelete={() => setShowModalDelete(true)}
+                    onEdit={() => updatePublication(publication)}
+                  />
+                );
+              })}
           </>
-        ) : (
+        )}
+        {selectedPublication && (
           <>
             <BackBtn text='Cancelar' onClick={cancelUpdatePublication} />
             <Title text='Editando publicação' size={1.25} />
+            <FormUpdatePublication
+              data={selectedPublication}
+              onCancel={cancelUpdatePublication}
+            />
           </>
-        )}
-        {publicationsFiltred?.length === 0 && <P>Não há publicações</P>}
-        {publications.loading && <p>Carregando...</p>}
-        {showListPublications &&
-          publicationsFiltred?.map((publication) => {
-            const datePublication = new Date(publication.opening_date);
-            const dateNow = new Date();
-            return (
-              <MyPublication
-                key={publication.id}
-                id={publication.id}
-                title={publication.title}
-                dateCreation={timerFormatter(datePublication, dateNow)}
-                onDelete={() => setShowModalDelete(true)}
-                onEdit={() => updatePublication(publication)}
-              />
-            );
-          })}
-        {selectedPublication && (
-          <FormUpdatePublication data={selectedPublication} />
         )}
       </Container>
 
