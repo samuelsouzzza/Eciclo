@@ -1,17 +1,14 @@
-// function timeFormatter(id: number) {
-//   const minutes = minutesElapsed[id];
+export const timerFormatter = (data1: Date, data2: Date): string => {
+  const diffInMs = data2.getTime() - data1.getTime();
+  const diffInDays = diffInMs / (1000 * 60 * 60 * 24);
+  const numDays = Math.floor(diffInDays);
 
-//   if (minutes === undefined) {
-//     return '•••';
-//   } else if (minutes === 0) {
-//     return 'Agora';
-//   } else if (minutes >= 60) {
-//     return Math.floor(minutes / 60) + 'h';
-//   } else if (minutes >= 1440) {
-//     return Math.floor(minutes / 1440) + 'd';
-//   } else if (minutes >= 10080) {
-//     return 'Mais de uma semana';
-//   } else {
-//     return minutes + 'min';
-//   }
-// }
+  switch (numDays) {
+    case 0:
+      return 'Hoje';
+    case 1:
+      return 'Ontem';
+    default:
+      return `${numDays}d atrás`;
+  }
+};

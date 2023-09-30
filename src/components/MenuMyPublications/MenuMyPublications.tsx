@@ -7,6 +7,7 @@ import { handlerMenus } from '../../utils/handlerMenus.ts';
 import { MyPublication } from '../MyPublication/MyPublication.tsx';
 import useFetch from '../../hooks/useFetch.ts';
 import { IPublication, IUser } from '../../@types/types';
+import { timerFormatter } from '../../utils/timerFormatter.ts';
 
 export const MenuMyPublications = () => {
   const { setShowFeed, setShowMenuMyPublications } = UseContextScreens();
@@ -19,9 +20,9 @@ export const MenuMyPublications = () => {
     localStorage.getItem('userLogged') as string
   );
 
-  const publicationsFiltred = publications.data?.filter(
-    (publication) => publication.owner.id == userLogged.id
-  );
+  const publicationsFiltred = publications.data
+    ?.filter((publication) => publication.owner.id == userLogged.id)
+    .reverse();
 
   function closeMenu() {
     handlerMenus([setShowFeed], [setShowMenuMyPublications]);
@@ -33,7 +34,16 @@ export const MenuMyPublications = () => {
       {publicationsFiltred?.length === 0 && <P>Não há publicações</P>}
       {publications.loading && <p>Carregando...</p>}
       {publicationsFiltred?.map((publication) => {
-        return <MyPublication id={publication.id} title={publication.title} />;
+        const datePublication = new Date(publication.opening_date);
+        const dateNow = new Date();
+        return (
+          <MyPublication
+            key={publication.id}
+            id={publication.id}
+            title={publication.title}
+            dateCreation={timerFormatter(datePublication, dateNow)}
+          />
+        );
       })}
     </Container>
   );

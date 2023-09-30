@@ -7,7 +7,7 @@ import { PrimaryButton } from '../Form/PrimaryButton/PrimaryButton.tsx';
 type MyPublicationProps = {
   id: number;
   title: string;
-  dateCreation?: string;
+  dateCreation: number | string;
 };
 
 export const MyPublication = ({
@@ -27,7 +27,7 @@ export const MyPublication = ({
         <BtnEdit>
           <FontAwesomeIcon icon={faPen} />
         </BtnEdit>
-        <Temp>3d</Temp>
+        <Temp>{dateCreation}</Temp>
         <PrimaryButton
           style={{ height: 'auto', fontSize: '0.75rem', padding: '0 5%' }}
           content='Fechar'

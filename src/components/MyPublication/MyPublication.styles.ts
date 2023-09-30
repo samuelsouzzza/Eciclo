@@ -9,7 +9,7 @@ export const Container = styled.div`
   border-bottom: 1px solid #0000001a;
   div {
     display: flex;
-    width: 30%;
+    width: 50%;
     justify-content: end;
     align-items: center;
     gap: 10%;
@@ -25,6 +25,8 @@ export const T = styled.p`
 `;
 export const Temp = styled.p`
   font-size: 0.75rem;
+  width: max-content;
+  white-space: nowrap;
 `;
 export const BtnDel = styled.button`
   width: 20%;
@@ -42,7 +44,7 @@ export const BtnDel = styled.button`
   &:hover {
     transform: scale(1.25);
     > svg > path {
-      fill: #e04026;
+      fill: #92e3a9;
     }
   }
 `;
@@ -62,7 +64,7 @@ export const BtnEdit = styled.button`
   &:hover {
     transform: scale(1.25);
     > svg > path {
-      fill: #2651e0;
+      fill: #92e3a9;
     }
   }
 `;
