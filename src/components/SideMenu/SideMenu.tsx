@@ -2,7 +2,7 @@ import React from 'react';
 import { Container } from './SideMenu.styles.ts';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
-  faUser,
+  faCircleUser,
   faBell,
   faBookmark,
   faComments,
@@ -40,7 +40,7 @@ export const SideMenu = () => {
         className='i new'
         onClick={createNewPublication}
       />
-      <FontAwesomeIcon icon={faUser} className='i' />
+      <FontAwesomeIcon icon={faCircleUser} className='i' />
       <FontAwesomeIcon icon={faList} className='i' onClick={myPublications} />
       <FontAwesomeIcon icon={faBell} className='i' />
       <FontAwesomeIcon icon={faBookmark} className='i' />

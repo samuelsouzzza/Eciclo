@@ -9,7 +9,7 @@ import {
 } from './Publication.styles.ts';
 import { PrimaryButton } from '../Form/PrimaryButton/PrimaryButton.tsx';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser, faCompass } from '@fortawesome/free-regular-svg-icons';
+import { faCircleUser, faCompass } from '@fortawesome/free-regular-svg-icons';
 
 type PublicationProps = {
   icon: React.ReactNode;
@@ -37,7 +37,7 @@ export const Publication = ({
       <Category>{category}</Category>
       <B>
         <Author>
-          <FontAwesomeIcon icon={faUser} className='i' />
+          <FontAwesomeIcon icon={faCircleUser} className='i' />
           {owner}
         </Author>
         <Local>
