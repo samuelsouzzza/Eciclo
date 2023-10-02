@@ -1,6 +1,5 @@
 import React from 'react';
 import { Container } from './FormUpdatePublication.styles.ts';
-import { Title } from '../Title/Title.tsx';
 import { IPublication } from '../../@types/types';
 import { Input } from '../Form/Input/Input.tsx';
 import { SelectBox } from '../Form/SelectBox/SelectBox.tsx';
@@ -29,14 +28,20 @@ export const FormUpdatePublication = ({
     'Combinar entrega',
   ];
   const txtTitle = useForm(null);
-  // txtTitle.value = data.title;
-  const [txtTitleReact, setTxtTitleReact] = React.useState(data.title);
   const [category, setCategory] = React.useState(data.category);
   const [sendRecept, setSendRecept] = React.useState(data.collect_receipt);
   const [description, setDescription] = React.useState(data.description);
-  // const [publicationPics, setpublicationPics] = React.useState<
-  //   IPublicationImgs[] | null
-  // >(data.photos_path);
+  const [publicationPics, setPublicationPics] = React.useState<
+    IPublicationImgs[] | null
+  >(
+    data.photos_paths
+      ? data.photos_paths.map((photoPath) => ({
+          preview: `http://localhost/3000${photoPath}`,
+          raw: null,
+        }))
+      : null
+  );
+
   const [loadingNewPublication, setLoadingNewPublication] =
     React.useState(false);
 
@@ -44,7 +49,7 @@ export const FormUpdatePublication = ({
     e.preventDefault();
     const { files } = e.target;
     if (files !== null && files.length > 0) {
-      setpublicationPics((...prevPublicationPics) =>
+      setPublicationPics((...prevPublicationPics) =>
         Array.from(files).map((file) => ({
           preview: URL.createObjectURL(file),
           raw: file,
@@ -52,6 +57,12 @@ export const FormUpdatePublication = ({
       );
     }
   }
+
+  React.useEffect(() => {
+    console.log(data.photos_paths);
+
+    console.log(publicationPics);
+  }, []);
 
   return (
     <Container>
@@ -63,7 +74,6 @@ export const FormUpdatePublication = ({
         {...txtTitle}
         onChange={(e) => txtTitle.setValue(e.target.value)}
       />
-      {txtTitle.value}
       <SelectBox
         label='Categoria'
         options={arrCategories}

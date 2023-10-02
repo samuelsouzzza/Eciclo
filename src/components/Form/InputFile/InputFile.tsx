@@ -5,7 +5,7 @@ import {
   PreviewContainer,
   PreviewImg,
 } from './InputFile.styles.ts';
-import { IPublicationImgs } from '../../ModalNewPublication/ModalNewPublication.tsx';
+import { IPublicationImgs } from '../../../@types/types';
 import { Invalid } from '../Invalid/Invalid.tsx';
 
 type InputFileProps = React.ComponentProps<'input'> & {

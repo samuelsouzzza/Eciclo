@@ -7,7 +7,7 @@ type TextAreaProps = React.ComponentProps<'textarea'> & {
   span?: number;
   lines?: number;
   limit?: number;
-  value: string;
+  value?: string;
   setValue: React.Dispatch<React.SetStateAction<string>>;
 };
 
@@ -30,7 +30,7 @@ export const TextArea = ({
       }}
     >
       {label}
-      {value.length === 0 && (
+      {value?.length === 0 && (
         <Invalid text=' - Preencha uma descrição' color='#e0d026' />
       )}
       <Area
@@ -44,10 +44,10 @@ export const TextArea = ({
         style={{
           width: '100%',
           textAlign: 'right',
-          color: value.length === limit ? '#e04026ed' : 'currentcolor',
+          color: value?.length === limit ? '#e04026ed' : 'currentcolor',
         }}
       >
-        {value.length}/{limit}
+        {value?.length}/{limit}
       </p>
     </label>
   );

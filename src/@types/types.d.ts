@@ -20,7 +20,7 @@ export interface IPublication {
   opening_date: string;
   closing_date: string | null;
   status: boolean;
-  photos_path: string[];
+  photos_paths: string[];
   owner: {
     id: number;
     complete_name: string;
