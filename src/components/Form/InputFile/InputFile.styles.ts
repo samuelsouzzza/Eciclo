@@ -43,5 +43,6 @@ export const PreviewContainer = styled.section`
 export const PreviewImg = styled.img`
   height: 200px;
   width: 200px;
+  margin: 2%;
   border: 1px solid #ccc;
 `;

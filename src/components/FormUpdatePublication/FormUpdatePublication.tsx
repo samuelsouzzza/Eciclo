@@ -36,7 +36,7 @@ export const FormUpdatePublication = ({
   >(
     data.photos_paths
       ? data.photos_paths.map((photoPath) => ({
-          preview: `http://localhost/3000${photoPath}`,
+          preview: `http://localhost:3000/${photoPath}`,
           raw: null,
         }))
       : null
@@ -57,12 +57,7 @@ export const FormUpdatePublication = ({
       );
     }
   }
-
-  React.useEffect(() => {
-    console.log(data.photos_paths);
-
-    console.log(publicationPics);
-  }, []);
+  console.log(publicationPics);
 
   return (
     <Container>
