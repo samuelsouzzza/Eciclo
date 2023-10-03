@@ -9,6 +9,6 @@ export const timerFormatter = (data1: Date, data2: Date): string => {
     case 1:
       return 'Ontem';
     default:
-      return `${numDays}d atrás`;
+      return `há ${numDays}d`;
   }
 };

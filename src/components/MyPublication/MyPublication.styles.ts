@@ -32,9 +32,13 @@ export const Container = styled.div`
   }
 `;
 export const T = styled.p`
+  width: 90%;
   color: #333;
   justify-self: start;
   cursor: pointer;
+  white-space: nowrap;
+  overflow-x: hidden;
+  text-overflow: ellipsis;
   &:hover {
     text-decoration: underline;
   }

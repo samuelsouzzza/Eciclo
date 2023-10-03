@@ -23,6 +23,7 @@ export const Container = styled.div`
   justify-content: center;
   align-items: center;
   padding: 1%;
+  animation: 0.3s fadeInBottom forwards;
   .i {
     font-size: 3rem;
     fill: #92e3a9;

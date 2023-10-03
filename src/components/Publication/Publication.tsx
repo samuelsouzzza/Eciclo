@@ -3,13 +3,16 @@ import {
   Container,
   Description,
   Category,
-  Local,
-  Author,
+  BoxInfo,
   B,
 } from './Publication.styles.ts';
 import { PrimaryButton } from '../Form/PrimaryButton/PrimaryButton.tsx';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCircleUser, faCompass } from '@fortawesome/free-regular-svg-icons';
+import {
+  faCircleUser,
+  faCompass,
+  faClock,
+} from '@fortawesome/free-regular-svg-icons';
 
 type PublicationProps = {
   icon: React.ReactNode;
@@ -18,6 +21,7 @@ type PublicationProps = {
   description: string;
   owner: string;
   adress: string;
+  dateCreation: string;
 };
 
 export const Publication = ({
@@ -27,6 +31,7 @@ export const Publication = ({
   description,
   owner,
   adress,
+  dateCreation,
 }: PublicationProps) => {
   return (
     <Container>
@@ -36,14 +41,18 @@ export const Publication = ({
       </div>
       <Category>{category}</Category>
       <B>
-        <Author>
+        <BoxInfo>
           <FontAwesomeIcon icon={faCircleUser} className='i' />
           {owner}
-        </Author>
-        <Local>
+        </BoxInfo>
+        <BoxInfo>
           <FontAwesomeIcon icon={faCompass} className='i' />
           {adress}
-        </Local>
+        </BoxInfo>
+        <BoxInfo>
+          <FontAwesomeIcon icon={faClock} className='i' />
+          {dateCreation}
+        </BoxInfo>
       </B>
       <Description>{description}</Description>
 

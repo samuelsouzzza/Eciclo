@@ -45,4 +45,5 @@ export const PreviewImg = styled.img`
   width: 200px;
   margin: 2%;
   border: 1px solid #ccc;
+  object-fit: contain;
 `;

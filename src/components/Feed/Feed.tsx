@@ -8,6 +8,7 @@ import { IPublication } from '../../@types/types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { handlerIcons } from '../../utils/handlerIcons.ts';
 import { SkeletonPublicationLoader } from '../SkeletonPublicationLoader/SkeletonPublicationLoader.tsx';
+import { timerFormatter } from '../../utils/timerFormatter.ts';
 
 export const Feed = () => {
   const publications = useFetch<IPublication[]>(
@@ -22,6 +23,8 @@ export const Feed = () => {
       {publications.loading && <SkeletonPublicationLoader />}
       {publications.loading}
       {publications.data?.map((publication) => {
+        const dateNow = new Date();
+        const datePublication = new Date(publication.opening_date);
         return (
           <Publication
             key={publication.id}
@@ -33,6 +36,7 @@ export const Feed = () => {
             }
             title={publication.title}
             category={publication.category}
+            dateCreation={timerFormatter(datePublication, dateNow)}
             description={publication.description}
             owner={publication.owner.complete_name}
             adress={publication.collect_receipt}
