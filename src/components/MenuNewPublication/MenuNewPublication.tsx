@@ -124,8 +124,10 @@ export const MenuNewPublication = () => {
   return (
     <>
       <Container>
-        <BackBtn text='Cancelar' onClick={closeMenu} />
-        <Title text='Criar nova publicação' />
+        <div>
+          <BackBtn text='Cancelar' onClick={closeMenu} />
+          <Title text='Criar nova publicação' />
+        </div>
         <BoxForm>
           <form
             onSubmit={createNewPublication}

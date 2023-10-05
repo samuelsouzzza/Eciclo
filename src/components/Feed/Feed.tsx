@@ -9,40 +9,47 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { handlerIcons } from '../../utils/handlerIcons.ts';
 import { SkeletonPublicationLoader } from '../SkeletonPublicationLoader/SkeletonPublicationLoader.tsx';
 import { timerFormatter } from '../../utils/timerFormatter.ts';
+import { ModalDetailsPublication } from '../ModalDetailsPublication/ModalDatailsPublication.tsx';
 
 export const Feed = () => {
   const publications = useFetch<IPublication[]>(
     'http://localhost:3000/publications'
   );
 
+  const [details, setDetails] = React.useState<IPublication | null>(null);
+
   return (
-    <Container>
-      <Title text='Perto de você' size={1.25} />
-      <SearchBar placeholder='Pesquise aqui' />
-      {publications.data?.length === 0 && <P>Não há publicações</P>}
-      {publications.loading && <SkeletonPublicationLoader />}
-      {publications.loading}
-      {publications.data?.map((publication) => {
-        const dateNow = new Date();
-        const datePublication = new Date(publication.opening_date);
-        return (
-          <Publication
-            key={publication.id}
-            icon={
-              <FontAwesomeIcon
-                icon={handlerIcons(publication.category)}
-                className='i'
-              />
-            }
-            title={publication.title}
-            category={publication.category}
-            dateCreation={timerFormatter(datePublication, dateNow)}
-            description={publication.description}
-            owner={publication.owner.complete_name}
-            adress={publication.collect_receipt}
-          />
-        );
-      })}
-    </Container>
+    <>
+      {details && <ModalDetailsPublication data={details} />}
+      <Container>
+        <Title text='Perto de você' size={1.25} />
+        <SearchBar placeholder='Pesquise aqui' />
+        {publications.data?.length === 0 && <P>Não há publicações</P>}
+        {publications.loading && <SkeletonPublicationLoader />}
+        {publications.loading}
+        {publications.data?.map((publication) => {
+          const dateNow = new Date();
+          const datePublication = new Date(publication.opening_date);
+          return (
+            <Publication
+              key={publication.id}
+              icon={
+                <FontAwesomeIcon
+                  icon={handlerIcons(publication.category)}
+                  className='i'
+                />
+              }
+              onDetails={() => setDetails(publication)}
+              title={publication.title}
+              category={publication.category}
+              dateCreation={timerFormatter(datePublication, dateNow)}
+              description={publication.description}
+              owner={publication.owner.complete_name}
+              adress={publication.collect_receipt}
+            />
+          );
+        })}
+      </Container>
+    </>
   );
 };

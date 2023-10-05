@@ -12,6 +12,11 @@ export const Container = styled.div`
   overflow-y: scroll;
   overflow-x: hidden;
   animation: fadeInLeft 0.3s forwards;
+  div {
+    display: flex;
+    justify-content: start;
+    align-items: last baseline;
+  }
 `;
 export const P = styled.p`
   width: 100%;

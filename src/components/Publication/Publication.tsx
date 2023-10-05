@@ -22,6 +22,7 @@ type PublicationProps = {
   owner: string;
   adress: string;
   dateCreation: string;
+  onDetails: () => void;
 };
 
 export const Publication = ({
@@ -32,6 +33,7 @@ export const Publication = ({
   owner,
   adress,
   dateCreation,
+  onDetails,
 }: PublicationProps) => {
   return (
     <Container>
@@ -57,6 +59,7 @@ export const Publication = ({
       <Description>{description}</Description>
 
       <PrimaryButton
+        onClick={onDetails}
         content='Saber mais'
         style={{
           fontSize: '.85rem',

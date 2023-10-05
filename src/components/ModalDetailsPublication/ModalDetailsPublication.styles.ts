@@ -20,4 +20,10 @@ export const Container = styled.div`
   border-radius: 5px;
   box-shadow: 1px 1px 5px 3px #0000000d;
   animation: 0.3s fadeInBottom forwards;
+  padding: 1%;
+  div {
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+  }
 `;

@@ -54,8 +54,10 @@ export const MenuMyPublications = () => {
       <Container>
         {showListPublications && (
           <>
-            <BackBtn text='Voltar' onClick={closeMenu} />
-            <Title text='Minhas publicações' size={1.25} />
+            <div>
+              <BackBtn text='Voltar' onClick={closeMenu} />
+              <Title text='Minhas publicações' size={1.25} />
+            </div>
             {publicationsFiltred?.length === 0 && <P>Não há publicações</P>}
             {publications.loading && <p>Carregando...</p>}
             {showListPublications &&

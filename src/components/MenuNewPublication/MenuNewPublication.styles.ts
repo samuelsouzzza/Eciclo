@@ -11,6 +11,9 @@ export const Container = styled.section`
   grid-column-end: 4;
   overflow-y: scroll;
   animation: fadeInLeft 0.3s forwards;
+  div {
+    display: flex;
+  }
 `;
 export const BoxForm = styled.div`
   width: 100%;
