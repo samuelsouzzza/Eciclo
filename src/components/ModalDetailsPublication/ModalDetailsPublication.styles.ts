@@ -14,16 +14,44 @@ export const Wrapper = styled.section`
   z-index: 50;
 `;
 export const Container = styled.div`
-  width: 400px;
-  height: 300px;
+  width: 45%;
+  height: auto;
   background-color: #f8f8ff;
   border-radius: 5px;
   box-shadow: 1px 1px 5px 3px #0000000d;
   animation: 0.3s fadeInBottom forwards;
   padding: 1%;
-  div {
+  .header {
     display: flex;
     justify-content: center;
     align-items: baseline;
   }
+  .header-data {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+  }
+  .title-data {
+    display: flex;
+    align-items: center;
+    width: 50%;
+    .i {
+      margin-right: 1%;
+    }
+  }
+  h3 {
+    &::first-letter {
+      text-transform: capitalize;
+    }
+  }
+`;
+export const Description = styled.article`
+  width: 100%;
+  &::first-letter {
+    text-transform: capitalize;
+  }
+`;
+export const BoxData = styled.section`
+  background-color: red;
+  width: 100%;
 `;

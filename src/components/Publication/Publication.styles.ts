@@ -16,6 +16,9 @@ export const Container = styled.div`
       white-space: nowrap;
       overflow-x: hidden;
       text-overflow: ellipsis;
+      &::first-letter {
+        text-transform: capitalize;
+      }
     }
   }
   .i {
