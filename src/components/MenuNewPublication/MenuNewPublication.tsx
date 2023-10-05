@@ -124,7 +124,7 @@ export const MenuNewPublication = () => {
   return (
     <>
       <Container>
-        <div>
+        <div className='header'>
           <BackBtn text='Cancelar' onClick={closeMenu} />
           <Title text='Criar nova publicação' />
         </div>

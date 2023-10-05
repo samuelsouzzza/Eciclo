@@ -54,7 +54,7 @@ export const MenuMyPublications = () => {
       <Container>
         {showListPublications && (
           <>
-            <div>
+            <div className='header'>
               <BackBtn text='Voltar' onClick={closeMenu} />
               <Title text='Minhas publicações' size={1.25} />
             </div>
@@ -79,8 +79,10 @@ export const MenuMyPublications = () => {
         )}
         {selectedPublication && (
           <>
-            <BackBtn text='Cancelar' onClick={cancelUpdatePublication} />
-            <Title text='Editando publicação' size={1.25} />
+            <div className='header'>
+              <BackBtn text='Cancelar' onClick={cancelUpdatePublication} />
+              <Title text='Editando publicação' size={1.25} />
+            </div>
             <FormUpdatePublication
               data={selectedPublication}
               onCancel={cancelUpdatePublication}

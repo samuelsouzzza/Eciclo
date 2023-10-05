@@ -12,10 +12,10 @@ export const Container = styled.div`
   overflow-y: scroll;
   overflow-x: hidden;
   animation: fadeInLeft 0.3s forwards;
-  div {
+  .header {
     display: flex;
-    justify-content: start;
-    align-items: last baseline;
+    justify-content: center;
+    align-items: baseline;
   }
 `;
 export const P = styled.p`

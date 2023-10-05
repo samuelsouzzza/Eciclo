@@ -11,8 +11,10 @@ export const Container = styled.section`
   grid-column-end: 4;
   overflow-y: scroll;
   animation: fadeInLeft 0.3s forwards;
-  div {
+  .header {
     display: flex;
+    justify-content: center;
+    align-items: baseline;
   }
 `;
 export const BoxForm = styled.div`
