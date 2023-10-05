@@ -10,17 +10,18 @@ import { handlerIcons } from '../../utils/handlerIcons.ts';
 import { SkeletonPublicationLoader } from '../SkeletonPublicationLoader/SkeletonPublicationLoader.tsx';
 import { timerFormatter } from '../../utils/timerFormatter.ts';
 import { ModalDetailsPublication } from '../ModalDetailsPublication/ModalDatailsPublication.tsx';
+import { UseContextScreens } from '../../global/ScreenStates.tsx';
 
 export const Feed = () => {
   const publications = useFetch<IPublication[]>(
     'http://localhost:3000/publications'
   );
 
-  const [details, setDetails] = React.useState<IPublication | null>(null);
+  const { showDetails, setShowDetails } = UseContextScreens();
 
   return (
     <>
-      {details && <ModalDetailsPublication data={details} />}
+      {showDetails && <ModalDetailsPublication data={showDetails} />}
       <Container>
         <Title text='Perto de você' size={1.25} />
         <SearchBar placeholder='Pesquise aqui' />
@@ -39,7 +40,7 @@ export const Feed = () => {
                   className='i'
                 />
               }
-              onDetails={() => setDetails(publication)}
+              onDetails={() => setShowDetails(publication)}
               title={publication.title}
               category={publication.category}
               dateCreation={timerFormatter(datePublication, dateNow)}

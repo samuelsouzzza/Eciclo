@@ -1,4 +1,5 @@
 import React from 'react';
+import { IPublication } from '../@types/types';
 
 type IScreens = {
   showFeed: boolean;
@@ -7,6 +8,8 @@ type IScreens = {
   setShowMenuNewPublication: React.Dispatch<React.SetStateAction<boolean>>;
   showMenuMyPublications: boolean;
   setShowMenuMyPublications: React.Dispatch<React.SetStateAction<boolean>>;
+  showDetails: IPublication | null;
+  setShowDetails: React.Dispatch<React.SetStateAction<IPublication | null>>;
 };
 
 const ScreensContext = React.createContext<IScreens | null>(null);
@@ -25,6 +28,9 @@ export const ScreensContextProvider = ({
     React.useState(false);
   const [showMenuMyPublications, setShowMenuMyPublications] =
     React.useState(false);
+  const [showDetails, setShowDetails] = React.useState<IPublication | null>(
+    null
+  );
 
   return (
     <ScreensContext.Provider
@@ -35,6 +41,8 @@ export const ScreensContextProvider = ({
         setShowMenuNewPublication,
         showMenuMyPublications,
         setShowMenuMyPublications,
+        showDetails,
+        setShowDetails,
       }}
     >
       {children}
