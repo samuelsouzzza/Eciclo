@@ -18,7 +18,6 @@ import { CarouselImgs } from '../CarouselImgs/CarouselImgs.tsx';
 import { handlerIcons } from '../../utils/handlerIcons.ts';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faClock, faCompass } from '@fortawesome/free-regular-svg-icons';
-import { faWhatsapp } from '@fortawesome/free-brands-svg-icons';
 import { timerFormatter } from '../../utils/timerFormatter.ts';
 import UserDefault from '../../assets/user-default.jpg';
 import { PrimaryButton } from '../Form/PrimaryButton/PrimaryButton.tsx';
@@ -41,6 +40,10 @@ export const ModalDetailsPublication = ({
     overflowX: 'hidden',
     textOverflow: 'ellipsis',
   };
+
+  function openWhatsApp(cell: string) {
+    window.open(`https://wa.me/55${cell}`, '_blank');
+  }
 
   return (
     <Wrapper>
@@ -90,6 +93,7 @@ export const ModalDetailsPublication = ({
           <SecondaryButton
             content='Conversar no WhatsApp'
             style={{ ...boxStyle, width: '40%' }}
+            onClick={() => openWhatsApp(data.owner.cell)}
           />
           <PrimaryButton
             content={`Conversar no Chat`}
