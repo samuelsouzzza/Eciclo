@@ -6,6 +6,7 @@ import {
   faBell,
   faBookmark,
   faComments,
+  faCircleXmark,
 } from '@fortawesome/free-regular-svg-icons';
 import {
   faPlus,
@@ -33,6 +34,13 @@ export const SideMenu = () => {
     );
   }
 
+  function logOut() {
+    localStorage.removeItem('userLogged');
+
+    const local = 'http://localhost:5173';
+    location.href = local;
+  }
+
   return (
     <Container>
       <FontAwesomeIcon
@@ -47,6 +55,11 @@ export const SideMenu = () => {
       <FontAwesomeIcon icon={faComments} className='i' />
       <FontAwesomeIcon icon={faQuestion} className='i' />
       <FontAwesomeIcon icon={faEllipsisH} className='i' />
+      <FontAwesomeIcon
+        icon={faCircleXmark}
+        className='i loggout'
+        onClick={logOut}
+      />
     </Container>
   );
 };

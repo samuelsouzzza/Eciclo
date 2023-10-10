@@ -34,10 +34,18 @@ export const Container = styled.aside`
       padding: 10%;
       border-radius: 50%;
       &:hover {
+        background-color: #92e3a9;
         path {
           color: #fff;
         }
-        background-color: #92e3a9;
+      }
+    }
+    &.loggout {
+      &:hover {
+        background-color: #e0402644;
+        path {
+          color: #e04026;
+        }
       }
     }
   }
