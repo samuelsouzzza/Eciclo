@@ -11,7 +11,7 @@ export const Wrapper = styled.section`
   justify-content: center;
   align-items: start;
   position: fixed;
-  z-index: 50;
+  z-index: 5;
 `;
 export const Container = styled.div`
   width: 45%;
@@ -27,22 +27,44 @@ export const Container = styled.div`
     display: flex;
     justify-content: center;
     align-items: baseline;
+    width: 100%;
+    height: auto;
   }
-
   h3 {
     &::first-letter {
       text-transform: capitalize;
     }
   }
 `;
+export const BoxOwner = styled.p`
+  display: flex;
+  align-items: center;
+  gap: 1%;
+`;
+export const PhotoOwner = styled.img`
+  border-radius: 50px;
+  max-width: 40px;
+  aspect-ratio: 1/1;
+`;
+
 export const HeaderPubli = styled.div`
   display: flex;
-  margin: 2% 0;
+  align-items: center;
+  margin: 1% 0;
   h4 {
     span {
       white-space: nowrap;
       overflow-x: hidden;
       text-overflow: ellipsis;
+    }
+  }
+  div {
+    display: flex;
+    flex-direction: column;
+    span {
+      display: flex;
+      align-items: center;
+      gap: 2%;
     }
   }
 `;
@@ -58,12 +80,10 @@ export const T = styled.h4`
 
 export const Description = styled.article`
   width: 100%;
+  margin: 2% 0;
   &::first-letter {
     text-transform: capitalize;
   }
-`;
-export const BoxData = styled.section`
-  width: 100%;
 `;
 export const Category = styled.span`
   background-color: #92e3a944;
@@ -76,14 +96,8 @@ export const Category = styled.span`
   text-transform: capitalize;
   display: inline-block;
 `;
-export const BoxOwner = styled.p`
+export const BoxButtons = styled.section`
+  width: 100%;
   display: flex;
-  align-items: center;
-  gap: 1%;
-  margin: 2.5% 0;
-`;
-export const PhotoOwner = styled.img`
-  border-radius: 50px;
-  max-width: 40px;
-  aspect-ratio: 1/1;
+  gap: 0 1%;
 `;

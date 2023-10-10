@@ -6,6 +6,10 @@ type TitleProps = React.ComponentProps<'h1'> & {
   size?: number;
 };
 
-export const Title = ({ text, size = 1.5 }: TitleProps) => {
-  return <T style={{ fontSize: `${size}rem` }}>{text}</T>;
+export const Title = ({ text, size = 1.5, ...props }: TitleProps) => {
+  return (
+    <T style={{ fontSize: `${size}rem` }} {...props}>
+      {text}
+    </T>
+  );
 };
