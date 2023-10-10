@@ -15,7 +15,9 @@ export const Wrapper = styled.section`
 `;
 export const Container = styled.div`
   width: 45%;
-  height: auto;
+  min-height: auto;
+  max-height: 80%;
+  overflow-y: scroll;
   background-color: #f8f8ff;
   border-radius: 5px;
   box-shadow: 1px 1px 5px 3px #0000000d;
@@ -35,6 +37,14 @@ export const Container = styled.div`
 `;
 export const HeaderPubli = styled.div`
   display: flex;
+  margin: 2% 0;
+  h4 {
+    span {
+      white-space: nowrap;
+      overflow-x: hidden;
+      text-overflow: ellipsis;
+    }
+  }
 `;
 
 export const T = styled.h4`
@@ -70,7 +80,7 @@ export const BoxOwner = styled.p`
   display: flex;
   align-items: center;
   gap: 1%;
-  margin: 1% 0;
+  margin: 2.5% 0;
 `;
 export const PhotoOwner = styled.img`
   border-radius: 50px;

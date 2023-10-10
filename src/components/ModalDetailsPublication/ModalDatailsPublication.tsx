@@ -18,6 +18,7 @@ import { CarouselImgs } from '../CarouselImgs/CarouselImgs.tsx';
 import { handlerIcons } from '../../utils/handlerIcons.ts';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { timerFormatter } from '../../utils/timerFormatter.ts';
+import UserDefault from '../../assets/user-default.jpg';
 
 type ModalDetailsPublicationProps = {
   data: IPublication;
@@ -30,16 +31,14 @@ export const ModalDetailsPublication = ({
   const dateNow = new Date();
   const arrDateBRL = data.opening_date.split('-');
   const dateBRL = `${arrDateBRL[2]}/${arrDateBRL[1]}/${arrDateBRL[0]}`;
-
-  console.log(!!data.owner.profile);
+  console.log(data);
   return (
     <Wrapper>
       <Container>
         <div className='header'>
           <BackBtn text='Voltar' onClick={() => setShowDetails(null)} />
-          <Title text='Detalhes da publicação' size={1.25}></Title>
+          <Title text='Detalhes da publicação' size={1.25} />
         </div>
-        {/* <p>{!!data.owner.profile}</p> */}
         <BoxOwner>
           {data.owner.profile ? (
             <PhotoOwner
@@ -48,21 +47,21 @@ export const ModalDetailsPublication = ({
             />
           ) : (
             <PhotoOwner
-              src={`https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1780&q=80`}
+              src={UserDefault}
               alt='Foto de perfil do proprietário da publicação'
             />
           )}
-          <p>{data.owner.complete_name}</p>
+          <span>{data.owner.complete_name}</span>
         </BoxOwner>
         <HeaderPubli>
           <T>
             <FontAwesomeIcon icon={handlerIcons(data.category)} className='i' />
-            <h3>{data.title}</h3>
+            <span>{data.title}</span>
             <Category>{data.category}</Category>
           </T>
-          <p>
+          <span>
             {dateBRL}({timerFormatter(new Date(data.opening_date), dateNow)})
-          </p>
+          </span>
         </HeaderPubli>
         <CarouselImgs />
 
