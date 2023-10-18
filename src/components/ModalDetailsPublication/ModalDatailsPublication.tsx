@@ -14,7 +14,7 @@ import { Title } from '../Title/Title.tsx';
 import { IPublication } from '../../@types/types';
 import { BackBtn } from '../BackBtn/BackBtn.tsx';
 import { UseContextScreens } from '../../global/ScreenStates.tsx';
-import { CarouselImgs } from '../CarouselImgs/CarouselImgs.tsx';
+import { Slider } from '../Slider/Slider.tsx';
 import { handlerIcons } from '../../utils/handlerIcons.ts';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faClock, faCompass } from '@fortawesome/free-regular-svg-icons';
@@ -44,6 +44,21 @@ export const ModalDetailsPublication = ({
   function openWhatsApp(cell: string) {
     window.open(`https://wa.me/55${cell}`, '_blank');
   }
+
+  // const arrTeste = [
+  //   {
+  //     id: 'slide1',
+  //     text: 'Slide 01',
+  //   },
+  //   {
+  //     id: 'slide2',
+  //     text: 'Slide 02',
+  //   },
+  //   {
+  //     id: 'slide3',
+  //     text: 'Slide 03',
+  //   },
+  // ];
 
   return (
     <Wrapper>
@@ -87,7 +102,7 @@ export const ModalDetailsPublication = ({
             </span>
           </div>
         </HeaderPubli>
-        <CarouselImgs />
+        <Slider slides={data.photos_paths} />
         <Description>{data.description}</Description>
         <BoxButtons>
           <SecondaryButton
