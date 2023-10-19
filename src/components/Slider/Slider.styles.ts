@@ -1,20 +1,20 @@
 import styled from 'styled-components';
 
 export const Container = styled.section`
-  aspect-ratio: 4/2;
-  width: 100%;
-  border-radius: 5px;
-  margin: 1% 0;
-  overflow-x: hidden;
+  overflow: hidden;
 `;
 export const Content = styled.article`
   display: flex;
   transition: transform 0.3s ease;
 `;
 export const Item = styled.div`
-  background-color: #eee;
-  width: 100%;
   flex-shrink: 0;
+  width: 100%;
+  max-height: 300px;
+  background: #eee;
+  border-radius: 4px;
+  text-align: center;
+  object-fit: contain;
 `;
 export const BoxButtons = styled.section`
   width: 100%;
@@ -22,7 +22,5 @@ export const BoxButtons = styled.section`
   justify-content: space-between;
 `;
 export const Image = styled.img`
-  max-height: 100%;
-  aspect-ratio: 4/2;
   object-fit: contain;
 `;

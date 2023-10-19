@@ -45,21 +45,6 @@ export const ModalDetailsPublication = ({
     window.open(`https://wa.me/55${cell}`, '_blank');
   }
 
-  // const arrTeste = [
-  //   {
-  //     id: 'slide1',
-  //     text: 'Slide 01',
-  //   },
-  //   {
-  //     id: 'slide2',
-  //     text: 'Slide 02',
-  //   },
-  //   {
-  //     id: 'slide3',
-  //     text: 'Slide 03',
-  //   },
-  // ];
-
   return (
     <Wrapper>
       <Container>

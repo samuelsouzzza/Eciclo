@@ -6,9 +6,6 @@ import {
   BoxButtons,
   Image,
 } from './Slider.styles.ts';
-import { IPublicationImgs } from '../../@types/types';
-
-import Imagem from '../../assets/exemplo.webp';
 
 type SliderProps = {
   slides: string[];
@@ -36,11 +33,14 @@ export const Slider = ({ slides }: SliderProps) => {
 
   return (
     <Container>
+      <BoxButtons>
+        <button onClick={slidePrev}>Anterior</button>
+        <button onClick={slideNext}>Próximo</button>
+      </BoxButtons>
       <Content
         ref={contentRef}
         style={{
-          transform: `translateX(${position}px
-      )`,
+          transform: `translateX(${position}px)`,
         }}
       >
         {slides.map((slide) => {
@@ -54,11 +54,6 @@ export const Slider = ({ slides }: SliderProps) => {
           );
         })}
       </Content>
-
-      <BoxButtons>
-        <button onClick={slidePrev}>Anterior</button>
-        <button onClick={slideNext}>Próximo</button>
-      </BoxButtons>
     </Container>
   );
 };
