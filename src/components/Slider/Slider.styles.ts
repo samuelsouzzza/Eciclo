@@ -6,6 +6,7 @@ export const Container = styled.section`
 export const Content = styled.article`
   display: flex;
   transition: transform 0.3s ease;
+  margin: 1% 0;
 `;
 export const Item = styled.div`
   flex-shrink: 0;
@@ -14,7 +15,7 @@ export const Item = styled.div`
   background: #eee;
   border-radius: 4px;
   text-align: center;
-  object-fit: contain;
+  display: flex;
 `;
 export const BoxButtons = styled.section`
   width: 100%;
@@ -23,4 +24,6 @@ export const BoxButtons = styled.section`
 `;
 export const Image = styled.img`
   object-fit: contain;
+  width: 100%;
+  padding: 1%;
 `;
