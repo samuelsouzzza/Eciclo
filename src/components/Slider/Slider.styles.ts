@@ -2,11 +2,13 @@ import styled from 'styled-components';
 
 export const Container = styled.section`
   overflow: hidden;
+  /* padding: 0 2%; */
 `;
 export const Content = styled.article`
   display: flex;
   transition: transform 0.3s ease;
   margin: 1% 0;
+  position: relative;
 `;
 export const Item = styled.div`
   flex-shrink: 0;
@@ -19,8 +21,27 @@ export const Item = styled.div`
 `;
 export const BoxButtons = styled.section`
   width: 100%;
+  height: 100%;
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  padding: 1%;
+  position: absolute;
+  left: 0;
+  z-index: 5;
+  button {
+    width: 45px;
+    height: 45px;
+    background-color: #fff;
+    border: 1px solid #0000001a;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: 0.3s;
+    &:hover {
+      background-color: #92e3a9aa;
+      transform: scale(1.1);
+    }
+  }
 `;
 export const Image = styled.img`
   object-fit: contain;

@@ -10,7 +10,11 @@ import {
 type SliderProps = {
   slides: string[];
 };
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faChevronLeft,
+  faChevronRight,
+} from '@fortawesome/free-solid-svg-icons';
 export const Slider = ({ slides }: SliderProps) => {
   const [active, setActive] = React.useState(0);
   const [position, setPosition] = React.useState(0);
@@ -33,16 +37,24 @@ export const Slider = ({ slides }: SliderProps) => {
 
   return (
     <Container>
-      <BoxButtons>
-        <button onClick={slidePrev}>Anterior</button>
-        <button onClick={slideNext}>Próximo</button>
-      </BoxButtons>
       <Content
         ref={contentRef}
         style={{
           transform: `translateX(${position}px)`,
         }}
       >
+        <BoxButtons
+          style={{
+            transform: `translateX(${position}px)`,
+          }}
+        >
+          <button onClick={slidePrev}>
+            <FontAwesomeIcon icon={faChevronLeft} />
+          </button>
+          <button onClick={slideNext}>
+            <FontAwesomeIcon icon={faChevronRight} />
+          </button>
+        </BoxButtons>
         {slides.map((slide) => {
           return (
             <Item key={Math.random()}>
