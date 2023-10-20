@@ -2,7 +2,6 @@ import styled from 'styled-components';
 
 export const Container = styled.section`
   overflow: hidden;
-  /* padding: 0 2%; */
 `;
 export const Content = styled.article`
   display: flex;
@@ -25,7 +24,7 @@ export const BoxButtons = styled.section`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1%;
+  padding: 3%;
   position: absolute;
   left: 0;
   z-index: 5;
@@ -36,6 +35,7 @@ export const BoxButtons = styled.section`
     border: 1px solid #0000001a;
     border-radius: 50%;
     cursor: pointer;
+    translate: 10% -100%;
     transition: 0.3s;
     &:hover {
       background-color: #92e3a9aa;

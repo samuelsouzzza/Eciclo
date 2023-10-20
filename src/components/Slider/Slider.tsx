@@ -37,24 +37,20 @@ export const Slider = ({ slides }: SliderProps) => {
 
   return (
     <Container>
+      <BoxButtons>
+        <button onClick={slidePrev}>
+          <FontAwesomeIcon icon={faChevronLeft} />
+        </button>
+        <button onClick={slideNext}>
+          <FontAwesomeIcon icon={faChevronRight} />
+        </button>
+      </BoxButtons>
       <Content
         ref={contentRef}
         style={{
           transform: `translateX(${position}px)`,
         }}
       >
-        <BoxButtons
-          style={{
-            transform: `translateX(${position}px)`,
-          }}
-        >
-          <button onClick={slidePrev}>
-            <FontAwesomeIcon icon={faChevronLeft} />
-          </button>
-          <button onClick={slideNext}>
-            <FontAwesomeIcon icon={faChevronRight} />
-          </button>
-        </BoxButtons>
         {slides.map((slide) => {
           return (
             <Item key={Math.random()}>
