@@ -18,6 +18,7 @@ export const Container = styled.aside`
     padding: 5%;
     width: 90%;
     height: 20px;
+    border: 1px solid #fff;
     border-radius: 5px;
     transition: 0.3s;
     &:hover {
@@ -39,6 +40,10 @@ export const Container = styled.aside`
           color: #fff;
         }
       }
+    }
+    &.active {
+      background-color: #92e3a944;
+      border: 1px solid #92e3a9;
     }
     &.loggout {
       &:hover {

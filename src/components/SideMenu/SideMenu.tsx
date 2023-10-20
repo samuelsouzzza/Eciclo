@@ -18,8 +18,14 @@ import { UseContextScreens } from '../../global/ScreenStates.tsx';
 import { handlerMenus } from '../../utils/handlerMenus.ts';
 
 export const SideMenu = () => {
-  const { setShowFeed, setShowMenuNewPublication, setShowMenuMyPublications } =
-    UseContextScreens();
+  const {
+    setShowFeed,
+    showFeed,
+    setShowMenuNewPublication,
+    showMenuNewPublication,
+    setShowMenuMyPublications,
+    showMenuMyPublications,
+  } = UseContextScreens();
 
   function createNewPublication() {
     handlerMenus(
@@ -49,7 +55,11 @@ export const SideMenu = () => {
         onClick={createNewPublication}
       />
       <FontAwesomeIcon icon={faCircleUser} className='i' />
-      <FontAwesomeIcon icon={faList} className='i' onClick={myPublications} />
+      <FontAwesomeIcon
+        icon={faList}
+        className={`i ${showMenuMyPublications && 'active'}`}
+        onClick={myPublications}
+      />
       <FontAwesomeIcon icon={faBell} className='i' />
       <FontAwesomeIcon icon={faBookmark} className='i' />
       <FontAwesomeIcon icon={faComments} className='i' />
