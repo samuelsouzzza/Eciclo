@@ -5,6 +5,7 @@ import {
   Item,
   BoxButtons,
   Image,
+  Count,
 } from './Slider.styles.ts';
 
 type SliderProps = {
@@ -62,6 +63,9 @@ export const Slider = ({ slides }: SliderProps) => {
           );
         })}
       </Content>
+      <Count>
+        {active + 1}/{slides.length}
+      </Count>
     </Container>
   );
 };

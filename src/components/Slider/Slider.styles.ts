@@ -49,3 +49,7 @@ export const Image = styled.img`
   width: 100%;
   padding: 1%;
 `;
+export const Count = styled.section`
+  width: 100%;
+  text-align: center;
+`;
