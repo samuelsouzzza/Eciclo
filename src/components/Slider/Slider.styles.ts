@@ -8,7 +8,6 @@ export const Content = styled.article`
   transition: transform 0.3s ease;
   margin: 1% 0;
   position: relative;
-  /* overflow-y: hidden; */
 `;
 export const Item = styled.div`
   flex-shrink: 0;
@@ -28,7 +27,7 @@ export const BoxButtons = styled.section`
   padding: 0 calc(3% + 10px) 0 3%;
   position: absolute;
   left: 0;
-  z-index: 5;
+  z-index: 3;
   button {
     width: 45px;
     height: 45px;
@@ -50,6 +49,6 @@ export const Image = styled.img`
   padding: 1%;
 `;
 export const Count = styled.section`
-  width: 100%;
+  max-width: 100%;
   text-align: center;
 `;

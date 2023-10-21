@@ -44,7 +44,6 @@ export const ModalDetailsPublication = ({
   function openWhatsApp(cell: string) {
     window.open(`https://wa.me/55${cell}`, '_blank');
   }
-
   return (
     <Wrapper>
       <Container>

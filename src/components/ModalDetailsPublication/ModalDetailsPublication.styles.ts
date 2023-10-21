@@ -100,4 +100,6 @@ export const BoxButtons = styled.section`
   width: 100%;
   display: flex;
   gap: 0 1%;
+  position: relative;
+  z-index: 4;
 `;
