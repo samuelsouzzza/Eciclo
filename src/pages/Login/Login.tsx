@@ -9,6 +9,7 @@ import { PrimaryButton } from '../../components/Form/PrimaryButton/PrimaryButton
 import { Anchor } from '../../components/Anchor/Anchor.tsx';
 import ImgLogin from '../../assets/login-illustration.svg';
 import { IUser } from '../../@types/types';
+import { HeadName } from '../../utils/HeadName.ts';
 
 export const Login = () => {
   const txtUser = useForm(false);
@@ -51,6 +52,10 @@ export const Login = () => {
 
   return (
     <Wrapper>
+      <HeadName
+        title='E-Ciclo • Login'
+        description='Esta é a página de login.'
+      />
       <Container>
         <img src={ImgLogin} alt='Imagem de Login' />
         <BoxForm>

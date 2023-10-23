@@ -4,7 +4,7 @@ import { Title } from '../Title/Title.tsx';
 import { SearchBar } from '../SearchBar/SearchBar.tsx';
 import { Publication } from '../Publication/Publication.tsx';
 import useFetch from '../../hooks/useFetch.ts';
-import { IPublication } from '../../@types/types';
+import { IPublication, IUser } from '../../@types/types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { handlerIcons } from '../../utils/handlerIcons.ts';
 import { SkeletonPublicationLoader } from '../SkeletonPublicationLoader/SkeletonPublicationLoader.tsx';
@@ -17,6 +17,16 @@ export const Feed = () => {
     'http://localhost:3000/publications'
   );
 
+  const userLogged: IUser | undefined = JSON.parse(
+    localStorage.getItem('userLogged') as string
+  );
+  const publicationFiltred = publications.data
+    ?.filter(
+      (p) =>
+        p.owner.complete_name != `${userLogged?.name} ${userLogged?.surname}`
+    )
+    .reverse();
+
   const { showDetails, setShowDetails } = UseContextScreens();
 
   return (
@@ -25,10 +35,9 @@ export const Feed = () => {
       <Container>
         <Title text='Perto de você' size={1.25} />
         <SearchBar placeholder='Pesquise aqui' />
-        {publications.data?.length === 0 && <P>Não há publicações</P>}
+        {publicationFiltred?.length === 0 && <P>Não há publicações</P>}
         {publications.loading && <SkeletonPublicationLoader />}
-        {publications.loading}
-        {publications.data?.map((publication) => {
+        {publicationFiltred?.map((publication) => {
           const dateNow = new Date();
           const datePublication = new Date(publication.opening_date);
           return (

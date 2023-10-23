@@ -20,9 +20,7 @@ import { handlerMenus } from '../../utils/handlerMenus.ts';
 export const SideMenu = () => {
   const {
     setShowFeed,
-    showFeed,
     setShowMenuNewPublication,
-    showMenuNewPublication,
     setShowMenuMyPublications,
     showMenuMyPublications,
   } = UseContextScreens();

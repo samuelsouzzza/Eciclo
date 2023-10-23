@@ -8,6 +8,7 @@ export const Content = styled.article`
   transition: transform 0.3s ease;
   margin: 1% 0;
   position: relative;
+  min-height: 50%;
 `;
 export const Item = styled.div`
   flex-shrink: 0;
@@ -27,7 +28,7 @@ export const BoxButtons = styled.section`
   padding: 0 calc(3% + 10px) 0 3%;
   position: absolute;
   left: 0;
-  z-index: 3;
+  z-index: 1;
   button {
     width: 45px;
     height: 45px;

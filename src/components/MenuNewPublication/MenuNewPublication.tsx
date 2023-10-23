@@ -158,7 +158,7 @@ export const MenuNewPublication = () => {
             <TextArea
               id='descriptionPublication'
               label='Descrição'
-              limit={200}
+              limit={500}
               value={description}
               setValue={setDescription}
             />

@@ -16,6 +16,7 @@ import { IFeedback, IUser, IProfileImg } from '../../@types/types.ts';
 import { SpinLoader } from '../../components/SpinLoader/SpinLoader.tsx';
 import { ModalActions } from '../../components/ModalActions/ModalActions.tsx';
 import { BiCheck, BiMessageError } from 'react-icons/bi';
+import { HeadName } from '../../utils/HeadName.ts';
 
 export const NewAccount = () => {
   const [profilePic, setProfilePic] = React.useState<IProfileImg | null>({
@@ -119,6 +120,10 @@ export const NewAccount = () => {
 
   return (
     <Wrapper>
+      <HeadName
+        title='E-Ciclo • Crie sua conta'
+        description='Esta é a página de criação de contas.'
+      />
       <Container>
         <div
           style={{

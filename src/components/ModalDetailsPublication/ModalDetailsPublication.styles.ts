@@ -45,6 +45,7 @@ export const PhotoOwner = styled.img`
   border-radius: 50px;
   max-width: 40px;
   aspect-ratio: 1/1;
+  object-fit: contain;
 `;
 
 export const HeaderPubli = styled.div`
@@ -81,6 +82,7 @@ export const T = styled.h4`
 export const Description = styled.article`
   width: 100%;
   margin: 2% 0;
+  word-break: break-all;
   &::first-letter {
     text-transform: capitalize;
   }
