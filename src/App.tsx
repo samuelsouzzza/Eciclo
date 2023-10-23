@@ -4,7 +4,8 @@ import { Login } from './pages/Login/Login';
 import { NewAccount } from './pages/NewAccount/NewAccount';
 import { Home } from './pages/Home/Home';
 import { Page404 } from './pages/Page404/Page404';
-import { ScreensContextProvider } from './global/ScreenStates';
+import { ScreensContextProvider } from './global/ScreenStates.tsx';
+
 
 function App() {
   return (

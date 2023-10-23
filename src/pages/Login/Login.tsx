@@ -3,13 +3,42 @@ import useFetch from '../../hooks/useFetch.ts';
 import useForm from '../../hooks/useForm.ts';
 import { Invalid } from '../../components/Form/Invalid/Invalid.tsx';
 import { useNavigate } from 'react-router-dom';
-import { Wrapper, Container, BoxForm, BoxLinks } from './Login.styles.ts';
+import {
+  Wrapper,
+  ContentLogin,
+  BoxContent,
+  BoxLogo,
+  BoxForm,
+  BoxLinks,
+  Illustration,
+} from './Login.styles.ts';
 import { Input } from '../../components/Form/Input/Input.tsx';
 import { PrimaryButton } from '../../components/Form/PrimaryButton/PrimaryButton.tsx';
 import { Anchor } from '../../components/Anchor/Anchor.tsx';
 import ImgLogin from '../../assets/login-illustration.svg';
 import { IUser } from '../../@types/types';
 import { HeadName } from '../../utils/HeadName.ts';
+import { LogoMain } from '../../components/Logos/LogoMain.tsx';
+import { Title } from '../../components/Title/Title.tsx';
+
+interface User {
+  name: string;
+  surname: string;
+  cpf: string;
+  email: string;
+  cell: string;
+  cell_secondary: string;
+  birth: string;
+  address: {
+    street: string;
+    number: number | null;
+    cep: string;
+    neighborhood: string;
+    city: string;
+    state: string;
+  };
+  password: string;
+}
 
 export const Login = () => {
   const txtUser = useForm(false);
