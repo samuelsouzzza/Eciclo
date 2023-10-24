@@ -12,23 +12,12 @@ import { Feedback } from '../../components/Feedback/Feedback.tsx';
 import ImgNewAccount from '../../assets/new_account-illustration.svg';
 import { BackBtn } from '../../components/BackBtn/BackBtn.tsx';
 import { useNavigate } from 'react-router-dom';
+import { IFeedback, IUser, IProfileImg } from '../../@types/types.ts';
+import { SpinLoader } from '../../components/SpinLoader/SpinLoader.tsx';
+import { ModalActions } from '../../components/ModalActions/ModalActions.tsx';
+import { BiCheck, BiMessageError } from 'react-icons/bi';
+import { HeadName } from '../../utils/HeadName.ts';
 
-interface User {
-  name: string;
-  surname: string;
-  cpf: string;
-  email: string;
-  cell: string;
-  password: string;
-}
-interface Feedback {
-  message: string;
-  status: number;
-}
-interface IProfileImg {
-  preview: string;
-  raw: File | null;
-}
 export const NewAccount = () => {
   const [profilePic, setProfilePic] = React.useState<IProfileImg | null>({
     preview: '',
@@ -44,6 +33,7 @@ export const NewAccount = () => {
   const [terms, setTerms] = React.useState(false);
   const [loadingNewUser, setLoadingNewUser] = React.useState(false);
   const [statusNewUser, setStatusNewUser] = React.useState<string | null>(null);
+  const [showModalFeedback, setShowModalFeedback] = React.useState(true);
 
   const navigate = useNavigate();
 
@@ -82,7 +72,8 @@ export const NewAccount = () => {
       txtConfirmPass.validate() &&
       terms
     ) {
-      const newUser: User = {
+      const newUser: IUser = {
+        id: 0,
         name: txtName.value,
         surname: txtSurname.value,
         cpf: txtCpf.value,
@@ -103,7 +94,7 @@ export const NewAccount = () => {
           method: 'post',
           body: formData,
         });
-        const feedback: Feedback = await response.json();
+        const feedback: IFeedback = await response.json();
         if (feedback.status != 201)
           throw new Error('Não foi possível salvar o usuário.');
 
@@ -112,13 +103,12 @@ export const NewAccount = () => {
 
       try {
         setLoadingNewUser(true);
-        setStatusNewUser(null);
-        setStatusNewUser((await postUser()).message);
         setLoadingNewUser(false);
-        navigate('/');
       } catch (err) {
         if (err instanceof Error) setStatusNewUser(err.message);
       } finally {
+        setStatusNewUser((await postUser()).message);
+        setShowModalFeedback(true);
         setLoadingNewUser(false);
       }
     } else {
@@ -130,6 +120,10 @@ export const NewAccount = () => {
 
   return (
     <Wrapper>
+      <HeadName
+        title='E-Ciclo • Crie sua conta'
+        description='Esta é a página de criação de contas.'
+      />
       <Container>
         <div
           style={{
@@ -141,7 +135,7 @@ export const NewAccount = () => {
           }}
         >
           <BackBtn text='Voltar' onClick={backPage} />
-          <Title text='Criando conta como cliente' />
+          <Title text='Criando conta como cliente' size={1.5} />
         </div>
         <img
           src={ImgNewAccount}
@@ -155,6 +149,7 @@ export const NewAccount = () => {
               span={6}
               label='Foto de perfil'
               accept='image/*'
+              radius={50}
               preview={profilePic?.preview}
               showPic={!!profilePic}
               onChange={loadPicture}
@@ -226,14 +221,29 @@ export const NewAccount = () => {
               span={2}
             />
             {loadingNewUser ? (
-              <PrimaryButton content='Carregando' span={4} />
+              <SpinLoader size={25} color='#92e3a9' />
             ) : (
               <PrimaryButton content='Criar nova conta' span={4} />
             )}
           </BoxForm>
-          {statusNewUser && <Feedback>{statusNewUser}</Feedback>}
         </form>
       </Container>
+      {statusNewUser &&
+        (statusNewUser !== 'Usuário criado com sucesso!' ? (
+          <ModalActions
+            action='ok'
+            icon={<BiMessageError className='i' />}
+            message={statusNewUser}
+            onClose={() => setStatusNewUser(null)}
+          />
+        ) : (
+          <ModalActions
+            action='ok'
+            icon={<BiCheck className='i' />}
+            message={statusNewUser}
+            onClose={() => navigate('/')}
+          />
+        ))}
     </Wrapper>
   );
 };

@@ -2,12 +2,13 @@ import styled from 'styled-components';
 
 export const B = styled.button`
   border: none;
+  margin-right: 1%;
   background-color: transparent;
   display: flex;
   justify-content: start;
   align-items: center;
-  font-size: 1rem;
-  width: 8%;
+  font-size: 0.75rem;
+  width: max-content;
   cursor: pointer;
   svg {
     margin-right: 2%;

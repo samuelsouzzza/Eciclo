@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
 export const InputText = styled.input`
-  background-color: ghostwhite;
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  background-color: #f8f8ff;
+  border: 1px solid #0000001a;
   height: 40px;
   width: 100%;
   font-size: 1.125rem;
@@ -22,9 +22,4 @@ export const InputText = styled.input`
   &::placeholder {
     color: rgba(0, 0, 0, 0.3);
   }
-`;
-export const Invalid = styled.p`
-  color: #e04026;
-  font-size: 0.75rem;
-  display: inline;
 `;

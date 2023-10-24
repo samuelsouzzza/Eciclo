@@ -1,7 +1,7 @@
 import React from 'react';
 import useFetch from '../../hooks/useFetch.ts';
 import useForm from '../../hooks/useForm.ts';
-import { Invalid } from '../../components/Form/Input/Input.styles.ts';
+import { Invalid } from '../../components/Form/Invalid/Invalid.tsx';
 import { useNavigate } from 'react-router-dom';
 import {
   Wrapper,
@@ -16,6 +16,8 @@ import { Input } from '../../components/Form/Input/Input.tsx';
 import { PrimaryButton } from '../../components/Form/PrimaryButton/PrimaryButton.tsx';
 import { Anchor } from '../../components/Anchor/Anchor.tsx';
 import ImgLogin from '../../assets/login-illustration.svg';
+import { IUser } from '../../@types/types';
+import { HeadName } from '../../utils/HeadName.ts';
 import { LogoMain } from '../../components/Logos/LogoMain.tsx';
 import { Title } from '../../components/Title/Title.tsx';
 
@@ -48,8 +50,7 @@ export const Login = () => {
     setLoginError(null);
   }, [txtUser.value, txtPassword.value]);
 
-  // const users = useFetch<User[]>('../../../api/users.json');
-  const users = useFetch<User[]>('http://localhost:3000/users');
+  const users = useFetch<IUser[]>('http://localhost:3000/users');
 
   function logon(e: React.FormEvent<HTMLElement>) {
     e.preventDefault();
@@ -61,6 +62,8 @@ export const Login = () => {
         );
 
         if (userLogged?.length === 1) {
+          localStorage.setItem('userLogged', JSON.stringify(userLogged[0]));
+
           navigate('./home');
         } else {
           throw new Error('Usuário e/ou senha incorretos');
@@ -78,27 +81,25 @@ export const Login = () => {
 
   return (
     <Wrapper>
-      <BoxContent>
-        <BoxLogo>
-          <LogoMain />
-        </BoxLogo>
-        <ContentLogin>
-          <Illustration src={ImgLogin} alt='Imagem de Login' />
-          <BoxForm>
-            <Title text='Login' />
-            <form onSubmit={logon}>
-              <Input label='Usuário' id='user' type='text' {...txtUser} />
-              <Input label='Senha' id='pass' type='text' {...txtPassword} />
-              {loginError && <Invalid>{loginError}</Invalid>}
-              <PrimaryButton content='Entrar' />
-            </form>
-            <BoxLinks>
-              <Anchor content='Não tenho conta' onClick={toNewAccount} />
-              <Anchor content='Perdeu a senha?' />
-            </BoxLinks>
-          </BoxForm>
-        </ContentLogin>
-      </BoxContent>
+      <HeadName
+        title='E-Ciclo • Login'
+        description='Esta é a página de login.'
+      />
+      <Container>
+        <img src={ImgLogin} alt='Imagem de Login' />
+        <BoxForm>
+          <form onSubmit={logon}>
+            <Input label='Usuário' id='user' type='text' {...txtUser} />
+            <Input label='Senha' id='pass' type='text' {...txtPassword} />
+            {loginError && <Invalid text={loginError} />}
+            <PrimaryButton content='Entrar' />
+          </form>
+          <BoxLinks>
+            <Anchor content='Não tenho conta' onClick={toNewAccount} />
+            <Anchor content='Perdeu a senha?' />
+          </BoxLinks>
+        </BoxForm>
+      </Container>
     </Wrapper>
   );
 };

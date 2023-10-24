@@ -33,9 +33,17 @@ export const File = styled.input`
     height: 100%;
   }
 `;
-export const PreviewContainer = styled.img`
+export const PreviewContainer = styled.section`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1%;
+`;
+export const PreviewImg = styled.img`
   height: 200px;
   width: 200px;
+  margin: 2%;
   border: 1px solid #ccc;
-  border-radius: 50%;
+  object-fit: contain;
 `;

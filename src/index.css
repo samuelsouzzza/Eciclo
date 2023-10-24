@@ -1,4 +1,21 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,700;1,400&display=swap');
+
+.pallete {
+  --primary: #92e3a9;
+  --primary-opac: #92e3a9aa;
+  --primary-opac2: #92e3a944;
+  --white: #f8f8ff;
+
+  --border: #0000001a;
+
+  --shadow: #0000000d;
+  --shadowColor: #20732d44;
+
+  --invadid: #e04026;
+  --legend: #2651e0;
+  --warning: #e0d026;
+}
+
 * {
   font-family: Nunito, sans-serif;
   padding: 0;
@@ -7,12 +24,58 @@
   color: #444;
   accent-color: #92e3a9aa;
 }
+*::-webkit-scrollbar {
+  width: 10px;
+}
+*::-webkit-scrollbar-track {
+  background-color: #f1f1f1;
+}
+*::-webkit-scrollbar-thumb {
+  background-color: #ddd;
+  border-radius: 5px;
+}
+*::-webkit-scrollbar-thumb:hover {
+  background-color: #92e3a9aa;
+}
+html {
+  background-color: #92e3a922;
+}
 
-@keyframes fadeIn {
+@keyframes fadeInLeft {
   from {
+    opacity: 0;
     transform: translateX(30px);
   }
   to {
+    opacity: 1;
     transform: translateX(0);
+  }
+}
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+@keyframes fadeInBottom {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes loadingSkeleton {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
   }
 }

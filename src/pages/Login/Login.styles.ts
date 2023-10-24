@@ -23,8 +23,8 @@ export const BoxContent = styled.section`
   width: 60%;
   min-width: 300px;
   height: auto;
-  padding: 1% 2%;
-  animation: fadeIn forwards 0.2s;
+  padding: 2%;
+  animation: fadeInLeft forwards 0.2s;
   &form {
     grid-column: 2;
   }
