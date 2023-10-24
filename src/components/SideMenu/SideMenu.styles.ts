@@ -55,3 +55,7 @@ export const Container = styled.aside`
     }
   }
 `;
+export const BoxLogoIcon = styled.div`
+  width: 100%;
+  margin: 0;
+`;

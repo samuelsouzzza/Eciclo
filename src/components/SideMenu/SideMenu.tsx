@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container } from './SideMenu.styles.ts';
+import { Container, BoxLogoIcon } from './SideMenu.styles.ts';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faCircleUser,
@@ -16,6 +16,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { UseContextScreens } from '../../global/ScreenStates.tsx';
 import { handlerMenus } from '../../utils/handlerMenus.ts';
+import { LogoIcon } from '../Logos/LogoIcon.tsx';
 
 export const SideMenu = () => {
   const {
@@ -47,6 +48,9 @@ export const SideMenu = () => {
 
   return (
     <Container>
+      <BoxLogoIcon>
+        <LogoIcon />
+      </BoxLogoIcon>
       <FontAwesomeIcon
         icon={faPlus}
         className='i new'

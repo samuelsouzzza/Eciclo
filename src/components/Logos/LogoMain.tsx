@@ -1,9 +1,5 @@
 import React from 'react';
 
-type LogoMainProps = React.FC & {
-  size?: number;
-};
-
 export const LogoMain: React.FC = () => {
   return (
     <div>
