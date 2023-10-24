@@ -10,7 +10,6 @@ import {
   BoxLogo,
   BoxForm,
   BoxLinks,
-  Illustration,
 } from './Login.styles.ts';
 import { Input } from '../../components/Form/Input/Input.tsx';
 import { PrimaryButton } from '../../components/Form/PrimaryButton/PrimaryButton.tsx';
@@ -20,25 +19,6 @@ import { IUser } from '../../@types/types';
 import { HeadName } from '../../utils/HeadName.ts';
 import { LogoMain } from '../../components/Logos/LogoMain.tsx';
 import { Title } from '../../components/Title/Title.tsx';
-
-interface User {
-  name: string;
-  surname: string;
-  cpf: string;
-  email: string;
-  cell: string;
-  cell_secondary: string;
-  birth: string;
-  address: {
-    street: string;
-    number: number | null;
-    cep: string;
-    neighborhood: string;
-    city: string;
-    state: string;
-  };
-  password: string;
-}
 
 export const Login = () => {
   const txtUser = useForm(false);
@@ -85,21 +65,27 @@ export const Login = () => {
         title='E-Ciclo • Login'
         description='Esta é a página de login.'
       />
-      <Container>
-        <img src={ImgLogin} alt='Imagem de Login' />
-        <BoxForm>
-          <form onSubmit={logon}>
-            <Input label='Usuário' id='user' type='text' {...txtUser} />
-            <Input label='Senha' id='pass' type='text' {...txtPassword} />
-            {loginError && <Invalid text={loginError} />}
-            <PrimaryButton content='Entrar' />
-          </form>
-          <BoxLinks>
-            <Anchor content='Não tenho conta' onClick={toNewAccount} />
-            <Anchor content='Perdeu a senha?' />
-          </BoxLinks>
-        </BoxForm>
-      </Container>
+      <BoxContent>
+        <BoxLogo>
+          <LogoMain />
+        </BoxLogo>
+        <ContentLogin>
+          <img src={ImgLogin} alt='Imagem de Login' />
+          <BoxForm>
+            <form onSubmit={logon}>
+              <Title size={1.5} text='Login' />
+              <Input label='Usuário' id='user' type='text' {...txtUser} />
+              <Input label='Senha' id='pass' type='text' {...txtPassword} />
+              {loginError && <Invalid text={loginError} />}
+              <PrimaryButton content='Entrar' />
+            </form>
+            <BoxLinks>
+              <Anchor content='Não tenho conta' onClick={toNewAccount} />
+              <Anchor content='Perdeu a senha?' />
+            </BoxLinks>
+          </BoxForm>
+        </ContentLogin>
+      </BoxContent>
     </Wrapper>
   );
 };

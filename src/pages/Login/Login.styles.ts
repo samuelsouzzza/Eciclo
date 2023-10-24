@@ -9,10 +9,7 @@ export const Wrapper = styled.div`
   padding: 2% 0;
   background-color: #92e3a922;
 `;
-export const ContentLogin = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-`;
+
 export const BoxContent = styled.section`
   background-color: white;
   box-shadow: 1px 1px 5px 3px rgba(0, 0, 0, 0.05);
@@ -23,17 +20,21 @@ export const BoxContent = styled.section`
   width: 60%;
   min-width: 300px;
   height: auto;
-  padding: 2%;
+  padding: 1% 2% 0 2%;
   animation: fadeInLeft forwards 0.2s;
   &form {
     grid-column: 2;
   }
 `;
+export const ContentLogin = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+`;
 export const BoxLogo = styled.div`
   margin: 0 auto;
 `;
 export const Illustration = styled.img`
-  width: 100%;
+  width: 50%;
 `;
 export const BoxForm = styled.div`
   display: flex;
