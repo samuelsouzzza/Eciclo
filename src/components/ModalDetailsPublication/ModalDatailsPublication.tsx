@@ -9,6 +9,7 @@ import {
   PhotoOwner,
   T,
   HeaderPubli,
+  BoxInfo,
 } from './ModalDetailsPublication.styles.ts';
 import { Title } from '../Title/Title.tsx';
 import { IPublication } from '../../@types/types';
@@ -33,7 +34,6 @@ export const ModalDetailsPublication = ({
   const { setShowDetails } = UseContextScreens();
   const dateNow = new Date();
   const arrDateBRL = data.opening_date.split('-');
-  const dateBRL = `${arrDateBRL[2]}/${arrDateBRL[1]}/${arrDateBRL[0]}`;
 
   const boxStyle: React.CSSProperties = {
     whiteSpace: 'nowrap',
@@ -75,17 +75,17 @@ export const ModalDetailsPublication = ({
             <span>{data.title}</span>
             <Category>{data.category}</Category>
           </T>
-          <div>
-            <span>
-              <FontAwesomeIcon icon={faClock} />
-              {dateBRL}({timerFormatter(new Date(data.opening_date), dateNow)})
-            </span>
-            <span>
-              <FontAwesomeIcon icon={faCompass} />
-              {data.collect_receipt}
-            </span>
-          </div>
         </HeaderPubli>
+        <BoxInfo>
+          <span>
+            <FontAwesomeIcon icon={faClock} />
+            {timerFormatter(new Date(data.opening_date), dateNow)}
+          </span>
+          <span>
+            <FontAwesomeIcon icon={faCompass} />
+            {data.collect_receipt}
+          </span>
+        </BoxInfo>
         <Slider slides={data.photos_paths} />
         <Description>{data.description}</Description>
         <BoxButtons>

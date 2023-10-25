@@ -59,17 +59,24 @@ export const HeaderPubli = styled.div`
       text-overflow: ellipsis;
     }
   }
-  div {
+`;
+export const BoxInfo = styled.div`
+  margin: 2% 0;
+  width: 100%;
+  display: flex;
+  justify-content: start;
+  gap: 0 2%;
+  span {
     display: flex;
-    flex-direction: column;
-    span {
-      display: flex;
-      align-items: center;
-      gap: 2%;
-    }
+    align-items: center;
+    justify-content: start;
+    flex-shrink: 1;
+    gap: 0 2%;
+    width: auto;
+    white-space: nowrap;
+    text-transform: capitalize;
   }
 `;
-
 export const T = styled.h4`
   display: flex;
   align-items: center;
