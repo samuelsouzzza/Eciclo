@@ -1,5 +1,10 @@
 import React from 'react';
-import { Container, P } from './MenuMyPublications.styles.ts';
+import {
+  Container,
+  P,
+  BoxHeader,
+  BoxData,
+} from './MenuMyPublications.styles.ts';
 import { BackBtn } from '../BackBtn/BackBtn.tsx';
 import { Title } from '../Title/Title.tsx';
 import { UseContextScreens } from '../../global/ScreenStates.tsx';
@@ -11,6 +16,7 @@ import { timerFormatter } from '../../utils/timerFormatter.ts';
 import { ModalActions } from '../ModalActions/ModalActions.tsx';
 import { BiError } from 'react-icons/bi';
 import { FormUpdatePublication } from '../FormUpdatePublication/FormUpdatePublication.tsx';
+import { SelectBox } from '../Form/SelectBox/SelectBox.tsx';
 
 export const MenuMyPublications = () => {
   const { setShowFeed, setShowMenuMyPublications } = UseContextScreens();
@@ -18,6 +24,7 @@ export const MenuMyPublications = () => {
   const [selectedPublication, setSelectedPublication] =
     React.useState<IPublication | null>(null);
   const [showListPublications, setShowListPublications] = React.useState(true);
+  const [statusPublication, setStatusPublication] = React.useState('abertas');
 
   const publications = useFetch<IPublication[]>(
     'http://localhost:3000/publications'
@@ -28,7 +35,11 @@ export const MenuMyPublications = () => {
   );
 
   const publicationsFiltred: IPublication[] | undefined = publications.data
-    ?.filter((publication) => publication.owner.id == userLogged?.id)
+    ?.filter(
+      (publication) =>
+        publication.owner.id == userLogged?.id &&
+        publication.status.opened == (statusPublication == 'abertas')
+    )
     .reverse();
 
   function closeMenu() {
@@ -54,27 +65,36 @@ export const MenuMyPublications = () => {
       <Container>
         {showListPublications && (
           <>
-            <div className='header'>
+            <BoxHeader>
               <BackBtn text='Voltar' onClick={closeMenu} />
               <Title text='Minhas publicações' size={1.25} />
-            </div>
-            {publicationsFiltred?.length === 0 && <P>Não há publicações</P>}
-            {publications.loading && <p>Carregando...</p>}
-            {showListPublications &&
-              publicationsFiltred?.map((publication) => {
-                const datePublication = new Date(publication.opening_date);
-                const dateNow = new Date();
-                return (
-                  <MyPublication
-                    key={publication.id}
-                    id={publication.id}
-                    title={publication.title}
-                    dateCreation={timerFormatter(datePublication, dateNow)}
-                    onDelete={() => setShowModalDelete(true)}
-                    onEdit={() => updatePublication(publication)}
-                  />
-                );
-              })}
+            </BoxHeader>
+            <SelectBox
+              label='Ver publicações'
+              id='optStatusPublication'
+              value={statusPublication}
+              setValue={setStatusPublication}
+              options={['Abertas', 'Fechadas']}
+            />
+            <BoxData>
+              {publicationsFiltred?.length === 0 && <P>Não há publicações</P>}
+              {publications.loading && <p>Carregando...</p>}
+              {showListPublications &&
+                publicationsFiltred?.map((publication) => {
+                  const datePublication = new Date(publication.opening_date);
+                  const dateNow = new Date();
+                  return (
+                    <MyPublication
+                      key={publication.id}
+                      id={publication.id}
+                      title={publication.title}
+                      dateCreation={timerFormatter(datePublication, dateNow)}
+                      onDelete={() => setShowModalDelete(true)}
+                      onEdit={() => updatePublication(publication)}
+                    />
+                  );
+                })}
+            </BoxData>
           </>
         )}
         {selectedPublication && (

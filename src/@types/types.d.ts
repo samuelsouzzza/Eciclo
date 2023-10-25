@@ -20,14 +20,18 @@ export interface IPublication {
   description: string;
   opening_date: string;
   closing_date: string | null;
-  status: boolean;
-  photos_paths: string[];
   owner: {
     id: number;
     complete_name: string;
     cell: string;
     profile: string | null;
   };
+  status: {
+    opened: boolean;
+    was_delivered: boolean;
+    was_received: boolean;
+  };
+  photos_paths: string[];
   collect_receipt: string;
 }
 export interface IProfileImg {

@@ -9,18 +9,21 @@ export const Container = styled.div`
   padding: 2%;
   grid-column-start: 3;
   grid-column-end: 4;
-  overflow-y: scroll;
   overflow-x: hidden;
   animation: fadeInLeft 0.3s forwards;
-  .header {
-    display: flex;
-    justify-content: center;
-    align-items: baseline;
-  }
+`;
+export const BoxHeader = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+`;
+export const BoxData = styled.div`
+  height: auto;
 `;
 export const P = styled.p`
   width: 100%;
   height: 100%;
   display: flex;
   justify-content: center;
+  margin: 5% 0;
 `;

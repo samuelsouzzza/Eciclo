@@ -21,10 +21,7 @@ export const Feed = () => {
     localStorage.getItem('userLogged') as string
   );
   const publicationFiltred = publications.data
-    ?.filter(
-      (p) =>
-        p.owner.complete_name != `${userLogged?.name} ${userLogged?.surname}`
-    )
+    ?.filter((p) => p.owner.id != userLogged?.id)
     .reverse();
 
   const { showDetails, setShowDetails } = UseContextScreens();
