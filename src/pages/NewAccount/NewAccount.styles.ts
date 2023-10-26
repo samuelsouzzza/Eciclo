@@ -20,7 +20,6 @@ export const Container = styled.section`
   align-items: center;
   animation: fadeInLeft forwards 0.2s;
   h3,
-  p,
   li {
     color: #666;
   }
@@ -45,4 +44,13 @@ export const BoxForm = styled.section`
   justify-content: center;
   align-items: last baseline;
   gap: 2%;
+`;
+export const BoxFormTemporary = styled.section`
+  background-color: #ccc;
+  width: 100%;
+  height: 300px;
+  grid-column: span 6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;

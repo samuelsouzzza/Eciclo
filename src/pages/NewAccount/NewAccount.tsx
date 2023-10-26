@@ -1,11 +1,17 @@
 import React from 'react';
 import useForm from '../../hooks/useForm.ts';
-import { Wrapper, Container, BoxForm } from './NewAccount.styles.ts';
+import {
+  Wrapper,
+  Container,
+  BoxForm,
+  BoxFormTemporary,
+} from './NewAccount.styles.ts';
 import { Input } from '../../components/Form/Input/Input.tsx';
 import { InputFile } from '../../components/Form/InputFile/InputFile.tsx';
 import { PrimaryButton } from '../../components/Form/PrimaryButton/PrimaryButton.tsx';
 import { SecondaryButton } from '../../components/Form/SecondaryButton/SecondaryButton.tsx';
 import { CheckBox } from '../../components/Form/CheckBox/CheckBox.tsx';
+import { SelectBox } from '../../components/Form/SelectBox/SelectBox.tsx';
 import { Title } from '../../components/Title/Title.tsx';
 import { Separate } from '../../components/Separate/Separate.tsx';
 import { Feedback } from '../../components/Feedback/Feedback.tsx';
@@ -34,6 +40,9 @@ export const NewAccount = () => {
   const [loadingNewUser, setLoadingNewUser] = React.useState(false);
   const [statusNewUser, setStatusNewUser] = React.useState<string | null>(null);
   const [showModalFeedback, setShowModalFeedback] = React.useState(true);
+  const [typeUser, setTypeUser] = React.useState('doador/beneficiado');
+
+  console.log(typeUser);
 
   const navigate = useNavigate();
 
@@ -117,7 +126,6 @@ export const NewAccount = () => {
       );
     }
   }
-
   return (
     <Wrapper>
       <HeadName
@@ -135,50 +143,76 @@ export const NewAccount = () => {
           }}
         >
           <BackBtn text='Voltar' onClick={backPage} />
-          <Title text='Criando conta como cliente' size={1.5} />
+          <Title text={`Criar conta como ${typeUser}`} size={1.5} />
         </div>
         <img
           src={ImgNewAccount}
           alt='Imagem de ilustração para criação de novas contas'
         />
-        <form onSubmit={sendForm} method='post' encType='multipart/form-data'>
-          <h3>Dados pessoais</h3>
-          <BoxForm>
-            <InputFile
-              id='profile_photo'
-              span={6}
-              label='Foto de perfil'
-              accept='image/*'
-              radius={50}
-              preview={profilePic?.preview}
-              showPic={!!profilePic}
-              onChange={loadPicture}
-            />
 
-            <Input label='Nome *' id='name' type='text' span={3} {...txtName} />
-            <Input
-              label='Sobrenome *'
-              id='sob_name'
-              type='text'
-              span={3}
-              {...txtSurname}
-            />
-            <Input label='CPF *' id='cpf' type='text' span={4} {...txtCpf} />
-            <Input
-              label='Celular *'
-              id='cell'
-              type='text'
-              span={2}
-              {...txtCell}
-            />
-            <Input
-              label='E-Mail *'
-              id='email'
-              type='email'
-              span={6}
-              {...txtEmail}
-            />
-          </BoxForm>
+        <form onSubmit={sendForm} method='post' encType='multipart/form-data'>
+          <SelectBox
+            id='typeUser'
+            label='Cadastrar como'
+            value={typeUser}
+            setValue={setTypeUser}
+            options={['Doador/Beneficiado', 'Ponto de Coleta']}
+            span={6}
+          />
+
+          <Separate />
+
+          <h3>Informações de cadastro</h3>
+          {typeUser === 'doador/beneficiado' ? (
+            <BoxForm>
+              <InputFile
+                id='profile_photo'
+                span={6}
+                label='Foto de perfil'
+                accept='image/*'
+                radius={50}
+                preview={profilePic?.preview}
+                showPic={!!profilePic}
+                onChange={loadPicture}
+              />
+              <Input
+                label='Nome *'
+                id='name'
+                type='text'
+                span={3}
+                {...txtName}
+              />
+              <Input
+                label='Sobrenome *'
+                id='sob_name'
+                type='text'
+                span={3}
+                {...txtSurname}
+              />
+              <Input label='CPF *' id='cpf' type='text' span={4} {...txtCpf} />
+              <Input
+                label='Celular *'
+                id='cell'
+                type='text'
+                span={2}
+                {...txtCell}
+              />
+              <Input
+                label='E-Mail *'
+                id='email'
+                type='email'
+                span={6}
+                {...txtEmail}
+              />
+            </BoxForm>
+          ) : (
+            <BoxForm>
+              <BoxFormTemporary>
+                <span>Formulário de cadadastro de pontos de coleta</span>
+              </BoxFormTemporary>
+            </BoxForm>
+          )}
+
           <Separate />
           <h3>Acesso</h3>
           <p>A senha deve conter, no mínimo: </p>
