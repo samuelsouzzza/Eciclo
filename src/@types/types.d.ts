@@ -11,7 +11,6 @@ export interface IUser {
   cell: string;
   password: string;
   profile_path?: string | null;
-  publications: IPublication[];
 }
 export interface IPublication {
   id: number;
