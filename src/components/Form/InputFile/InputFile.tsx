@@ -31,7 +31,10 @@ export const InputFile = ({
       <label htmlFor={id}>
         {label}
         {preview?.length === 0 && (
-          <Invalid text=' - Escolha no mínimo uma foto' color='#e0d026' />
+          <Invalid
+            text=' - Escolha no mínimo uma foto e no máximo 5'
+            color='#e0d026'
+          />
         )}
         <File id={id} type='file' {...props} />
       </label>

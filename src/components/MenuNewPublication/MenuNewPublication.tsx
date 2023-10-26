@@ -70,7 +70,8 @@ export const MenuNewPublication = () => {
       txtTitle.validate() &&
       description.length >= 1 &&
       publicationPics &&
-      publicationPics?.length >= 1
+      publicationPics?.length >= 1 &&
+      publicationPics?.length <= 5
     ) {
       const newPublication = {
         title: txtTitle.value,
@@ -116,7 +117,7 @@ export const MenuNewPublication = () => {
       }
     } else {
       setStatusNewPublication(
-        'Verifique se todos os campos foram preenchidos corretamente.'
+        'Verifique se todos os campos foram preenchidos corretamente e o número de fotos não passa de 5.'
       );
     }
   }
