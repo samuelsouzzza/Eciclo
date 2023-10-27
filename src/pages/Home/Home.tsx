@@ -8,6 +8,7 @@ import { MenuMyPublications } from '../../components/MenuMyPublications/MenuMyPu
 import { useNavigate } from 'react-router-dom';
 import { HeadName } from '../../utils/HeadName.ts';
 import { SplashScreen } from '../../components/SplashScreen/SplashScreen.tsx';
+import { MyMap } from '../../components/MyMap/MyMap.tsx';
 
 export const Home = () => {
   const { showFeed, showMenuNewPublication, showMenuMyPublications } =
@@ -28,6 +29,7 @@ export const Home = () => {
         title='E-Ciclo • Home'
         description='Esta é a página principal.'
       />
+      <MyMap />
       {splash && <SplashScreen />}
       {showFeed && <Feed />}
       {showMenuNewPublication && <MenuNewPublication />}
