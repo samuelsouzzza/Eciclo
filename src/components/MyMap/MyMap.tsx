@@ -2,8 +2,6 @@ import React from 'react';
 import { Container } from './MyMap.styles.ts';
 import { GoogleMap, useJsApiLoader, Marker } from '@react-google-maps/api';
 
-// key = AIzaSyAh8GQnWwpqvovFN4gUTGJjmhMvztCykJY
-
 const center = {
   lat: -24.495860839810952,
   lng: -47.846232044294226,
@@ -22,21 +20,36 @@ const collectPoints = [
     lat: -24.48783801101713,
     lng: -47.85650521061934,
   },
+  {
+    lat: -24.488108008644193,
+    lng: -47.858792129765405,
+  },
+  {
+    lat: -24.48778864778539,
+    lng: -47.84187754805501,
+  },
+  {
+    lat: -24.510595326052414,
+    lng: -47.83522514991089,
+  },
+  {
+    lat: -24.49808840126225,
+    lng: -47.8748510526804,
+  },
 ];
-
-const customMarkerIcon = {
-  path: 'M10 0 C4.48 0 0 4.48 0 10 C0 15.52 4.48 20 10 20 C15.52 20 20 15.52 20 10 C20 4.48 15.52 0 10 0 M10 18 C5.59 18 2 14.41 2 10 C2 5.59 5.59 2 10 2 C14.41 2 18 5.59 18 10 C18 14.41 14.41 18 10 18 Z',
-  fillColor: '#92e3a9', // Cor de preenchimento
-  fillOpacity: 1, // Opacidade do preenchimento
-  scale: 3, // Tamanho do ícone
-  strokeColor: 'green', // Cor da borda
-  strokeWeight: 2, // Largura da borda
+const customIcon = {
+  path: `M12 0C5.383 0 0 5.383 0 12s12 24 12 24 12-18.617 12-24S18.617 0 12 0zm0 17c-2.481 0-4-1.127-4-3s1.519-3 4-3s4 1.127 4 3s-1.519 3-4 3z`,
+  fillColor: '#92e3a9',
+  fillOpacity: 1,
+  strokeWeight: 1,
+  strokeColor: '#086f29',
+  scale: 1,
 };
 
 export const MyMap = () => {
   const { isLoaded } = useJsApiLoader({
     id: 'google-map-script',
-    googleMapsApiKey: 'AIzaSyAh8GQnWwpqvovFN4gUTGJjmhMvztCykJY',
+    googleMapsApiKey: 'AIzaSyCYi_w8dxEi___n0D7X_vFoLKjwjeXTpus',
   });
 
   return (
@@ -46,13 +59,30 @@ export const MyMap = () => {
           mapContainerStyle={{ width: '100%', height: '100%' }}
           center={center}
           zoom={14}
+          options={{
+            styles: [
+              {
+                featureType: 'poi',
+                elementType: 'labels',
+                stylers: [{ visibility: 'off' }],
+              },
+              {
+                featureType: 'landscape',
+                elementType: 'all',
+                stylers: [
+                  { hue: '#92e3a9' }, // Define a cor de matiz (hue) para elementos de paisagem
+                  { saturation: 25 }, // Define a saturação (saturation) para elementos de paisagem
+                ],
+              },
+            ],
+          }}
         >
           {collectPoints.map((pnt) => {
             return (
               <Marker
                 key={Math.random()}
                 position={{ lat: pnt.lat, lng: pnt.lng }}
-                icon={customMarkerIcon}
+                icon={customIcon}
               />
             );
           })}
