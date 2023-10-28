@@ -60,6 +60,12 @@ export const MyMap = () => {
           center={center}
           zoom={14}
           options={{
+            fullscreenControl: false,
+            streetViewControl: false,
+            zoomControl: false,
+            scaleControl: false,
+            mapTypeControl: false,
+
             styles: [
               {
                 featureType: 'poi',
