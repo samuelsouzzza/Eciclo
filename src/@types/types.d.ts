@@ -41,3 +41,7 @@ export interface IPublicationImgs {
   preview: string;
   raw: File | null;
 }
+export interface ICoordenates {
+  lat: number;
+  lng: number;
+}
