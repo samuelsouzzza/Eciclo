@@ -48,8 +48,16 @@ export const Image = styled.img`
   object-fit: contain;
   width: 100%;
   padding: 1%;
+  opacity: 0;
 `;
 export const Count = styled.section`
   max-width: 100%;
   text-align: center;
+`;
+export const ImageSkeleton = styled.div`
+  width: 100%;
+  animation: loadingSkeleton linear 1.5s infinite;
+  min-height: 300px;
+  background: linear-gradient(90deg, #f6f6f6 25%, #f0f0f0 50%, #f6f6f6 75%);
+  background-size: 200% 100%;
 `;

@@ -5,6 +5,7 @@ import {
   Item,
   BoxButtons,
   Image,
+  ImageSkeleton,
   Count,
 } from './Slider.styles.ts';
 
@@ -20,6 +21,7 @@ export const Slider = ({ slides }: SliderProps) => {
   const [active, setActive] = React.useState(0);
   const [position, setPosition] = React.useState(0);
   const contentRef = React.useRef<HTMLDivElement>(null);
+  const [skeleton, setSkeleton] = React.useState(true);
 
   React.useEffect(() => {
     if (contentRef.current) {
@@ -36,15 +38,28 @@ export const Slider = ({ slides }: SliderProps) => {
     if (active < slides.length - 1) setActive(active + 1);
   }
 
+  function handleLoad(e: React.SyntheticEvent<HTMLImageElement, Event>) {
+    e.currentTarget.style.opacity = '1';
+    setSkeleton(false);
+  }
+
   return (
     <Container>
       <BoxButtons>
-        <button onClick={slidePrev}>
-          <FontAwesomeIcon icon={faChevronLeft} />
-        </button>
-        <button onClick={slideNext}>
-          <FontAwesomeIcon icon={faChevronRight} />
-        </button>
+        {active > 0 ? (
+          <button onClick={slidePrev}>
+            <FontAwesomeIcon icon={faChevronLeft} />
+          </button>
+        ) : (
+          <div />
+        )}
+        {active >= 0 && active + 1 < slides.length ? (
+          <button onClick={slideNext}>
+            <FontAwesomeIcon icon={faChevronRight} />
+          </button>
+        ) : (
+          <div />
+        )}
       </BoxButtons>
       <Content
         ref={contentRef}
@@ -55,7 +70,9 @@ export const Slider = ({ slides }: SliderProps) => {
         {slides.map((slide) => {
           return (
             <Item key={Math.random()}>
+              {skeleton && <ImageSkeleton />}
               <Image
+                onLoad={handleLoad}
                 src={`http://localhost:3000/${slide}`}
                 alt='Imagem da publicação'
               />
