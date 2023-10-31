@@ -2,8 +2,6 @@ export const timerFormatter = (data1: Date, data2: Date): string => {
   const diffInMs = data2.getTime() - data1.getTime();
   const numDays = Math.floor(diffInMs / (1000 * 60 * 60 * 24));
 
-  console.log(numDays);
-
   if (numDays === 0) {
     return 'Hoje';
   } else if (numDays === 1) {
