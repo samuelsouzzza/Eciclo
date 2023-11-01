@@ -17,9 +17,15 @@ import { ModalActions } from '../ModalActions/ModalActions.tsx';
 import { BiError } from 'react-icons/bi';
 import { FormUpdatePublication } from '../FormUpdatePublication/FormUpdatePublication.tsx';
 import { SelectBox } from '../Form/SelectBox/SelectBox.tsx';
+import { ModalDetailsPublication } from '../ModalDetailsPublication/ModalDatailsPublication.tsx';
 
 export const MenuMyPublications = () => {
-  const { setShowFeed, setShowMenuMyPublications } = UseContextScreens();
+  const {
+    setShowFeed,
+    setShowMenuMyPublications,
+    showDetails,
+    setShowDetails,
+  } = UseContextScreens();
   const [showModalDelete, setShowModalDelete] = React.useState(false);
   const [selectedPublication, setSelectedPublication] =
     React.useState<IPublication | null>(null);
@@ -62,6 +68,7 @@ export const MenuMyPublications = () => {
 
   return (
     <>
+      {showDetails && <ModalDetailsPublication data={showDetails} />}
       <Container>
         {showListPublications && (
           <>
@@ -91,6 +98,7 @@ export const MenuMyPublications = () => {
                       dateCreation={timerFormatter(datePublication, dateNow)}
                       onDelete={() => setShowModalDelete(true)}
                       onEdit={() => updatePublication(publication)}
+                      onDetails={() => setShowDetails(publication)}
                     />
                   );
                 })}

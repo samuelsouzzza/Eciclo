@@ -5,9 +5,11 @@ export const Container = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 3% 0;
+  margin: 1% 0;
   border-bottom: 1px solid #0000001a;
   animation: fadeInRight 0.3s forwards;
+  transition: 0.3s;
+  border-radius: 5px;
   div {
     display: flex;
     width: 50%;
@@ -25,10 +27,14 @@ export const Container = styled.div`
       &:hover {
         transform: scale(1.25);
         > path {
-          fill: #92e3a9;
+          fill: #000;
         }
       }
     }
+  }
+  &:hover {
+    background-color: #92e3a966;
+    cursor: pointer;
   }
 `;
 export const T = styled.p`
@@ -39,9 +45,6 @@ export const T = styled.p`
   white-space: nowrap;
   overflow-x: hidden;
   text-overflow: ellipsis;
-  &:hover {
-    text-decoration: underline;
-  }
 `;
 export const Temp = styled.p`
   font-size: 0.75rem;

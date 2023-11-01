@@ -4,7 +4,6 @@ import {
   faPenToSquare,
   faSquareMinus,
 } from '@fortawesome/free-regular-svg-icons';
-
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 type MyPublicationProps = {
@@ -13,6 +12,7 @@ type MyPublicationProps = {
   dateCreation: string;
   onDelete: () => void;
   onEdit: () => void;
+  onDetails: () => void;
 };
 
 export const MyPublication = ({
@@ -21,11 +21,12 @@ export const MyPublication = ({
   dateCreation,
   onDelete,
   onEdit,
+  onDetails,
 }: MyPublicationProps) => {
   return (
     <Container>
-      <T>
-        {id}. {title}
+      <T onClick={onDetails}>
+        {id} - {title}
       </T>
       <div>
         <Temp>{dateCreation}</Temp>
