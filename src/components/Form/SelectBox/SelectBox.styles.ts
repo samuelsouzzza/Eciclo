@@ -9,7 +9,11 @@ export const Box = styled.select`
   border-radius: 5px;
   padding: 0 2%;
   outline: 0;
-  transition: 0.2s;
+  transition: 0.3s;
   margin: 1.5% 0;
   cursor: pointer;
+  &:hover,
+  &:focus {
+    border-color: #92e3a9;
+  }
 `;
