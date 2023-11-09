@@ -42,8 +42,6 @@ export const NewAccount = () => {
   const [showModalFeedback, setShowModalFeedback] = React.useState(true);
   const [typeUser, setTypeUser] = React.useState('doador/beneficiado');
 
-  console.log(typeUser);
-
   const navigate = useNavigate();
 
   React.useEffect(() => {

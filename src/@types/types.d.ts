@@ -3,7 +3,7 @@ export interface IFeedback {
   status: number;
 }
 export interface IUser {
-  id: number;
+  id?: number;
   name: string;
   surname: string;
   cpf: string;

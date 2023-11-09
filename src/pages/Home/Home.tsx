@@ -29,7 +29,7 @@ export const Home = () => {
         title='E-Ciclo • Home'
         description='Esta é a página principal.'
       />
-      <MyMap />
+      {/* <MyMap /> */}
       {splash && <SplashScreen />}
       {showFeed && <Feed />}
       {showMenuNewPublication && <MenuNewPublication />}

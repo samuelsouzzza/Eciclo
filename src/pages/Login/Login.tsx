@@ -25,29 +25,34 @@ export const Login = () => {
   const txtPassword = useForm(false);
   const navigate = useNavigate();
   const [loginError, setLoginError] = React.useState<string | null>(null);
+  const [userLogged, setUserLogged] = React.useState<IUser | null>(null);
+
+  async function findUser() {
+    fetch('http://localhost:3000/loginUser', {
+      method: 'post',
+      body: JSON.stringify({
+        email: 'rssamuel17@gmail.com',
+        password: '$ouZ44rb',
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => setUserLogged(data))
+      .catch(() => {
+        setLoginError('Não foi possível entrar.');
+        console.log(userLogged);
+      });
+  }
 
   React.useEffect(() => {
     setLoginError(null);
   }, [txtUser.value, txtPassword.value]);
 
-  const users = useFetch<IUser[]>('http://localhost:3000/users');
-
-  function logon(e: React.FormEvent<HTMLElement>) {
+  async function logon(e: React.FormEvent<HTMLElement>) {
     e.preventDefault();
     try {
-      if (users) {
-        const userLogged = users.data?.filter(
-          (user) =>
-            user.email === txtUser.value && user.password === txtPassword.value
-        );
-
-        if (userLogged?.length === 1) {
-          localStorage.setItem('userLogged', JSON.stringify(userLogged[0]));
-
-          navigate('./home');
-        } else {
-          throw new Error('Usuário e/ou senha incorretos');
-        }
+      await findUser();
+      if (userLogged) {
+        navigate('./home');
       }
     } catch (err) {
       if (err instanceof Error) setLoginError(err.message);
