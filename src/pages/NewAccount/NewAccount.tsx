@@ -80,7 +80,6 @@ export const NewAccount = () => {
       terms
     ) {
       const newUser: IUser = {
-        id: 0,
         name: txtName.value,
         surname: txtSurname.value,
         cpf: txtCpf.value,
