@@ -28,19 +28,23 @@ export const Login = () => {
   const [userLogged, setUserLogged] = React.useState<IUser | null>(null);
 
   async function findUser() {
-    fetch('http://localhost:3000/loginUser', {
+    fetch('http://localhost:3000/userLogin', {
       method: 'post',
+      headers: {
+        'Content-Type': 'application/json',
+      },
       body: JSON.stringify({
-        email: 'rssamuel17@gmail.com',
-        password: '$ouZ44rb',
+        email: txtUser.value,
+        password: txtPassword.value,
       }),
     })
       .then((response) => response.json())
       .then((data) => setUserLogged(data))
       .catch(() => {
         setLoginError('Não foi possível entrar.');
-        console.log(userLogged);
       });
+
+    return userLogged;
   }
 
   React.useEffect(() => {
@@ -50,12 +54,11 @@ export const Login = () => {
   async function logon(e: React.FormEvent<HTMLElement>) {
     e.preventDefault();
     try {
-      await findUser();
-      if (userLogged) {
-        navigate('./home');
-      }
-    } catch (err) {
-      if (err instanceof Error) setLoginError(err.message);
+      setUserLogged(await findUser());
+      localStorage.setItem('userLogged', JSON.stringify(userLogged));
+      navigate('/home');
+    } catch {
+      setLoginError('Não foi possível fazer o login 2.');
     }
   }
 
@@ -77,7 +80,7 @@ export const Login = () => {
         <ContentLogin>
           <img src={ImgLogin} alt='Imagem de Login' />
           <BoxForm>
-            <form onSubmit={logon}>
+            <form onSubmit={logon} method='post'>
               <Title size={1.5} text='Login' />
               <Input label='Usuário' id='user' type='text' {...txtUser} />
               <Input label='Senha' id='pass' type='text' {...txtPassword} />
