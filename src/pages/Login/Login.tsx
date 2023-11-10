@@ -28,37 +28,56 @@ export const Login = () => {
   const [userLogged, setUserLogged] = React.useState<IUser | null>(null);
 
   async function findUser() {
-    fetch('http://localhost:3000/userLogin', {
-      method: 'post',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        email: txtUser.value,
-        password: txtPassword.value,
-      }),
-    })
-      .then((response) => response.json())
-      .then((data) => setUserLogged(data))
-      .catch(() => {
-        setLoginError('Não foi possível entrar.');
+    try {
+      const response = await fetch('http://localhost:3000/userLogin', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email: txtUser.value,
+          password: txtPassword.value,
+        }),
       });
 
-    return userLogged;
+      if (!response.ok) {
+        throw new Error('Não foi possível entrar.');
+      }
+
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      setLoginError('Não foi possível entrar.');
+      throw error;
+    }
   }
 
   React.useEffect(() => {
     setLoginError(null);
   }, [txtUser.value, txtPassword.value]);
 
-  async function logon(e: React.FormEvent<HTMLElement>) {
-    e.preventDefault();
-    try {
-      setUserLogged(await findUser());
+  React.useEffect(() => {
+    if (userLogged) {
       localStorage.setItem('userLogged', JSON.stringify(userLogged));
       navigate('/home');
-    } catch {
-      setLoginError('Não foi possível fazer o login 2.');
+    } else if (txtUser.value && txtPassword.value) {
+      setLoginError('Verifique as credenciais de acesso.');
+    }
+  }, [userLogged, navigate]);
+
+  async function logon(e: React.FormEvent<HTMLElement>) {
+    e.preventDefault();
+
+    try {
+      const infoLogin = await findUser();
+
+      if (infoLogin) {
+        setUserLogged(infoLogin);
+      } else {
+        throw new Error('Verifique as credenciais de acesso.');
+      }
+    } catch (err) {
+      if (err instanceof Error) setLoginError(err.message);
     }
   }
 
