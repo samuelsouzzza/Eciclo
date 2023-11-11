@@ -85,6 +85,7 @@ export const MenuNewPublication = () => {
           complete_name: `${userLogged.name} ${userLogged.surname}`,
           cell: userLogged.cell,
           profile: userLogged.profile_path,
+          cpf: userLogged.cpf
         },
       };
       const formDataPublication = new FormData();

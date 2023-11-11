@@ -1,5 +1,4 @@
 import React from 'react';
-import useFetch from '../../hooks/useFetch.ts';
 import useForm from '../../hooks/useForm.ts';
 import { Invalid } from '../../components/Form/Invalid/Invalid.tsx';
 import { useNavigate } from 'react-router-dom';

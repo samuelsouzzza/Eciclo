@@ -13,18 +13,28 @@ import { ModalDetailsPublication } from '../ModalDetailsPublication/ModalDatails
 import { UseContextScreens } from '../../global/ScreenStates.tsx';
 
 export const Feed = () => {
-  const publications = useFetch<IPublication[]>(
-    'http://localhost:3000/publications'
-  );
+  const { showDetails, setShowDetails } = UseContextScreens();
+  const [publicationsFiltred, setPublicationsFiltred] = React.useState<IPublication[] | null>(null)
 
   const userLogged: IUser | undefined = JSON.parse(
     localStorage.getItem('userLogged') as string
   );
-  const publicationFiltred = publications.data
-    ?.filter((p) => p.owner._id != userLogged?._id)
-    .reverse();
 
-  const { showDetails, setShowDetails } = UseContextScreens();
+  async function getAllPublications() {
+    try {
+      const response = await fetch(`http://localhost:3000/feedPublications/${userLogged?.cpf}`)
+      const data: IPublication[] = await response.json();
+      setPublicationsFiltred(data)
+      console.log(publicationsFiltred)
+    } catch (error) {
+      console.log('Não foi possível entrar.');
+      throw error;
+    }
+  }
+
+  React.useEffect(()=> {
+    getAllPublications();
+  }, [])
 
   return (
     <>
@@ -32,9 +42,9 @@ export const Feed = () => {
       <Container>
         <Title text='Perto de você' size={1.25} />
         <SearchBar placeholder='Pesquise aqui' />
-        {publicationFiltred?.length === 0 && <P>Não há publicações</P>}
-        {publications.loading && <SkeletonPublicationLoader />}
-        {publicationFiltred?.map((publication) => {
+        {publicationsFiltred && <P>Não há publicações</P>}
+        {/* {publicationsFiltred.loading && <SkeletonPublicationLoader />} */}
+        {publicationsFiltred?.map((publication) => {
           const dateNow = new Date();
           const datePublication = new Date(publication.opening_date);
           return (
