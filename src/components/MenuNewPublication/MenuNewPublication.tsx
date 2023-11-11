@@ -81,7 +81,7 @@ export const MenuNewPublication = () => {
         collect_receipt: collectReceipt,
         description,
         owner: {
-          id: userLogged._id,
+          _id: userLogged._id,
           complete_name: `${userLogged.name} ${userLogged.surname}`,
           cell: userLogged.cell,
           profile: userLogged.profile_path,
