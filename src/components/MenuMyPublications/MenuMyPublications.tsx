@@ -31,22 +31,27 @@ export const MenuMyPublications = () => {
     React.useState<IPublication | null>(null);
   const [showListPublications, setShowListPublications] = React.useState(true);
   const [statusPublication, setStatusPublication] = React.useState('abertas');
+  const [publicationsFiltred, setPublicationsFiltred] = React.useState<IPublication[] | null>(null)
 
-  const publications = useFetch<IPublication[]>(
-    'http://localhost:3000/publications'
-  );
+  async function getMyPublications() {
+    try {
+      const response = await fetch(`http://localhost:3000/myPublications/${userLogged?.cpf}/${statusPublication == 'abertas' ? true : false}`)
+      const data: IPublication[] = await response.json();
+      setPublicationsFiltred(data)
+    } catch (error) {
+      console.log('Não foi possível encontrar as publicaçãoes no servidor.');
+      throw error;
+    }
+  }
+
+  React.useEffect(()=> {
+    getMyPublications();
+  }, [statusPublication])
 
   const userLogged: IUser | null = JSON.parse(
     localStorage.getItem('userLogged') as string
   );
 
-  const publicationsFiltred: IPublication[] | undefined = publications.data
-    ?.filter(
-      (publication) =>
-        publication.owner.id == userLogged?.id &&
-        publication.status.opened == (statusPublication == 'abertas')
-    )
-    .reverse();
 
   function closeMenu() {
     handlerMenus([setShowFeed], [setShowMenuMyPublications]);
@@ -84,16 +89,16 @@ export const MenuMyPublications = () => {
               options={['Abertas', 'Fechadas']}
             />
             <BoxData>
-              {publicationsFiltred?.length === 0 && <P>Não há publicações</P>}
-              {publications.loading && <p>Carregando...</p>}
+              {!publicationsFiltred && <P>Não há publicações</P>}
+              {/* {publications.loading && <p>Carregando...</p>} */}
               {showListPublications &&
-                publicationsFiltred?.map((publication) => {
+                publicationsFiltred?.map((publication, i) => {
                   const datePublication = new Date(publication.opening_date);
                   const dateNow = new Date();
                   return (
                     <MyPublication
-                      key={publication.id}
-                      id={publication.id}
+                      key={publication._id}
+                      id={i + 1}
                       title={publication.title}
                       dateCreation={timerFormatter(datePublication, dateNow)}
                       onDelete={() => setShowModalDelete(true)}

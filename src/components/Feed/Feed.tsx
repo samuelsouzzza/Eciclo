@@ -3,7 +3,6 @@ import { Container, P } from './Feed.styles.ts';
 import { Title } from '../Title/Title.tsx';
 import { SearchBar } from '../SearchBar/SearchBar.tsx';
 import { Publication } from '../Publication/Publication.tsx';
-import useFetch from '../../hooks/useFetch.ts';
 import { IPublication, IUser } from '../../@types/types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { handlerIcons } from '../../utils/handlerIcons.ts';
@@ -25,9 +24,8 @@ export const Feed = () => {
       const response = await fetch(`http://localhost:3000/feedPublications/${userLogged?.cpf}`)
       const data: IPublication[] = await response.json();
       setPublicationsFiltred(data)
-      console.log(publicationsFiltred)
     } catch (error) {
-      console.log('Não foi possível entrar.');
+      console.log('Não foi possível encontrar as publicaçãoes no servidor.');
       throw error;
     }
   }
