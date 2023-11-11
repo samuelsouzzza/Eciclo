@@ -31,7 +31,7 @@ export const Home = () => {
       />
       {/* <MyMap /> */}
       {splash && <SplashScreen />}
-      {showFeed && <Feed />}
+      {/* {showFeed && <Feed />} */}
       {showMenuNewPublication && <MenuNewPublication />}
       {showMenuMyPublications && <MenuMyPublications />}
       <SideMenu />

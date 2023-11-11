@@ -21,7 +21,7 @@ export const Feed = () => {
     localStorage.getItem('userLogged') as string
   );
   const publicationFiltred = publications.data
-    ?.filter((p) => p.owner.id != userLogged?.id)
+    ?.filter((p) => p.owner._id != userLogged?._id)
     .reverse();
 
   const { showDetails, setShowDetails } = UseContextScreens();
@@ -39,7 +39,7 @@ export const Feed = () => {
           const datePublication = new Date(publication.opening_date);
           return (
             <Publication
-              key={publication.id}
+              key={publication._id}
               icon={
                 <FontAwesomeIcon
                   icon={handlerIcons(publication.category)}

@@ -3,7 +3,7 @@ export interface IFeedback {
   status: number;
 }
 export interface IUser {
-  id?: number;
+  _id?: string;
   name: string;
   surname: string;
   cpf: string;
@@ -13,14 +13,14 @@ export interface IUser {
   profile_path?: string | null;
 }
 export interface IPublication {
-  id: number;
+  _id: string;
   title: string;
   category: string;
   description: string;
   opening_date: string;
   closing_date: string | null;
   owner: {
-    id: number;
+    _id: string;
     complete_name: string;
     cell: string;
     profile: string | null;

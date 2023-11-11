@@ -66,6 +66,8 @@ export const MenuNewPublication = () => {
       localStorage.getItem('userLogged') as string
     );
 
+    console.log(userLogged);
+
     if (
       txtTitle.validate() &&
       description.length >= 1 &&
@@ -79,7 +81,7 @@ export const MenuNewPublication = () => {
         collect_receipt: collectReceipt,
         description,
         owner: {
-          id: userLogged.id,
+          id: userLogged._id,
           complete_name: `${userLogged.name} ${userLogged.surname}`,
           cell: userLogged.cell,
           profile: userLogged.profile_path,
@@ -100,7 +102,7 @@ export const MenuNewPublication = () => {
         });
         const feedback: IFeedback = await response.json();
         if (feedback.status != 201)
-          throw new Error('Não foi possível criar a publicação.');
+          throw new Error('Não foi possível salvar o usuário.');
 
         return feedback;
       }
