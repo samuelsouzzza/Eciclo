@@ -14,10 +14,11 @@ import useFetch from '../../hooks/useFetch.ts';
 import { IPublication, IUser } from '../../@types/types';
 import { timerFormatter } from '../../utils/timerFormatter.ts';
 import { ModalActions } from '../ModalActions/ModalActions.tsx';
-import { BiError } from 'react-icons/bi';
+import { BiCheck, BiError } from 'react-icons/bi';
 import { FormUpdatePublication } from '../FormUpdatePublication/FormUpdatePublication.tsx';
 import { SelectBox } from '../Form/SelectBox/SelectBox.tsx';
 import { ModalDetailsPublication } from '../ModalDetailsPublication/ModalDatailsPublication.tsx';
+import { IFeedback } from '../../@types/types';
 
 export const MenuMyPublications = () => {
   const {
@@ -26,39 +27,61 @@ export const MenuMyPublications = () => {
     showDetails,
     setShowDetails,
   } = UseContextScreens();
-  const [showModalDelete, setShowModalDelete] = React.useState(false);
+  const [modalDelete, setModalDelete] = React.useState<IPublication | null>(
+    null
+  );
   const [selectedPublication, setSelectedPublication] =
     React.useState<IPublication | null>(null);
   const [showListPublications, setShowListPublications] = React.useState(true);
   const [statusPublication, setStatusPublication] = React.useState('abertas');
-  const [publicationsFiltred, setPublicationsFiltred] = React.useState<IPublication[] | null>(null)
+  const [publicationsFiltred, setPublicationsFiltred] = React.useState<
+    IPublication[] | null
+  >(null);
+  const [feedbackPublication, setFeedbackPublication] =
+    React.useState<IFeedback | null>(null);
 
   async function getMyPublications() {
     try {
-      const response = await fetch(`http://localhost:3000/myPublications/${userLogged?.cpf}/${statusPublication == 'abertas' ? true : false}`)
+      const response = await fetch(
+        `http://localhost:3000/myPublications/${userLogged?.cpf}/${
+          statusPublication == 'abertas' ? true : false
+        }`
+      );
       const data: IPublication[] = await response.json();
-      setPublicationsFiltred(data)
+      setPublicationsFiltred(data);
     } catch (error) {
       console.log('Não foi possível encontrar as publicaçãoes no servidor.');
       throw error;
     }
   }
 
-  React.useEffect(()=> {
+  React.useEffect(() => {
     getMyPublications();
-  }, [statusPublication])
+  }, [statusPublication, getMyPublications]);
 
   const userLogged: IUser | null = JSON.parse(
     localStorage.getItem('userLogged') as string
   );
 
-
   function closeMenu() {
     handlerMenus([setShowFeed], [setShowMenuMyPublications]);
   }
 
-  function deletePublication() {
-    console.log('Excluiu a publicação!');
+  async function deletePublication(idPublicaton: string) {
+    try {
+      const response = await fetch(
+        `http://localhost:3000/deletePublication/${idPublicaton}`,
+        {
+          method: 'DELETE',
+        }
+      );
+      const feedback: IFeedback = await response.json();
+      setFeedbackPublication(feedback);
+    } catch {
+      console.log('Não foi possível excluir a publicação.');
+    } finally {
+      setModalDelete(null);
+    }
   }
 
   function updatePublication(publication: IPublication) {
@@ -89,22 +112,23 @@ export const MenuMyPublications = () => {
               options={['Abertas', 'Fechadas']}
             />
             <BoxData>
-              {!publicationsFiltred && <P>Não há publicações</P>}
+              {publicationsFiltred && <P>Não há publicações</P>}
               {/* {publications.loading && <p>Carregando...</p>} */}
               {showListPublications &&
                 publicationsFiltred?.map((publication, i) => {
                   const datePublication = new Date(publication.opening_date);
                   const dateNow = new Date();
                   return (
-                    <MyPublication
-                      key={publication._id}
-                      id={i + 1}
-                      title={publication.title}
-                      dateCreation={timerFormatter(datePublication, dateNow)}
-                      onDelete={() => setShowModalDelete(true)}
-                      onEdit={() => updatePublication(publication)}
-                      onDetails={() => setShowDetails(publication)}
-                    />
+                    <div key={publication._id}>
+                      <MyPublication
+                        id={i + 1}
+                        title={publication.title}
+                        dateCreation={timerFormatter(datePublication, dateNow)}
+                        onDelete={() => setModalDelete(publication)}
+                        onEdit={() => updatePublication(publication)}
+                        onDetails={() => setShowDetails(publication)}
+                      />
+                    </div>
                   );
                 })}
             </BoxData>
@@ -123,14 +147,21 @@ export const MenuMyPublications = () => {
           </>
         )}
       </Container>
-
-      {showModalDelete && (
+      {modalDelete && (
         <ModalActions
           action='confirm'
           message='Tem certeza que deseja excluir esta publicação?'
-          onClose={() => setShowModalDelete(false)}
-          onConfirm={() => deletePublication()}
+          onClose={() => setModalDelete(null)}
+          onConfirm={() => deletePublication(modalDelete._id)}
           icon={<BiError className='i' />}
+        />
+      )}
+      {feedbackPublication && (
+        <ModalActions
+          action='ok'
+          message={feedbackPublication.message}
+          onClose={() => setFeedbackPublication(null)}
+          icon={<BiCheck className='i' />}
         />
       )}
     </>
