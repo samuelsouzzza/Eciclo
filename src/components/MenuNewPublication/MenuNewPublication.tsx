@@ -12,8 +12,6 @@ import { BackBtn } from '../BackBtn/BackBtn.tsx';
 import useForm from '../../hooks/useForm.ts';
 import { IFeedback, IPublicationImgs, IUser } from '../../@types/types';
 import { SpinLoader } from '../SpinLoader/SpinLoader.tsx';
-import { ModalActions } from '../ModalActions/ModalActions.tsx';
-import { BiCheck, BiMessageError } from 'react-icons/bi';
 import { handlerMenus } from '../../utils/handlerMenus.ts';
 
 export const MenuNewPublication = () => {
@@ -37,9 +35,6 @@ export const MenuNewPublication = () => {
   const [publicationPics, setpublicationPics] = React.useState<
     IPublicationImgs[] | null
   >([]);
-  // const [statusNewPublication, setStatusNewPublication] = React.useState<
-  //   string | null
-  // >(null);
   const [loadingNewPublication, setLoadingNewPublication] =
     React.useState(false);
 
@@ -112,6 +107,7 @@ export const MenuNewPublication = () => {
         setLoadingNewPublication(true);
         setShowFeedback(await postPublication());
         setShowMenuNewPublication(false);
+        handlerMenus([setShowFeed], [setShowMenuNewPublication]);
       } catch (err) {
         console.log('Não foi possível criar a publicação.');
       } finally {
@@ -182,22 +178,6 @@ export const MenuNewPublication = () => {
           </form>
         </BoxForm>
       </Container>
-      {/* {statusNewPublication &&
-        (statusNewPublication !== 'Publicação criada com sucesso!' ? (
-          <ModalActions
-            action='ok'
-            icon={<BiMessageError className='i' />}
-            message={statusNewPublication}
-            onClose={() => setStatusNewPublication(null)}
-          />
-        ) : (
-          <ModalActions
-            action='ok'
-            icon={<BiCheck className='i' />}
-            message={statusNewPublication}
-            onClose={handleClickModalFeedback}
-          />
-        ))} */}
     </>
   );
 };
