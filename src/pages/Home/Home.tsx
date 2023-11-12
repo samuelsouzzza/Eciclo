@@ -44,7 +44,7 @@ export const Home = () => {
           icon={<BiCheck className='i' />}
         />
       )}
-      {/* <MyMap /> */}
+      <MyMap />
       {splash && <SplashScreen />}
       {showFeed && <Feed />}
       {showMenuNewPublication && <MenuNewPublication />}
