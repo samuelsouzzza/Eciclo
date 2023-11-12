@@ -9,10 +9,17 @@ import { useNavigate } from 'react-router-dom';
 import { HeadName } from '../../utils/HeadName.ts';
 import { SplashScreen } from '../../components/SplashScreen/SplashScreen.tsx';
 import { MyMap } from '../../components/MyMap/MyMap.tsx';
+import { ModalActions } from '../../components/ModalActions/ModalActions.tsx';
+import { BiCheck } from 'react-icons/bi';
 
 export const Home = () => {
-  const { showFeed, showMenuNewPublication, showMenuMyPublications } =
-    UseContextScreens();
+  const {
+    showFeed,
+    showMenuNewPublication,
+    showMenuMyPublications,
+    showFeedback,
+    setShowFeedback,
+  } = UseContextScreens();
   const navigate = useNavigate();
   const [splash, setSplash] = React.useState(true);
 
@@ -29,6 +36,14 @@ export const Home = () => {
         title='E-Ciclo • Home'
         description='Esta é a página principal.'
       />
+      {showFeedback && (
+        <ModalActions
+          action='ok'
+          message={showFeedback.message}
+          onClose={() => setShowFeedback(null)}
+          icon={<BiCheck className='i' />}
+        />
+      )}
       {/* <MyMap /> */}
       {splash && <SplashScreen />}
       {showFeed && <Feed />}

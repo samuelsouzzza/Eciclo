@@ -1,6 +1,6 @@
 import React from 'react';
 import { Container } from './FormUpdatePublication.styles.ts';
-import { IPublication, IUser } from '../../@types/types';
+import { IFeedback, IPublication, IUser } from '../../@types/types';
 import { Input } from '../Form/Input/Input.tsx';
 import { SelectBox } from '../Form/SelectBox/SelectBox.tsx';
 import { TextArea } from '../Form/TextArea/TextArea.tsx';
@@ -10,6 +10,8 @@ import { PrimaryButton } from '../Form/PrimaryButton/PrimaryButton.tsx';
 import { SecondaryButton } from '../Form/SecondaryButton/SecondaryButton.tsx';
 import { SpinLoader } from '../SpinLoader/SpinLoader.tsx';
 import useForm from '../../hooks/useForm.ts';
+import { ModalActions } from '../ModalActions/ModalActions.tsx';
+import { UseContextScreens } from '../../global/ScreenStates.tsx';
 
 type FormUpdatePublicationProps = {
   data: IPublication;
@@ -20,6 +22,7 @@ export const FormUpdatePublication = ({
   data,
   onCancel,
 }: FormUpdatePublicationProps) => {
+  const { showFeedback, setShowFeedback } = UseContextScreens();
   const arrCategories = ['Celular', 'Notebook', 'Hardware'];
   const arrOptionsSend = [
     'Fatec Registro',
@@ -43,7 +46,7 @@ export const FormUpdatePublication = ({
         }))
       : null
   );
-  const [loadingNewPublication, setLoadingNewPublication] =
+  const [loadingUpdatingPublication, setLoadingUpdatingPublication] =
     React.useState(false);
 
   const userLogged: IUser = JSON.parse(
@@ -77,13 +80,6 @@ export const FormUpdatePublication = ({
         category,
         collect_receipt: collectReceipt,
         description: txtDescription,
-        owner: {
-          _id: userLogged._id as string,
-          complete_name: `${userLogged.name} ${userLogged.surname}`,
-          cell: userLogged.cell,
-          profile: userLogged.profile_path ? userLogged.profile_path : null,
-          cpf: userLogged.cpf,
-        },
       };
 
       const formData = new FormData();
@@ -96,9 +92,33 @@ export const FormUpdatePublication = ({
         if (image.raw) formData.append('publication_photos', image.raw);
       }
 
-      console.log(updatedPublication);
+      async function fetchDataPublication() {
+        const response = await fetch(
+          `http://localhost:3000/updatePublication/${data._id}`,
+          {
+            method: 'PUT',
+            body: formData,
+          }
+        );
+        const feedback: IFeedback = await response.json();
+        return feedback;
+      }
 
-      // const response = await fetch(`http://localhost:3000/updatePublication`);
+      // const feedBackteste: IFeedback = {
+      //   status: 200,
+      //   message: 'Mesangem de teste',
+      // };
+
+      try {
+        // setLoadingUpdatingPublication(true);
+        // setShowFeedback(await fetchDataPublication());
+        console.log(await fetchDataPublication());
+      } catch {
+        console.log('Não foi possível atualizar a publicação!');
+      } finally {
+        setLoadingUpdatingPublication(false);
+        onCancel();
+      }
     }
   }
 
@@ -145,7 +165,7 @@ export const FormUpdatePublication = ({
       />
       <div>
         <SecondaryButton content='Cancelar' onClick={onCancel} />
-        {loadingNewPublication ? (
+        {loadingUpdatingPublication ? (
           <SpinLoader size={25} />
         ) : (
           <PrimaryButton content='Atualizar' onClick={updatePublication} />

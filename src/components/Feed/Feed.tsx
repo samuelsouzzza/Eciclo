@@ -13,7 +13,9 @@ import { UseContextScreens } from '../../global/ScreenStates.tsx';
 
 export const Feed = () => {
   const { showDetails, setShowDetails } = UseContextScreens();
-  const [publicationsFiltred, setPublicationsFiltred] = React.useState<IPublication[] | null>(null)
+  const [publicationsFiltred, setPublicationsFiltred] = React.useState<
+    IPublication[] | null
+  >(null);
 
   const userLogged: IUser | undefined = JSON.parse(
     localStorage.getItem('userLogged') as string
@@ -21,18 +23,20 @@ export const Feed = () => {
 
   async function getAllPublications() {
     try {
-      const response = await fetch(`http://localhost:3000/feedPublications/${userLogged?.cpf}`)
+      const response = await fetch(
+        `http://localhost:3000/feedPublications/${userLogged?.cpf}`
+      );
       const data: IPublication[] = await response.json();
-      setPublicationsFiltred(data)
+      setPublicationsFiltred(data);
     } catch (error) {
       console.log('Não foi possível encontrar as publicaçãoes no servidor.');
       throw error;
     }
   }
 
-  React.useEffect(()=> {
+  React.useEffect(() => {
     getAllPublications();
-  }, [])
+  }, []);
 
   return (
     <>
@@ -40,7 +44,7 @@ export const Feed = () => {
       <Container>
         <Title text='Perto de você' size={1.25} />
         <SearchBar placeholder='Pesquise aqui' />
-        {publicationsFiltred && <P>Não há publicações</P>}
+        {publicationsFiltred?.length === 0 && <P>Não há publicações</P>}
         {/* {publicationsFiltred.loading && <SkeletonPublicationLoader />} */}
         {publicationsFiltred?.map((publication) => {
           const dateNow = new Date();

@@ -48,7 +48,6 @@ export const Image = styled.img`
   object-fit: contain;
   width: 100%;
   padding: 1%;
-  opacity: 0;
 `;
 export const Count = styled.section`
   max-width: 100%;

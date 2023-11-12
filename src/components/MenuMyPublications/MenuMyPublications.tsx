@@ -26,6 +26,7 @@ export const MenuMyPublications = () => {
     setShowMenuMyPublications,
     showDetails,
     setShowDetails,
+    setShowFeedback,
   } = UseContextScreens();
   const [modalDelete, setModalDelete] = React.useState<IPublication | null>(
     null
@@ -37,8 +38,6 @@ export const MenuMyPublications = () => {
   const [publicationsFiltred, setPublicationsFiltred] = React.useState<
     IPublication[] | null
   >(null);
-  const [feedbackPublication, setFeedbackPublication] =
-    React.useState<IFeedback | null>(null);
 
   async function getMyPublications() {
     try {
@@ -57,7 +56,7 @@ export const MenuMyPublications = () => {
 
   React.useEffect(() => {
     getMyPublications();
-  }, [statusPublication, getMyPublications]);
+  }, [statusPublication, showListPublications]);
 
   const userLogged: IUser | null = JSON.parse(
     localStorage.getItem('userLogged') as string
@@ -76,7 +75,7 @@ export const MenuMyPublications = () => {
         }
       );
       const feedback: IFeedback = await response.json();
-      setFeedbackPublication(feedback);
+      setShowFeedback(feedback);
     } catch {
       console.log('Não foi possível excluir a publicação.');
     } finally {
@@ -84,7 +83,7 @@ export const MenuMyPublications = () => {
     }
   }
 
-  function updatePublication(publication: IPublication) {
+  function handleUpdatePublication(publication: IPublication) {
     setShowListPublications(false);
     setSelectedPublication(publication);
   }
@@ -112,7 +111,7 @@ export const MenuMyPublications = () => {
               options={['Abertas', 'Fechadas']}
             />
             <BoxData>
-              {publicationsFiltred && <P>Não há publicações</P>}
+              {publicationsFiltred?.length === 0 && <P>Não há publicações</P>}
               {/* {publications.loading && <p>Carregando...</p>} */}
               {showListPublications &&
                 publicationsFiltred?.map((publication, i) => {
@@ -125,7 +124,7 @@ export const MenuMyPublications = () => {
                         title={publication.title}
                         dateCreation={timerFormatter(datePublication, dateNow)}
                         onDelete={() => setModalDelete(publication)}
-                        onEdit={() => updatePublication(publication)}
+                        onEdit={() => handleUpdatePublication(publication)}
                         onDetails={() => setShowDetails(publication)}
                       />
                     </div>
@@ -154,14 +153,6 @@ export const MenuMyPublications = () => {
           onClose={() => setModalDelete(null)}
           onConfirm={() => deletePublication(modalDelete._id)}
           icon={<BiError className='i' />}
-        />
-      )}
-      {feedbackPublication && (
-        <ModalActions
-          action='ok'
-          message={feedbackPublication.message}
-          onClose={() => setFeedbackPublication(null)}
-          icon={<BiCheck className='i' />}
         />
       )}
     </>

@@ -24,7 +24,12 @@ export const MenuNewPublication = () => {
     'CRAS Registro',
     'Combinar entrega',
   ];
-  const { setShowFeed, setShowMenuNewPublication } = UseContextScreens();
+  const {
+    setShowFeed,
+    setShowMenuNewPublication,
+    showFeedback,
+    setShowFeedback,
+  } = UseContextScreens();
   const [category, setCategory] = React.useState(arrCategories[0]);
   const txtTitle = useForm(null);
   const [collectReceipt, setCollectReceipt] = React.useState(arrOptionsSend[0]);
@@ -32,9 +37,9 @@ export const MenuNewPublication = () => {
   const [publicationPics, setpublicationPics] = React.useState<
     IPublicationImgs[] | null
   >([]);
-  const [statusNewPublication, setStatusNewPublication] = React.useState<
-    string | null
-  >(null);
+  // const [statusNewPublication, setStatusNewPublication] = React.useState<
+  //   string | null
+  // >(null);
   const [loadingNewPublication, setLoadingNewPublication] =
     React.useState(false);
 
@@ -100,26 +105,18 @@ export const MenuNewPublication = () => {
           body: formDataPublication,
         });
         const feedback: IFeedback = await response.json();
-        if (feedback.status != 201)
-          throw new Error('Não foi possível salvar o usuário.');
-
         return feedback;
       }
 
       try {
         setLoadingNewPublication(true);
-        setStatusNewPublication(null);
-        setStatusNewPublication((await postPublication()).message);
-        setLoadingNewPublication(false);
+        setShowFeedback(await postPublication());
+        setShowMenuNewPublication(false);
       } catch (err) {
-        if (err instanceof Error) setStatusNewPublication(err.message);
+        console.log('Não foi possível criar a publicação.');
       } finally {
         setLoadingNewPublication(false);
       }
-    } else {
-      setStatusNewPublication(
-        'Verifique se todos os campos foram preenchidos corretamente e o número de fotos não passa de 5.'
-      );
     }
   }
 
@@ -185,7 +182,7 @@ export const MenuNewPublication = () => {
           </form>
         </BoxForm>
       </Container>
-      {statusNewPublication &&
+      {/* {statusNewPublication &&
         (statusNewPublication !== 'Publicação criada com sucesso!' ? (
           <ModalActions
             action='ok'
@@ -200,7 +197,7 @@ export const MenuNewPublication = () => {
             message={statusNewPublication}
             onClose={handleClickModalFeedback}
           />
-        ))}
+        ))} */}
     </>
   );
 };
