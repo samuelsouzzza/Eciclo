@@ -1,6 +1,6 @@
 import React from 'react';
 import { Container } from './FormUpdatePublication.styles.ts';
-import { IPublication } from '../../@types/types';
+import { IPublication, IUser } from '../../@types/types';
 import { Input } from '../Form/Input/Input.tsx';
 import { SelectBox } from '../Form/SelectBox/SelectBox.tsx';
 import { TextArea } from '../Form/TextArea/TextArea.tsx';
@@ -29,8 +29,10 @@ export const FormUpdatePublication = ({
   ];
   const txtTitle = useForm(null);
   const [category, setCategory] = React.useState(data.category);
-  const [sendRecept, setSendRecept] = React.useState(data.collect_receipt);
-  const [description, setDescription] = React.useState(data.description);
+  const [collectReceipt, setCollectReceipt] = React.useState(
+    data.collect_receipt
+  );
+  const [txtDescription, setTxtDescription] = React.useState(data.description);
   const [publicationPics, setPublicationPics] = React.useState<
     IPublicationImgs[] | null
   >(
@@ -41,9 +43,12 @@ export const FormUpdatePublication = ({
         }))
       : null
   );
-
   const [loadingNewPublication, setLoadingNewPublication] =
     React.useState(false);
+
+  const userLogged: IUser = JSON.parse(
+    localStorage.getItem('userLogged') as string
+  );
 
   function loadPictures(e: React.ChangeEvent<HTMLInputElement>) {
     e.preventDefault();
@@ -57,7 +62,45 @@ export const FormUpdatePublication = ({
       );
     }
   }
-  console.log(publicationPics);
+
+  async function updatePublication() {
+    if (
+      txtTitle.validate() &&
+      txtDescription.length >= 1 &&
+      publicationPics &&
+      publicationPics?.length >= 1 &&
+      publicationPics?.length <= 5 &&
+      userLogged
+    ) {
+      const updatedPublication = {
+        title: txtTitle.value,
+        category,
+        collect_receipt: collectReceipt,
+        description: txtDescription,
+        owner: {
+          _id: userLogged._id as string,
+          complete_name: `${userLogged.name} ${userLogged.surname}`,
+          cell: userLogged.cell,
+          profile: userLogged.profile_path ? userLogged.profile_path : null,
+          cpf: userLogged.cpf,
+        },
+      };
+
+      const formData = new FormData();
+      formData.append(
+        'updatingPublication',
+        JSON.stringify(updatedPublication)
+      );
+
+      for (const image of publicationPics) {
+        if (image.raw) formData.append('publication_photos', image.raw);
+      }
+
+      console.log(updatedPublication);
+
+      // const response = await fetch(`http://localhost:3000/updatePublication`);
+    }
+  }
 
   return (
     <Container>
@@ -80,15 +123,15 @@ export const FormUpdatePublication = ({
         label='Envio/Retirada'
         options={arrOptionsSend}
         id='categoryPublication'
-        value={sendRecept}
-        setValue={setSendRecept}
+        value={collectReceipt}
+        setValue={setCollectReceipt}
       />
       <TextArea
         id='descriptionPublication'
         label='Descrição'
         limit={500}
-        value={description}
-        setValue={setDescription}
+        value={txtDescription}
+        setValue={setTxtDescription}
       />
       <InputFile
         id='photosPublication'
@@ -105,7 +148,7 @@ export const FormUpdatePublication = ({
         {loadingNewPublication ? (
           <SpinLoader size={25} />
         ) : (
-          <PrimaryButton content='Atualizar' />
+          <PrimaryButton content='Atualizar' onClick={updatePublication} />
         )}
       </div>
     </Container>

@@ -66,8 +66,6 @@ export const MenuNewPublication = () => {
       localStorage.getItem('userLogged') as string
     );
 
-    console.log(userLogged);
-
     if (
       txtTitle.validate() &&
       description.length >= 1 &&
@@ -85,7 +83,7 @@ export const MenuNewPublication = () => {
           complete_name: `${userLogged.name} ${userLogged.surname}`,
           cell: userLogged.cell,
           profile: userLogged.profile_path,
-          cpf: userLogged.cpf
+          cpf: userLogged.cpf,
         },
       };
       const formDataPublication = new FormData();

@@ -24,6 +24,7 @@ export interface IPublication {
     complete_name: string;
     cell: string;
     profile: string | null;
+    cpf: string;
   };
   status: {
     opened: boolean;
