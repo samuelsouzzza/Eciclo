@@ -13,6 +13,7 @@ import { UseContextScreens } from '../../global/ScreenStates.tsx';
 
 export const Feed = () => {
   const { showDetails, setShowDetails } = UseContextScreens();
+  const [loadingFeed, setLoadingFeed] = React.useState(false);
   const [publicationsFiltred, setPublicationsFiltred] = React.useState<
     IPublication[] | null
   >(null);
@@ -23,6 +24,7 @@ export const Feed = () => {
 
   async function getAllPublications() {
     try {
+      setLoadingFeed(true);
       const response = await fetch(
         `http://localhost:3000/feedPublications/${userLogged?.cpf}`
       );
@@ -31,6 +33,8 @@ export const Feed = () => {
     } catch (error) {
       console.log('Não foi possível encontrar as publicaçãoes no servidor.');
       throw error;
+    } finally {
+      setLoadingFeed(false);
     }
   }
 
@@ -45,7 +49,7 @@ export const Feed = () => {
         <Title text='Perto de você' size={1.25} />
         <SearchBar placeholder='Pesquise aqui' />
         {publicationsFiltred?.length === 0 && <P>Não há publicações</P>}
-        {/* {publicationsFiltred.loading && <SkeletonPublicationLoader />} */}
+        {loadingFeed && <SkeletonPublicationLoader />}
         {publicationsFiltred?.map((publication) => {
           const dateNow = new Date();
           const datePublication = new Date(publication.opening_date);

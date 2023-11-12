@@ -10,7 +10,6 @@ import { Title } from '../Title/Title.tsx';
 import { UseContextScreens } from '../../global/ScreenStates.tsx';
 import { handlerMenus } from '../../utils/handlerMenus.ts';
 import { MyPublication } from '../MyPublication/MyPublication.tsx';
-import useFetch from '../../hooks/useFetch.ts';
 import { IPublication, IUser } from '../../@types/types';
 import { timerFormatter } from '../../utils/timerFormatter.ts';
 import { ModalActions } from '../ModalActions/ModalActions.tsx';
@@ -19,6 +18,8 @@ import { FormUpdatePublication } from '../FormUpdatePublication/FormUpdatePublic
 import { SelectBox } from '../Form/SelectBox/SelectBox.tsx';
 import { ModalDetailsPublication } from '../ModalDetailsPublication/ModalDatailsPublication.tsx';
 import { IFeedback } from '../../@types/types';
+import { SpinLoader } from '../SpinLoader/SpinLoader.tsx';
+import { SkeletonPublicationLoader } from '../SkeletonPublicationLoader/SkeletonPublicationLoader.tsx';
 
 export const MenuMyPublications = () => {
   const {
@@ -38,9 +39,12 @@ export const MenuMyPublications = () => {
   const [publicationsFiltred, setPublicationsFiltred] = React.useState<
     IPublication[] | null
   >(null);
+  const [loadingMyPublications, setLoadingMyPublications] =
+    React.useState(false);
 
   async function getMyPublications() {
     try {
+      setLoadingMyPublications(true);
       const response = await fetch(
         `http://localhost:3000/myPublications/${userLogged?.cpf}/${
           statusPublication == 'abertas' ? true : false
@@ -51,6 +55,8 @@ export const MenuMyPublications = () => {
     } catch (error) {
       console.log('Não foi possível encontrar as publicaçãoes no servidor.');
       throw error;
+    } finally {
+      setLoadingMyPublications(false);
     }
   }
 
@@ -111,9 +117,12 @@ export const MenuMyPublications = () => {
               options={['Abertas', 'Fechadas']}
             />
             <BoxData>
-              {publicationsFiltred?.length === 0 && <P>Não há publicações</P>}
-              {/* {publications.loading && <p>Carregando...</p>} */}
-              {showListPublications &&
+              {loadingMyPublications && <SpinLoader size={50} />}
+              {!loadingMyPublications && publicationsFiltred?.length === 0 && (
+                <P>Não há publicações</P>
+              )}
+              {!loadingMyPublications &&
+                showListPublications &&
                 publicationsFiltred?.map((publication, i) => {
                   const datePublication = new Date(publication.opening_date);
                   const dateNow = new Date();
