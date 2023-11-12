@@ -101,7 +101,7 @@ export const Login = () => {
             <form onSubmit={logon} method='post'>
               <Title size={1.5} text='Login' />
               <Input label='Usuário' id='user' type='text' {...txtUser} />
-              <Input label='Senha' id='pass' type='text' {...txtPassword} />
+              <Input label='Senha' id='pass' type='password' {...txtPassword} />
               {loginError && <Invalid text={loginError} />}
               <PrimaryButton content='Entrar' />
             </form>
