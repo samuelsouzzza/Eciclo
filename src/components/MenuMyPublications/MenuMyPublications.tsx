@@ -13,13 +13,12 @@ import { MyPublication } from '../MyPublication/MyPublication.tsx';
 import { IPublication, IUser } from '../../@types/types';
 import { timerFormatter } from '../../utils/timerFormatter.ts';
 import { ModalActions } from '../ModalActions/ModalActions.tsx';
-import { BiCheck, BiError } from 'react-icons/bi';
+import { BiError } from 'react-icons/bi';
 import { FormUpdatePublication } from '../FormUpdatePublication/FormUpdatePublication.tsx';
 import { SelectBox } from '../Form/SelectBox/SelectBox.tsx';
 import { ModalDetailsPublication } from '../ModalDetailsPublication/ModalDatailsPublication.tsx';
 import { IFeedback } from '../../@types/types';
 import { SpinLoader } from '../SpinLoader/SpinLoader.tsx';
-import { SkeletonPublicationLoader } from '../SkeletonPublicationLoader/SkeletonPublicationLoader.tsx';
 
 export const MenuMyPublications = () => {
   const {
@@ -27,6 +26,7 @@ export const MenuMyPublications = () => {
     setShowMenuMyPublications,
     showDetails,
     setShowDetails,
+
     setShowFeedback,
   } = UseContextScreens();
   const [modalDelete, setModalDelete] = React.useState<IPublication | null>(
@@ -85,6 +85,7 @@ export const MenuMyPublications = () => {
     } catch {
       console.log('Não foi possível excluir a publicação.');
     } finally {
+      getMyPublications();
       setModalDelete(null);
     }
   }

@@ -42,7 +42,7 @@ export const Login = () => {
       });
 
       if (response.status != 201) {
-        throw new Error('Não foi possível entrar.');
+        throw new Error('Verifique as credenciais de acesso.');
       }
 
       const data = await response.json();
@@ -61,8 +61,6 @@ export const Login = () => {
     if (userLogged) {
       localStorage.setItem('userLogged', JSON.stringify(userLogged));
       navigate('/home');
-    } else if (txtUser.value && txtPassword.value) {
-      setLoginError('Verifique as credenciais de acesso.');
     }
   }, [userLogged, navigate]);
 
