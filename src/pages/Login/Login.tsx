@@ -18,6 +18,7 @@ import { IUser } from '../../@types/types';
 import { HeadName } from '../../utils/HeadName.ts';
 import { LogoMain } from '../../components/Logos/LogoMain.tsx';
 import { Title } from '../../components/Title/Title.tsx';
+import { SpinLoader } from '../../components/SpinLoader/SpinLoader.tsx';
 
 export const Login = () => {
   const txtUser = useForm(false);
@@ -25,6 +26,7 @@ export const Login = () => {
   const navigate = useNavigate();
   const [loginError, setLoginError] = React.useState<string | null>(null);
   const [userLogged, setUserLogged] = React.useState<IUser | null>(null);
+  const [loadingLogin, setLoadingLogin] = React.useState(false);
 
   async function findUser() {
     try {
@@ -39,14 +41,14 @@ export const Login = () => {
         }),
       });
 
-      if (!response.ok) {
+      if (response.status != 201) {
         throw new Error('Não foi possível entrar.');
       }
 
       const data = await response.json();
       return data;
     } catch (error) {
-      setLoginError('Não foi possível entrar.');
+      if (error instanceof Error) setLoginError(error.message);
       throw error;
     }
   }
@@ -68,15 +70,16 @@ export const Login = () => {
     e.preventDefault();
 
     try {
+      setLoadingLogin(true);
       const infoLogin = await findUser();
 
       if (infoLogin) {
         setUserLogged(infoLogin);
-      } else {
-        throw new Error('Verifique as credenciais de acesso.');
       }
     } catch (err) {
       if (err instanceof Error) setLoginError(err.message);
+    } finally {
+      setLoadingLogin(false);
     }
   }
 
@@ -103,7 +106,13 @@ export const Login = () => {
               <Input label='Usuário' id='user' type='text' {...txtUser} />
               <Input label='Senha' id='pass' type='password' {...txtPassword} />
               {loginError && <Invalid text={loginError} />}
-              <PrimaryButton content='Entrar' />
+              {loadingLogin ? (
+                <PrimaryButton>
+                  <SpinLoader size={30} color='#fff' />
+                </PrimaryButton>
+              ) : (
+                <PrimaryButton content='Entrar' />
+              )}
             </form>
             <BoxLinks>
               <Anchor content='Não tenho conta' onClick={toNewAccount} />
