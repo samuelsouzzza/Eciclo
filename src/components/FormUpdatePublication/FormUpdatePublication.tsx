@@ -111,7 +111,7 @@ export const FormUpdatePublication = ({
 
       try {
         // setLoadingUpdatingPublication(true);
-        // setShowFeedback(await fetchDataPublication());
+        setShowFeedback(await fetchDataPublication());
         console.log(await fetchDataPublication());
       } catch {
         console.log('Não foi possível atualizar a publicação!');
