@@ -47,6 +47,7 @@ export const BoxButtons = styled.section`
 export const Image = styled.img`
   object-fit: contain;
   width: 100%;
+  min-height: 350px;
   padding: 1%;
 `;
 export const Count = styled.section`
