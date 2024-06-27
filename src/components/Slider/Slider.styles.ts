@@ -21,7 +21,7 @@ export const Item = styled.div`
 `;
 export const BoxButtons = styled.section`
   width: 100%;
-  height: 100%;
+  height: min-content;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -36,7 +36,7 @@ export const BoxButtons = styled.section`
     border: 1px solid #0000001a;
     border-radius: 50%;
     cursor: pointer;
-    translate: 10% -100%;
+    translate: 10% 350%;
     transition: 0.3s;
     &:hover {
       background-color: #92e3a9aa;
@@ -47,7 +47,7 @@ export const BoxButtons = styled.section`
 export const Image = styled.img`
   object-fit: contain;
   width: 100%;
-  min-height: 350px;
+  /* min-height: 350px; */
   padding: 1%;
 `;
 export const Count = styled.section`
