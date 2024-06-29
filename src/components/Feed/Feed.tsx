@@ -31,7 +31,7 @@ export const Feed = () => {
       const data: IPublication[] = await response.json();
       setPublicationsFiltred(data);
     } catch (error) {
-      console.log('Não foi possível encontrar as publicaçãoes no servidor.');
+      console.log('Não foi possível encontrar as publicações no servidor.');
       throw error;
     } finally {
       setLoadingFeed(false);
