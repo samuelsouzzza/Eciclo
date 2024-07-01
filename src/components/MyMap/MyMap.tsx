@@ -27,8 +27,7 @@ export const MyMap = () => {
 
   const { isLoaded } = useJsApiLoader({
     id: 'google-map-script',
-    googleMapsApiKey: 'AIzaSyCDXWHPREBoOorRw9o5LYQ6JDZ4yp1wVGo',
-    // googleMapsApiKey: '',
+    googleMapsApiKey: '',
   });
 
   const [myPosition, setMyPosition] = React.useState<
