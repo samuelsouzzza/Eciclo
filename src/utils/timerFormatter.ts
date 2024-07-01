@@ -7,11 +7,11 @@ export const timerFormatter = (data1: Date, data2: Date): string => {
   } else if (numDays === 1) {
     return 'Ontem';
   } else if (numDays >= 1 && numDays <= 6) {
-    return `há ${Math.floor(numDays)} dia(s)`;
+    return `Há ${Math.floor(numDays)}d`;
   } else if (numDays >= 7 && numDays <= 29) {
-    return `há ${Math.floor(numDays / 7)} semena(s) `;
+    return `Há ${Math.floor(numDays / 7)}s `;
   } else if (numDays >= 30 && numDays <= 359) {
-    return `há ${Math.floor(numDays / 30)} mês(es)`;
+    return `Há ${Math.floor(numDays / 30)}m`;
   } else {
     return '...';
   }

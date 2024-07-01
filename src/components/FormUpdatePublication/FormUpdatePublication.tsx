@@ -12,6 +12,7 @@ import { SpinLoader } from '../SpinLoader/SpinLoader.tsx';
 import useForm from '../../hooks/useForm.ts';
 import { ModalActions } from '../ModalActions/ModalActions.tsx';
 import { UseContextScreens } from '../../global/ScreenStates.tsx';
+import { BiMessageError } from 'react-icons/bi';
 
 type FormUpdatePublicationProps = {
   data: IPublication;
@@ -101,20 +102,26 @@ export const FormUpdatePublication = ({
           }
         );
         const feedback: IFeedback = await response.json();
+
+        if (!response.ok) {
+          throw new Error(`Erro: ${response.status}`);
+        }
+
         return feedback;
       }
 
-      // const feedBackteste: IFeedback = {
-      //   status: 200,
-      //   message: 'Mesangem de teste',
-      // };
-
       try {
-        // setLoadingUpdatingPublication(true);
-        setShowFeedback(await fetchDataPublication());
-        console.log(await fetchDataPublication());
-      } catch {
-        console.log('Não foi possível atualizar a publicação!');
+        setLoadingUpdatingPublication(true);
+        const feedback = await fetchDataPublication();
+        setShowFeedback(feedback);
+      } catch (error) {
+        if (error instanceof Error) {
+          console.error('Ocorreu algum erro no servidor:', error);
+          setShowFeedback({
+            status: 500,
+            message: error.message || 'Ocorreu algum erro no servidor.',
+          });
+        }
       } finally {
         setLoadingUpdatingPublication(false);
         onCancel();
@@ -124,6 +131,15 @@ export const FormUpdatePublication = ({
 
   return (
     <Container>
+      {showFeedback && (
+        <ModalActions
+          action='ok'
+          icon={<BiMessageError className='i' />}
+          message={showFeedback.message}
+          onClose={() => setShowFeedback(null)}
+        />
+      )}
+
       <Input
         label='Título'
         type='text'
